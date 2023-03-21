@@ -1,0 +1,111 @@
+﻿
+@model IEnumerable<bookstore.Areas.Admin.Models.AuthorModel>
+
+@{
+    ViewData["Title"] = "Tác giả";
+}
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+   <div class="mt-5 mb-5">
+    <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Thêm Tác giả</button>
+    </div>
+
+    <table class="table">
+            
+        <thead>
+            <tr>
+                <td>
+                    Id
+                </td>
+                
+                <td>
+                    Tên tác giả
+                </td>
+                <td>
+
+                </td>
+            </tr
+
+        </thead>
+        <tbody>
+
+        @foreach(var obj in Model)
+        {
+              <tr>
+                  <td>
+                      @obj.Id
+                  </td>
+                  
+                  <td>
+                      @obj.Name
+                  </td>
+                  <td>                    
+                      <button onclick="location.href='@Url.Action("Edit","Author",new{id = obj.Id})'" class="btn btn-primary" >Chỉnh sửa</button>
+                      <button class="btn btn-danger" onclick="
+                           if(confirm('Bạn có muốn xóa thể loại này?')){
+                            location.href='@Url.Action("Detele","Author",new{id = @obj.Id})'
+                            }
+                        " >Xóa</button>
+                  </td>
+              </tr>
+        }
+         
+        </tbody>
+
+    </table>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm tác giả</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+            <form class="form-sample" method="post" asp-action="create">
+
+      <div class="modal-body">
+       
+                <p class="card-description">
+                    Thông tin tác giả
+                </p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Tên tác giả</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="Name" />
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Mô tả</label>
+                            <div class="col-sm-12">
+                                <textarea type="text" class="form-control" rows="7"  cols="50" name="Description" ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+               
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Thêm tác giả</button>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+      </div>
+            </form>
+
+    </div>
+  </div>
+</div>
