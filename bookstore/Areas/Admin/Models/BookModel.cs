@@ -54,6 +54,5 @@ namespace bookstore.Areas.Admin.Models
 
 
 
-
     }
 }

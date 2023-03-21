@@ -132,16 +132,16 @@ namespace bookstore.Areas.Admin.Controllers
             if (book == null) {
 
                 _toastNotification.AddErrorToastMessage("Không tìm thấy sách");
-
                 return RedirectToAction("Index");
             }
+
+            IEnumerable<BookImagesModel> obj = _db.BookImages.Where(i => i.book_id == id).ToList();
+       
+            ViewBag.BookImages = obj;
+
 
             return View(book);
 
         }
-
-
-
-
     }
 }

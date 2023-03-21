@@ -10,7 +10,7 @@
         <div class="card-body">
             <button onclick="location.href='@Url.Action("Index","Book")'" class="btn btn-secondary mt-5 mb-5">Trờ về</button>
             <h4 class="card-title">Nhà xuất bản</h4>
-            <form class="form-sample" method="post" asp-action="editpost" asp-controller="Book">
+            <form class="form-sample" method="post" enctype="multipart/form-data" asp-action="editpost" asp-controller="Book">
 
                 <p class="card-description">
                     Thông tin sách
@@ -25,6 +25,13 @@
                         </div>
                     </div>
                 </div>
+
+                <div>
+
+
+
+                </div>
+
 
                 <div class="row">
                     <div class="col-md-12">
@@ -42,7 +49,7 @@
                         <div class="form-group row">
                             <label class="col-sm-5 col-form-label">Tiêu đề sách</label>
                             <div class="col-sm-12">
-                                <input type="text" class="form-control" value="@Model.title" name="title" />
+                                <input type="text" class="form-control"  value="@Model.title" name="title" />
                             </div>
                         </div>
                     </div>
@@ -57,6 +64,10 @@
                     </div>
 
                 </div>
+
+                @await Html.PartialAsync("_PartialImagesBook.cshtml")
+
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
