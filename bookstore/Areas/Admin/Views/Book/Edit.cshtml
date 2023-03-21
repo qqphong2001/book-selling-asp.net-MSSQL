@@ -65,7 +65,8 @@
 
                 </div>
 
-                @await Html.PartialAsync("_PartialImagesBook.cshtml")
+                @*@await html.partialasync("_partialimagesbook.cshtml")*@
+
 
 
                 <div class="row">
@@ -121,7 +122,41 @@
                     </div>
 
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Hình mô tả</label>
+                            <div class="col-sm-12">
+                                <input type="file" name="FileUploads" class="form-control" multiple />
+                            </div>
+                          
+                        </div>
+                    </div>
 
+                    <div class="col-md-6">
+                        <div style="width:50px;height:50px;display:flex" > 
+                            @{var count = 0;}
+                            @foreach (var item in ViewBag.BookImages)
+                            {
+                                <div style="display:none">
+                                    @(count++)
+                                       
+                                    
+                                </div>
+                              
+
+
+                                <input type="hidden" value="@item.Id" name="@($"book{count}")" />
+                                <img src="@item.image" width="100%" />
+
+                            }
+                        </div>
+                      
+
+
+                    </div>
+
+                </div>
 
                 <div class="row">
                     <div class="col-md-6">
@@ -179,9 +214,9 @@
                         <div class="form-group row">
                             <label class="col-sm-5 col-form-label">Hình ảnh sản phẩm</label>
                             <div class="col-sm-12">
-                                <input type="file" name="imageFile"  class="form-control" id="photoInput" onchange="preview_image();" />
+                                <input type="file" name="imageFile" class="form-control" id="a" onchange="preview_imageedit();" />
 
-                                <img src="@Model.cover" class="userAvatar" width="100px" height="100px" />
+                                <img src="@Model.cover" class="coverbooks" width="100px" height="100px" />
                             </div>
                         </div>
                     </div>
