@@ -25,7 +25,19 @@ namespace bookstore.Areas.User.Controllers
             IEnumerable<GenreModel> genremodel = _db.Genres.ToList();
             ViewBag.genre = genremodel;
 
-            var bookmodel = _db.Books.ToList();
+            var bookmodel = _db.Books.
+                Join(
+                _db.Genres,
+                 book => book.genre_id,
+                genres => genres.Id,
+                    (book, genres) => new { Book = book, genres = genres.Name }
+                ).Join(
+                _db.Authors,
+                BookGenre => BookGenre.Book.author_id,
+                author => author.Id,
+                (BookGenre, author) => new { Book = BookGenre.Book, Genre = BookGenre.genres, Author = author.Name }
+                )
+                .ToList();
             ViewBag.book = bookmodel;
 
 

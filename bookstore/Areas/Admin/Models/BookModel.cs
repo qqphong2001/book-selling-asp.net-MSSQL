@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.VisualBasic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
 
 namespace bookstore.Areas.Admin.Models
@@ -34,7 +35,8 @@ namespace bookstore.Areas.Admin.Models
 
         public float wSize { get; set; }
 
-        public decimal unitPrice { get; set; }
+		[Column(TypeName = "money")]
+		public float unitPrice { get; set; }
 
         public int unitStock { get; set; }
 

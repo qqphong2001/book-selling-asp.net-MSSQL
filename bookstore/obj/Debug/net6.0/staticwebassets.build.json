@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dJwWQUNAnFmnXAjlB2LibADnnimjV2YYpkONxelNsbE=",
+  "Hash": "z86ewPWWeyHt3ttVSYUx7f2RtO7zGbdck6nQuLsaVYs=",
   "Source": "bookstore",
   "BasePath": "_content/bookstore",
   "Mode": "Default",
@@ -30923,6 +30923,23 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\5c1595b5-929d-4fb9-aa0c-84a6f7d2f5bd.png"
     },
     {
+      "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\products\\7279e9e6-470d-4e4c-ad8e-86cdddc4a1ca.png",
+      "SourceId": "bookstore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\",
+      "BasePath": "_content/bookstore",
+      "RelativePath": "images/products/7279e9e6-470d-4e4c-ad8e-86cdddc4a1ca.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\products\\7279e9e6-470d-4e4c-ad8e-86cdddc4a1ca.png"
+    },
+    {
       "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\products\\a6f48695-c81f-4283-91d1-8cc519f689c5.jpg",
       "SourceId": "bookstore",
       "SourceType": "Discovered",
@@ -31059,6 +31076,23 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\thumbnail\\6bc5fbab-97e7-4672-aba5-332dafa76480.png"
     },
     {
+      "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\products\\thumbnail\\8e2aa91d-132f-4dec-9db6-2c9c9e48c702.png",
+      "SourceId": "bookstore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\",
+      "BasePath": "_content/bookstore",
+      "RelativePath": "images/products/thumbnail/8e2aa91d-132f-4dec-9db6-2c9c9e48c702.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\products\\thumbnail\\8e2aa91d-132f-4dec-9db6-2c9c9e48c702.png"
+    },
+    {
       "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\products\\thumbnail\\99e33b6d-a2c4-4efa-b6a3-b7b821ba675d.png",
       "SourceId": "bookstore",
       "SourceType": "Discovered",
@@ -31074,6 +31108,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\products\\thumbnail\\99e33b6d-a2c4-4efa-b6a3-b7b821ba675d.png"
+    },
+    {
+      "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\products\\thumbnail\\a4533f4c-9de8-4665-8fd2-475a49bd88f5.png",
+      "SourceId": "bookstore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\",
+      "BasePath": "_content/bookstore",
+      "RelativePath": "images/products/thumbnail/a4533f4c-9de8-4665-8fd2-475a49bd88f5.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\products\\thumbnail\\a4533f4c-9de8-4665-8fd2-475a49bd88f5.png"
+    },
+    {
+      "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\products\\thumbnail\\a9365089-6224-4d17-bd0e-5abbb4ba1de5.png",
+      "SourceId": "bookstore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\",
+      "BasePath": "_content/bookstore",
+      "RelativePath": "images/products/thumbnail/a9365089-6224-4d17-bd0e-5abbb4ba1de5.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\products\\thumbnail\\a9365089-6224-4d17-bd0e-5abbb4ba1de5.png"
     },
     {
       "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\products\\thumbnail\\a9f65743-3f79-4f7d-ba72-55f623d9a430.png",

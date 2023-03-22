@@ -76,8 +76,7 @@ namespace bookstore.Areas.User.Controllers
                 (BookGenre, author) => new {Book = BookGenre.Book , Genre = BookGenre.genres , Author = author.Name }
                 )
                 .Where(x => x.Book.genre_id == viewbook.genre_id).
-                   Where(x => x.Book.Id != id).ToList()
-				;
+                   Where(x => x.Book.Id != id).ToList();
 
             ViewBag.BookGenre = bookgenre;  
 
