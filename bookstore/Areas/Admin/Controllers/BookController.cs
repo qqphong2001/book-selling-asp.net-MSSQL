@@ -23,7 +23,7 @@ namespace bookstore.Areas.Admin.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
         [Route("")]
-        [Route("~/")]
+      
         public IActionResult Index()
         {
 

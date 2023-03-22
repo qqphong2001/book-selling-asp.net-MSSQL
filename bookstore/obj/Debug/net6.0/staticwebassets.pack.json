@@ -6969,12 +6969,288 @@
       "PackagePath": "staticwebassets\\Admin\\Asset\\vendors\\x-editable\\bootstrap-editable.min.js"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\13-nguyen-tac-nghi-giau-lam-giau.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\13-nguyen-tac-nghi-giau-lam-giau.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\advanced-grammar-in-use.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\advanced-grammar-in-use.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\an-mang-muoi-mot-chu.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\an-mang-muoi-mot-chu.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\an-mang-tren-san-golf.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\an-mang-tren-san-golf.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\an-mang-tren-song-nile.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\an-mang-tren-song-nile.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\bach-da-hanh.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\bach-da-hanh.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\bi-mat-cua-naoko.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\bi-mat-cua-naoko.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\bo-con-ca-gai.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\bo-con-ca-gai.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\bo-gia.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\bo-gia.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\chuoc-toi.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\chuoc-toi.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\dac-nhan-tam.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\dac-nhan-tam.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\dam-bi-ghet.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\dam-bi-ghet.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\dieu-ky-dieu-cua-tiem-tap-hoa-namiya.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\dieu-ky-dieu-cua-tiem-tap-hoa-namiya.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\english-grammar-in-use.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\english-grammar-in-use.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\essential-grammar-in-use.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\essential-grammar-in-use.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\giet-con-chim-nhai.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\giet-con-chim-nhai.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\gioi-han-cua-ban-chi-la-xuat-phat-diem-cua-toi.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\gioi-han-cua-ban-chi-la-xuat-phat-diem-cua-toi.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\hai-so-phan.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\hai-so-phan.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\khong-gia-dinh.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\khong-gia-dinh.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\khuyen-hoc.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\khuyen-hoc.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\learning-vuejs.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\learning-vuejs.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\loi-song-toi-gian-cua-nguoi-nhat.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\loi-song-toi-gian-cua-nguoi-nhat.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\muoi-nguoi-da-den-nho.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\muoi-nguoi-da-den-nho.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\muon-kiep-nhan-sinh.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\muon-kiep-nhan-sinh.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\nghi-lon-de-thanh-cong.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\nghi-lon-de-thanh-cong.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\ngoi-nha-quai-di.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\ngoi-nha-quai-di.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\nhat-hoang-hirohito-va-cong-cuoc-kien-thiet-nuoc-nhat.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\nhat-hoang-hirohito-va-cong-cuoc-kien-thiet-nuoc-nhat.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\nhung-giac-mo-o-hieu-sach-morisaki.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\nhung-giac-mo-o-hieu-sach-morisaki.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\nhung-tu-nhan-cua-dia-ly.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\nhung-tu-nhan-cua-dia-ly.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\phia-sau-nghi-can-x.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\phia-sau-nghi-can-x.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\quoc-gia-khoi-nghiep.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\quoc-gia-khoi-nghiep.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\su-troi-day-va-suy-tan-cua-de-che-thu-ba-lich-su-duc-quoc-xa.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\su-troi-day-va-suy-tan-cua-de-che-thu-ba-lich-su-duc-quoc-xa.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\thien-tai-ben-trai-ke-dien-ben-phai.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\thien-tai-ben-trai-ke-dien-ben-phai.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\thu-toi.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\thu-toi.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\tieng-thet.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\tieng-thet.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\trong-gia-dinh.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\trong-gia-dinh.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\tu-duy-nhanh-va-cham.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\tu-duy-nhanh-va-cham.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\book\\tuoi-tre-dang-gia-bao-nhieu.png",
+      "PackagePath": "staticwebassets\\User\\public\\book\\tuoi-tre-dang-gia-bao-nhieu.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\css\\app.css",
+      "PackagePath": "staticwebassets\\User\\public\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\User\\public\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\css\\font-awesome.min.css",
+      "PackagePath": "staticwebassets\\User\\public\\css\\font-awesome.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\css\\nouislider.min.css",
+      "PackagePath": "staticwebassets\\User\\public\\css\\nouislider.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\css\\slick-theme.css",
+      "PackagePath": "staticwebassets\\User\\public\\css\\slick-theme.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\css\\slick.css",
+      "PackagePath": "staticwebassets\\User\\public\\css\\slick.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\css\\style.css",
+      "PackagePath": "staticwebassets\\User\\public\\css\\style.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\fonts\\FontAwesome.otf",
+      "PackagePath": "staticwebassets\\User\\public\\fonts\\FontAwesome.otf"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\fonts\\fontawesome-webfont.eot",
+      "PackagePath": "staticwebassets\\User\\public\\fonts\\fontawesome-webfont.eot"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\fonts\\fontawesome-webfont.svg",
+      "PackagePath": "staticwebassets\\User\\public\\fonts\\fontawesome-webfont.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\fonts\\fontawesome-webfont.ttf",
+      "PackagePath": "staticwebassets\\User\\public\\fonts\\fontawesome-webfont.ttf"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\fonts\\fontawesome-webfont.woff",
+      "PackagePath": "staticwebassets\\User\\public\\fonts\\fontawesome-webfont.woff"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\fonts\\fontawesome-webfont.woff2",
+      "PackagePath": "staticwebassets\\User\\public\\fonts\\fontawesome-webfont.woff2"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\fonts\\slick.eot",
+      "PackagePath": "staticwebassets\\User\\public\\fonts\\slick.eot"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\fonts\\slick.svg",
+      "PackagePath": "staticwebassets\\User\\public\\fonts\\slick.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\fonts\\slick.ttf",
+      "PackagePath": "staticwebassets\\User\\public\\fonts\\slick.ttf"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\fonts\\slick.woff",
+      "PackagePath": "staticwebassets\\User\\public\\fonts\\slick.woff"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\images\\cover.jpg",
+      "PackagePath": "staticwebassets\\User\\public\\images\\cover.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\User\\public\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\js\\jquery.min.js",
+      "PackagePath": "staticwebassets\\User\\public\\js\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\js\\jquery.zoom.min.js",
+      "PackagePath": "staticwebassets\\User\\public\\js\\jquery.zoom.min.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\js\\main.js",
+      "PackagePath": "staticwebassets\\User\\public\\js\\main.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\js\\nouislider.min.js",
+      "PackagePath": "staticwebassets\\User\\public\\js\\nouislider.min.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\User\\public\\js\\slick.min.js",
+      "PackagePath": "staticwebassets\\User\\public\\js\\slick.min.js"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\genre\\1fc48460-572e-4517-96eb-680209cdb14a.png",
+      "PackagePath": "staticwebassets\\images\\genre\\1fc48460-572e-4517-96eb-680209cdb14a.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\genre\\6786620d-9e2f-4c42-a4b0-f56cae078c67.png",
+      "PackagePath": "staticwebassets\\images\\genre\\6786620d-9e2f-4c42-a4b0-f56cae078c67.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\genre\\7e8496f3-afd4-450a-be3b-1da3b9d5ddbd.png",
+      "PackagePath": "staticwebassets\\images\\genre\\7e8496f3-afd4-450a-be3b-1da3b9d5ddbd.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\genre\\9b92fddd-1a2d-40e7-b428-d68449c47455.png",
+      "PackagePath": "staticwebassets\\images\\genre\\9b92fddd-1a2d-40e7-b428-d68449c47455.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\genre\\b9148f9d-22d6-4dfd-a2af-4b93250943ba.png",
+      "PackagePath": "staticwebassets\\images\\genre\\b9148f9d-22d6-4dfd-a2af-4b93250943ba.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\genre\\c0a62caa-56c2-463a-b28d-51f5d3f7cd15.png",
+      "PackagePath": "staticwebassets\\images\\genre\\c0a62caa-56c2-463a-b28d-51f5d3f7cd15.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\genre\\cd6ddca5-69d0-45e7-b1b7-e15823143475.png",
+      "PackagePath": "staticwebassets\\images\\genre\\cd6ddca5-69d0-45e7-b1b7-e15823143475.png"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\bookstore\\wwwroot\\images\\products\\15cd009c-6c1a-40d5-ba3c-880ee23a4979.png",

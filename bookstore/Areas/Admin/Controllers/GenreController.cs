@@ -1,5 +1,6 @@
 ﻿using bookstore.Areas.Admin.Models;
 using bookstore.DbContext;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using NToastNotify;
@@ -14,10 +15,12 @@ namespace bookstore.Areas.Admin.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly IToastNotification _toastNotification;
-        public GenreController(ApplicationDbContext db,IToastNotification toastNotification)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public GenreController(ApplicationDbContext db,IToastNotification toastNotification,IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
             _toastNotification = toastNotification;
+            _webHostEnvironment = webHostEnvironment;
             
         }
 
@@ -32,8 +35,25 @@ namespace bookstore.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         [Route("add")]
         
-        public async Task<IActionResult> create(GenreModel obj)
+        public async Task<IActionResult> create(GenreModel obj,IFormFile? imageFile)
         {
+
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+
+            if (imageFile != null)
+            {
+                string fileName = Guid.NewGuid().ToString();
+                string uploads = Path.Combine(wwwRootPath, @"images\genre");
+                var extension = Path.GetExtension(imageFile.FileName);
+
+                await using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(fileStreams);
+                }
+                obj.image = @"\images\genre\" + fileName + extension;
+
+            }
+
             await _db.Genres.AddAsync(obj);
             await _db.SaveChangesAsync();
             _toastNotification.AddSuccessToastMessage("Thêm thể loại thành công");
@@ -48,8 +68,9 @@ namespace bookstore.Areas.Admin.Controllers
             var genre = await _db.Genres.FindAsync(id);
             if (genre == null)
             {
-                return RedirectToAction("Index");
                 _toastNotification.AddErrorToastMessage("Xóa thể loại thất bại");
+
+                return RedirectToAction("Index");
 
             }
 
@@ -68,7 +89,14 @@ namespace bookstore.Areas.Admin.Controllers
 
         public IActionResult edit(int? id)
         {
-            var genre = _db.Genres.Find(id);    
+            var genre = _db.Genres.Find(id);  
+            
+
+
+
+
+
+
             if (genre == null)
             {
                 _toastNotification.AddErrorToastMessage("Sản phẩm không tồn tại");
@@ -84,15 +112,30 @@ namespace bookstore.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         [HttpPost]
         [Route("editpost")]
-        public async Task<IActionResult> editpost([Bind("Id,Name")]GenreModel obj )
+        public async Task<IActionResult> editpost([Bind("Id,Name")]GenreModel obj, IFormFile? imageFile)
         {
             var genre = await _db.Genres.FindAsync(obj.Id);
+
             if (genre == null)
             {
                 _toastNotification.AddErrorToastMessage("không tìm thấy sản phẩm");
                 return RedirectToAction("Index");
             }
 
+            if (imageFile != null)
+            {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                string fileName = Guid.NewGuid().ToString();
+                string uploads = Path.Combine(wwwRootPath, @"images\genre");
+                var extension = Path.GetExtension(imageFile.FileName);
+
+                await using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(fileStreams);
+                }
+                genre.image = @"\images\genre\" + fileName + extension;
+
+            }
             genre.Name = obj.Name;
             await _db.SaveChangesAsync();
             _toastNotification.AddSuccessToastMessage("Chỉnh sửa thể loại thành công");

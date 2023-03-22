@@ -10,5 +10,8 @@ namespace bookstore.Areas.Admin.Models
         [Required]
         public string Name { get; set; }
 
+        [Required]
+        
+        public string image { get; set; }
     }
 }

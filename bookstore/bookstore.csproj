@@ -40,9 +40,9 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Areas\User\Models\" />
-    <Folder Include="Areas\User\Views\Shared\" />
     <Folder Include="Data\" />
     <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\images\genre\" />
     <Folder Include="wwwroot\images\products\thumbnail\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\lib\bootstrap\" />
@@ -52,6 +52,18 @@
     <Folder Include="wwwroot\lib\jquery-validation\dist\" />
     <Folder Include="wwwroot\lib\jquery\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\User\public\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\User\public\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\User\public\fonts\slick.svg" />
+    <None Include="wwwroot\User\public\js\bootstrap.min.js" />
+    <None Include="wwwroot\User\public\js\jquery.min.js" />
+    <None Include="wwwroot\User\public\js\jquery.zoom.min.js" />
+    <None Include="wwwroot\User\public\js\main.js" />
+    <None Include="wwwroot\User\public\js\nouislider.min.js" />
+    <None Include="wwwroot\User\public\js\slick.min.js" />
   </ItemGroup>
 
 </Project>

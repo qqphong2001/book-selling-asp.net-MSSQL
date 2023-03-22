@@ -10,7 +10,7 @@
         <div class="card-body">
             <button onclick="location.href='@Url.Action("Index","Genre")'" class="btn btn-secondary mt-5 mb-5">Trờ về</button>
             <h4 class="card-title">Nhà xuất bản</h4>
-            <form class="form-sample" method="post" asp-action="editpost" asp-controller="Genre">
+            <form class="form-sample" method="post" asp-action="editpost" asp-controller="Genre" enctype="multipart/form-data">
 
                 <p class="card-description">
                     Thông tin nhà xuất bản
@@ -38,6 +38,20 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Hình ảnh sản phẩm</label>
+                            <div class="col-sm-12">
+                                <input type="file" name="imageFile" class="form-control" id="photoInput" onchange="preview_image();" />
+
+                                <img src="" class="userAvatar" width="100px" height="100px" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <button type="submit" class="btn btn-success">Lưu</button>
 

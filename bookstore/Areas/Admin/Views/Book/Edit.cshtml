@@ -138,10 +138,7 @@
                             @{var count = 0;}
                             @foreach (var item in ViewBag.BookImages)
                             {
-                              
-                              
-
-
+                             
                                 <input type="hidden" value="@item.Id" name="@($"book{count++}")" />
                                 <img src="@item.image" width="100%" />
 
@@ -245,7 +242,7 @@
                         <div class="form-group row">
                             <label class="col-sm-5 col-form-label">Thể loại</label>
                             <div class="col-sm-12">
-                                <input type="text" class="form-control" value="@Model.publisher_id" name="genre_id" />
+                                <input type="text" class="form-control" value="@Model.genre_id" name="genre_id" />
                             </div>
                         </div>
                     </div>
