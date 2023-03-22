@@ -9,6 +9,6 @@ $(function () {
 });
 
 
-    function preview_image() {
-        document.querySelector('.userAvatar').src = URL.createObjectURL(document.getElementById("photoInput").files[0])
-    }
+function preview_image() {
+   document.querySelector('.userAvatar').src = URL.createObjectURL(document.getElementById("photoInput").files[0])
+}

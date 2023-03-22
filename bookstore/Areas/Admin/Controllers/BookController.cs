@@ -212,9 +212,9 @@ namespace bookstore.Areas.Admin.Controllers
 
                 foreach (var file in arrList)
                 {
-                    count++;
+                  
                     
-                   var  bookimage =   await _db.BookImages.FindAsync(Int32.Parse(Request.Form["book" + count]));
+                   var  bookimage =   await _db.BookImages.FindAsync(Int32.Parse(Request.Form["book" + count++]));
                     bookimage.image = file.ToString();
                     await _db.SaveChangesAsync();
 

@@ -138,15 +138,11 @@
                             @{var count = 0;}
                             @foreach (var item in ViewBag.BookImages)
                             {
-                                <div style="display:none">
-                                    @(count++)
-                                       
-                                    
-                                </div>
+                              
                               
 
 
-                                <input type="hidden" value="@item.Id" name="@($"book{count}")" />
+                                <input type="hidden" value="@item.Id" name="@($"book{count++}")" />
                                 <img src="@item.image" width="100%" />
 
                             }
