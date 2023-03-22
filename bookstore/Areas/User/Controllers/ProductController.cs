@@ -14,7 +14,7 @@ namespace bookstore.Areas.User.Controllers
         public ProductController(ApplicationDbContext db,IToastNotification toastNotification )
         {
             _db = db;
-            
+            _toastNotification = toastNotification;
         }
 
         public IActionResult Index()

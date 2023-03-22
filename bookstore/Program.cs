@@ -1,7 +1,11 @@
-﻿using bookstore.Areas.Admin.Models;
+using bookstore.Areas.Admin.Models;
+using bookstore.Areas.User.Service;
 using bookstore.DbContext;
+using bookstore.Email;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using NToastNotify;
 using Org.BouncyCastle.Crypto.Tls;
 using System.Security.Principal;
@@ -15,17 +19,28 @@ builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
     ProgressBar = true,
     Timeout = 5000
 });
+builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddMvc();
+
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     
     builder.Configuration.GetConnectionString("defaulConnectSql")
     
     ));
+builder.Services.AddSingleton<IEmailSender, emailSender>();
+builder.Services.AddSession(cfg => {                    // Đăng ký dịch vụ Session
+    cfg.Cookie.Name = "bookstore";             // Đặt tên Session - tên này sử dụng ở Browser (Cookie)
+    cfg.IdleTimeout = new TimeSpan(0, 30, 0);    // Thời gian tồn tại của Session
+});
+builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddIdentity<UserModel, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-
+builder.Services.AddTransient<CartSevice>();
 
 builder.Services.Configure<IdentityOptions>(options => {
     // Thiết lập về Password
@@ -82,10 +97,10 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.MapRazorPages();
 app.UseRouting();
 app.MapRazorPages();
 app.UseAuthorization();

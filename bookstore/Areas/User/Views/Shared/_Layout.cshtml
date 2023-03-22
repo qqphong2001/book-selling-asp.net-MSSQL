@@ -71,7 +71,7 @@
                                     <span>Đăng nhập</span>
                                 </a>
                             </div>
-
+                            <partial name="_LoginPartial" />
                             <div class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <i class='bx bxs-cart'></i>
@@ -252,6 +252,8 @@
   <script src="~/User/public/js/nouislider.min.js"></script>
   <script src="~/User/public/js/jquery.zoom.min.js"></script>
   <script src="~/User/public/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @await Component.InvokeAsync("NToastNotify")
 
 
 
