@@ -1,6 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<bookstore.Areas.User.Models.CartItem>
+
 @{
 }
 
@@ -71,47 +70,9 @@
                                     <span>Đăng nhập</span>
                                 </a>
                             </div>
-                            <partial name="_LoginPartial" />
-                            <div class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                    <i class='bx bxs-cart'></i>
-                                    <span>Giỏ hàng</span>
-                                    <div class="qty">3</div>
-                                </a>
-                                <div class="cart-dropdown">
-                                    <div class="cart-list">
-                                        <div class="product-widget">
-                                            <div class="product-img">
-                                                <img src="" alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                <h4 class="product-price"><span class="qty">1x</span>450.000đ</h4>
-                                            </div>
-                                            <button class="delete"><i class="bx bx-x"></i></button>
-                                        </div>
-
-                                        <div class="product-widget">
-                                            <div class="product-img">
-                                                <img src="" alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                <h4 class="product-price"><span class="qty">1x</span>550.000đ</h4>
-                                            </div>
-                                            <button class="delete"><i class="bx bx-x"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="cart-summary">
-                                        <small>2 sản phẩm được chọn</small>
-                                        <h5>Tổng tiền: 1.000.000đ</h5>
-                                    </div>
-                                    <div class="cart-btns">
-                                        <a href="#">Xem giỏ hàng</a>
-                                        <a href="#">Thanh toán</a>
-                                    </div>
-                                </div>
-                            </div>
+                            
+                            @await Html.PartialAsync("_PartialCart.cshtml")
+                            
 
                         </div>
                     </div>

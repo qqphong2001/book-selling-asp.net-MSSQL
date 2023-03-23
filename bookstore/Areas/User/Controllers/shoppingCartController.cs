@@ -5,6 +5,7 @@ using NToastNotify;
 using bookstore.Areas.User.Service;
 using bookstore.Areas.User.Models;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace bookstore.Areas.User.Controllers
 {
@@ -44,18 +45,19 @@ namespace bookstore.Areas.User.Controllers
             if (cartitem != null)
             {
                 // Đã tồn tại, tăng thêm 1
-                cartitem.quantity++;
+                cartitem.quantity += Int32.Parse(Request.Form["quantity"]);
             }
             else
-            {
-                //  Thêm mới
-                cart.Add(new CartItem() { quantity = 1, product = product });
+			{
+				//  Thêm mới
+                cart.Add(new CartItem() { quantity = Int32.Parse(Request.Form["quantity"]) , product = product });
             }
 
             // Lưu cart vào Session
            _cartSevice.SaveCartSession(cart);
-            // Chuyển đến trang hiện thị Cart
-            return RedirectToAction("index");
+            _toastNotification.AddSuccessToastMessage("Thêm sản phẩm vào giỏ hàng thành công");
+
+            return Redirect(Request.Headers["Referer"].ToString());
         }
 
 

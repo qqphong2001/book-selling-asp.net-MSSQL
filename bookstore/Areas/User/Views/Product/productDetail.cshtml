@@ -12,6 +12,10 @@
 			<div class="col-md-5 col-md-push-2">
 				<div id="product-main-img">
 
+					<div class="product-preview">
+						<img src="@ViewBag.book.Book.cover" alt="">
+					</div>
+
 					@foreach (var item in ViewBag.thumbnail)
 					{
 						<div class="product-preview">
@@ -78,7 +82,7 @@
 					@if( ViewBag.book.Book.discount > 0)
 					{
 						<div>
-							<h3 class="product-price">85.000đ <del class="product-old-price">105.000đ</del></h3>
+							<h3 class="product-price">@((ViewBag.book.Book.unitPrice - (ViewBag.book.Book.unitPrice * (ViewBag.book.Book.discount / 100))).ToString("#,##0.00 đ")) <del class="product-old-price">@ViewBag.book.Book.unitPrice.ToString("#,##0.00 đ")</h3>
 							@if( ViewBag.book.Book.unitStock > 0)
 							{
 								<span class="product-available">Còn hàng</span>
@@ -96,7 +100,7 @@
 					else
 					{
 						<div>
-							<h3 class="product-price">85.000đ</h3>
+							<h3 class="product-price">@ViewBag.book.Book.unitPrice.ToString("#,##0.00 đ")</h3>
 
 							@if (ViewBag.book.Book.unitStock > 0)
 							{
@@ -123,17 +127,19 @@
 					
 					<p>@ViewBag.book.Book.description</p>
 
+					<form method="post" asp-action="AddToCart" asp-controller="shoppingCart" asp-route-productid="@ViewBag.book.Book.Id">
 
 					<div class="add-to-cart">
 						<div class="qty-label">
 							<div class="input-number">
-								<input type="number" value="0">
+								<input type="number" value="1" name="quantity">
 								<span class="qty-up">+</span>
 								<span class="qty-down">-</span>
 							</div>
 						</div>
-						<button onclick="location.href='@Url.Action("AddToCart","shoppingCart",new{productid = @ViewBag.book.Book.Id})'" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
+						<button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
 					</div>
+					</form>
 
 
 
