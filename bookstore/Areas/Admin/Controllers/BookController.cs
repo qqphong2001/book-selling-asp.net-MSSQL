@@ -1,11 +1,15 @@
 ﻿using bookstore.Areas.Admin.Models;
 using bookstore.DbContext;
+
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using System.Collections;
 
 namespace bookstore.Areas.Admin.Controllers
 {
+    [Authorize(Roles = Role.Role_Admin)]
     [Area("admin")]
 
     [Route("/admin/book")]

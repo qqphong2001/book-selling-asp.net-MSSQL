@@ -19,6 +19,8 @@ namespace bookstore.Areas.User.Controllers
 
         public IActionResult Index()
         {
+            ViewData["title"] = "Trang sản phẩm";
+
             return View();
         }
 
@@ -52,6 +54,8 @@ namespace bookstore.Areas.User.Controllers
             if (result == null)
             {
                 _toastNotification.AddErrorToastMessage("sản phẩm không tồn tại");
+                ViewData["title"] = "Trang chủ";
+
                 return RedirectToAction("Index","Home");
             }
 
@@ -78,8 +82,9 @@ namespace bookstore.Areas.User.Controllers
                 .Where(x => x.Book.genre_id == viewbook.genre_id).
                    Where(x => x.Book.Id != id).ToList();
 
-            ViewBag.BookGenre = bookgenre;  
+            ViewBag.BookGenre = bookgenre;
 
+            ViewData["title"] = "Chi tiết sản phẩm";
 
 
 

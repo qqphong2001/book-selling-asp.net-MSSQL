@@ -25,6 +25,8 @@ namespace bookstore.Areas.User.Controllers
         [Route("/cart")]
         public IActionResult Index()
         {
+            ViewData["title"] = "Trang giỏ hàng";
+
             return View(_cartSevice.GetCartItems());
         }
 

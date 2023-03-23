@@ -40,7 +40,7 @@ namespace bookstore.Areas.User.Controllers
                 .ToList();
             ViewBag.book = bookmodel;
 
-
+            ViewData["title"] = "Trang chủ";
             return View();
         }
     }

@@ -19,7 +19,7 @@
         var cart = JsonConvert.DeserializeObject<List<CartItem>>(jsoncart);
 
         <div class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" >
                 <i class='bx bxs-cart'></i>
                 <span>Giỏ hàng</span>
                 <div class="qty">@cart.Count</div>
@@ -50,7 +50,7 @@
                     <h5>Tổng tiền: @Maxtoal</h5>
                 </div>
                 <div class="cart-btns">
-                    <a href="#">Xem giỏ hàng</a>
+                    <a asp-action="Index" asp-controller="shoppingCart">Xem giỏ hàng</a>
                     <a href="#">Thanh toán</a>
                 </div>
             </div>
