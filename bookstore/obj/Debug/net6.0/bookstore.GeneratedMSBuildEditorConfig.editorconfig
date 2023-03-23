@@ -232,6 +232,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xQcm9kdWN0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Areas/User/Views/Product/productAdvance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xQcm9kdWN0XHByb2R1Y3RBZHZhbmNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Areas/User/Views/Product/productDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xQcm9kdWN0XHByb2R1Y3REZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

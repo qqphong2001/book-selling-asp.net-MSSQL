@@ -11,7 +11,7 @@ namespace bookstore.Areas.Admin.Controllers
 {
     [Authorize(Roles = Role.Role_Admin)]
     [Area("admin")]
-
+    
     [Route("/admin/book")]
     public class BookController : Controller
     {

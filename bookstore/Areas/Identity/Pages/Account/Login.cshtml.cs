@@ -15,6 +15,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using NToastNotify;
+using bookstore.DbContext;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace bookstore.Areas.Identity.Pages.Account
 {
@@ -22,11 +25,19 @@ namespace bookstore.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<UserModel> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IToastNotification _toastNotification;
+        private readonly UserManager<UserModel> _userManager;
 
-        public LoginModel(SignInManager<UserModel> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<UserModel> signInManager, ILogger<LoginModel> logger, IToastNotification toastNotification, RoleManager<IdentityRole> roleManager, UserManager<UserModel> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _toastNotification = toastNotification;
+            _roleManager = roleManager;
+            _userManager = userManager;
+
+
         }
 
         /// <summary>
@@ -112,10 +123,20 @@ namespace bookstore.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+             
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    var user = await _userManager.FindByNameAsync(Input.Email);
+                    var roles = await _userManager.GetRolesAsync(user);
+                    if (roles.Contains("Admin"))
+                    {
+                        _toastNotification.AddSuccessToastMessage("Đăng nhập thành công");
+                        return RedirectToPage("/Admin/home/index");
+                    }
+                    _toastNotification.AddSuccessToastMessage("Đăng nhập thành công");
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

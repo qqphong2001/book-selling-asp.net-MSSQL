@@ -7121,12 +7121,12 @@
       "PackagePath": "staticwebassets\\User\\public\\book\\tuoi-tre-dang-gia-bao-nhieu.png"
     },
     {
-      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\app.css",
-      "PackagePath": "staticwebassets\\User\\public\\css\\app.css"
-    },
-    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\User\\public\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\custom.css",
+      "PackagePath": "staticwebassets\\User\\public\\css\\custom.css"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\font-awesome.min.css",
@@ -7147,6 +7147,10 @@
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\style.css",
       "PackagePath": "staticwebassets\\User\\public\\css\\style.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\stylenew.css",
+      "PackagePath": "staticwebassets\\User\\public\\css\\stylenew.css"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\fonts\\FontAwesome.otf",
@@ -7251,6 +7255,10 @@
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\genre\\cd6ddca5-69d0-45e7-b1b7-e15823143475.png",
       "PackagePath": "staticwebassets\\images\\genre\\cd6ddca5-69d0-45e7-b1b7-e15823143475.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\logo\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo\\logo.png"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\products\\15cd009c-6c1a-40d5-ba3c-880ee23a4979.png",

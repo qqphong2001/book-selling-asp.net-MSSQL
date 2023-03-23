@@ -1,8 +1,4 @@
 ﻿
-
-@{
-}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +15,9 @@
     <link type="text/css" rel="stylesheet" href="~/User/public/css/nouislider.min.css" />
     <link type="text/css" rel="stylesheet" href="~/User/public/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="~/User/public/css/style.css" />
-    <link type="text/css" rel="stylesheet" href="~/User/public/css/app.css" />
+    <link type="text/css" rel="stylesheet" href="~/User/public/css/stylenew.css" />
+
+    <link type="text/css" rel="stylesheet" href="~/User/public/css/custom.css" />
 
 </head>
 <body>
@@ -44,17 +42,17 @@
 
                     <div class="col-md-3">
                         <div class="header-logo">
-                            <a href="#" class="logo">
-                                <img src="" alt="" width="200px">
+                            <a class="logo" asp-action="index" asp-controller="home" asp-area="user">
+                                <img src="~/images/logo/logo.png" alt="" width="200px">
                             </a>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="header-search">
-                            <form>
-                                <input class="input" placeholder="Bạn muốn tìm gì">
-                                <button class="search-btn">
+                            <form method="post" asp-action="searchProduct" asp-controller="product" >
+                                <input class="input" name="title" placeholder="Bạn muốn tìm gì">
+                                <button type="submit" class="search-btn">
                                     Tìm kiếm
                                 </button>
                             </form>

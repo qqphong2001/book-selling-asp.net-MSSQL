@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1Si3CrEzPA+Ii88RuV0aeimfKs3XZbI+bLUt+xWFNsU=",
+  "Hash": "2XJxU7L2tcfx79skXvj1vgKdJ3LDemAnbjvCHGfKmYA=",
   "Source": "bookstore",
   "BasePath": "_content/bookstore",
   "Mode": "Default",
@@ -30855,6 +30855,23 @@
       "OriginalItemSpec": "wwwroot\\images\\genre\\cd6ddca5-69d0-45e7-b1b7-e15823143475.png"
     },
     {
+      "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\logo\\logo.png",
+      "SourceId": "bookstore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\",
+      "BasePath": "_content/bookstore",
+      "RelativePath": "images/logo/logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\logo\\logo.png"
+    },
+    {
       "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\products\\15cd009c-6c1a-40d5-ba3c-880ee23a4979.png",
       "SourceId": "bookstore",
       "SourceType": "Discovered",
@@ -33014,23 +33031,6 @@
       "OriginalItemSpec": "wwwroot\\User\\public\\book\\trong-gia-dinh.png"
     },
     {
-      "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\app.css",
-      "SourceId": "bookstore",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\",
-      "BasePath": "_content/bookstore",
-      "RelativePath": "User/public/css/app.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\User\\public\\css\\app.css"
-    },
-    {
       "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\bootstrap.min.css",
       "SourceId": "bookstore",
       "SourceType": "Discovered",
@@ -33046,6 +33046,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\User\\public\\css\\bootstrap.min.css"
+    },
+    {
+      "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\custom.css",
+      "SourceId": "bookstore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\",
+      "BasePath": "_content/bookstore",
+      "RelativePath": "User/public/css/custom.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\User\\public\\css\\custom.css"
     },
     {
       "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\font-awesome.min.css",
@@ -33131,6 +33148,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\User\\public\\css\\style.css"
+    },
+    {
+      "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\stylenew.css",
+      "SourceId": "bookstore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\",
+      "BasePath": "_content/bookstore",
+      "RelativePath": "User/public/css/stylenew.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\User\\public\\css\\stylenew.css"
     },
     {
       "Identity": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\fonts\\FontAwesome.otf",
