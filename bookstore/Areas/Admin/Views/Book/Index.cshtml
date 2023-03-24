@@ -2,270 +2,265 @@
 
 
 @{
-  ViewData["Title"] = "Sách";
+    ViewData["Title"] = "Sách";
 }
 
 @{
-  Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 
 }
 <div class="mt-5 mb-5">
-  <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Thêm sách</button>
+    <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Thêm sách</button>
 </div>
 
 <table class="table">
 
-  <thead>
+    <thead>
 
-    <tr>
-      <td>Id</td>
-      <td>Isbn</td>
-      <td>Tiêu đề sách</td>
-      <td>hình ảnh</td>
-      <td>Giá tiền</td>
-      <td>Tình trạng</td>
-    </tr>
-  </thead>
+        <tr>
+            <td>Id</td>
+            <td>Isbn</td>
+            <td>Tiêu đề sách</td>
+            <td>hình ảnh</td>
+            <td>Giá tiền</td>
+            <td>Tình trạng</td>
+        </tr>
+    </thead>
 
-  <tbody>
+    <tbody>
 
-    @foreach (var obj in Model)
-    {
-      <tr>
-        <td>@obj.Id</td>
-        <td>@obj.isbn</td>
-        <td style="text-overflow: ellipsis;overflow:hidden;max-width:50px">@obj.title</td>
-        <td><img src="@obj.cover" width="50px" height="50px" /></td>
-        <td>@obj.unitPrice</td>
-        <td>@(obj.unitStock < 1 ? "Hết hàng" : "Còn hàng")</td>
-        <td>
-          <button onclick="location.href='@Url.Action("Edit","Book",new{id = obj.Id})'" class="btn btn-primary">Chỉnh sửa</button>
-          <button 
-            class="btn btn-danger" 
-            onclick="
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td>@obj.Id</td>
+                <td>@obj.isbn</td>
+                <td style="text-overflow: ellipsis;overflow:hidden;max-width:50px">@obj.title</td>
+                <td><img src="@obj.cover" width="50px" height="50px" /></td>
+                <td>@obj.unitPrice</td>
+                <td>@(obj.unitStock < 1 ? "Hết hàng" : "Còn hàng")</td>
+                <td>
+                    <button onclick="location.href='@Url.Action("Edit","Book",new{id = obj.Id})'" class="btn btn-primary">Chỉnh sửa</button>
+                    <button class="btn btn-danger"
+                            onclick="
               if(confirm('Bạn có muốn xóa nhà xuất bản này?')){
                 location.href='@Url.Action("Delete","Book",new{id = @obj.Id})'
               }
-            ">Xóa</button>
-        </td>
-      </tr>
-    }
+            ">
+                        Xóa
+                    </button>
+                </td>
+            </tr>
+        }
 
-  </tbody>
+    </tbody>
 
 </table>
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+     aria-hidden="true">
 
-  <div class="modal-dialog" role="document" style="max-width: 800px !important;">
-    <div class="modal-content" style="max-height: 600px; overflow-y: scroll;">
+    <div class="modal-dialog" role="document" style="max-width: 800px !important;">
+        <div class="modal-content" style="max-height: 600px; overflow-y: scroll;">
 
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Thêm sách</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <form class="form-sample" enctype="multipart/form-data" method="post" asp-action="create">
-
-        <div class="modal-body">
-
-          <div class="row">
-
-            <div class="col-sm-12 col-md-4">
-              <div class="form-group">
-                <label>Isbn</label>
-                <input type="text" class="form-control font-weight-bold" name="isbn" />
-              </div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm sách</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
-            <div class="col-sm-12 col-md-4">
-              <div class="form-group">
-                <label>Tên sách</label>
-                <input type="text" class="form-control font-weight-bold" name="title" />
-              </div>
-            </div>
+            <form class="form-sample" enctype="multipart/form-data" method="post" asp-action="create">
 
-            <div class="col-sm-12 col-md-4">
-              <div class="form-group">
-                <label>Số trang</label>
-                <input type="number" class="form-control font-weight-bold" name="numPages" />
-              </div>
-            </div>
+                <div class="modal-body">
 
-            <div class="col-sm-12 col-md-4">
-              <div class="form-group">
-                <label>Giá bán</label>
-                <input type="number" class="form-control font-weight-bold" name="unitPrice" />
-              </div>
-            </div>
+                    <div class="row">
 
-            <div class="col-sm-12 col-md-4">
-              <div class="form-group">
-                <label>Số lượng</label>
-                <input type="number" class="form-control font-weight-bold" name="unitStock" />
-              </div>
-            </div>
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Isbn</label>
+                                <input type="text" class="form-control font-weight-bold" name="isbn" />
+                            </div>
+                        </div>
 
-            <div class="col-sm-12 col-md-4">
-              <div class="form-group">
-                <label>Hình thức</label>
-                <select name="" class="form-control font-weight-bold">
-                  <option value="">Bìa cứng</option>
-                  <option value="">Bìa mềm</option>
-                </select>
-              </div>
-            </div>
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Tên sách</label>
+                                <input type="text" class="form-control font-weight-bold" name="title" />
+                            </div>
+                        </div>
 
-            <div class="col-sm-12 col-md-4">
-               <div class="form-group">
-                <label>Ngày xuất bản</label>
-                <input type="date" class="form-control font-weight-bold" name="publishDate" id="datepicker"/>
-              </div>
-            </div>
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Số trang</label>
+                                <input type="number" class="form-control font-weight-bold" name="numPages" />
+                            </div>
+                        </div>
 
-            <div class="col-sm-12 col-md-4">
-               <div class="form-group">
-                <label>Trọng lượng</label>
-                <input type="date" class="form-control font-weight-bold" name="weight"/>
-              </div>
-            </div>
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Giá bán</label>
+                                <input type="number" class="form-control font-weight-bold" name="unitPrice" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Số lượng</label>
+                                <input type="number" class="form-control font-weight-bold" name="unitStock" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Hình thức</label>
+                                <select name="" class="form-control font-weight-bold">
+                                    <option value="">Bìa cứng</option>
+                                    <option value="">Bìa mềm</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Ngày xuất bản</label>
+                                <input type="date" class="form-control font-weight-bold" name="publishDate" id="datepicker" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Trọng lượng</label>
+                                <input type="date" class="form-control font-weight-bold" name="weight" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Người dịch</label>
+                                <input type="date" class="form-control font-weight-bold" name="translatorName" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Chiều dài</label>
+                                <input type="date" class="form-control font-weight-bold" name="hSize" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Chiều rộng</label>
+                                <input type="date" class="form-control font-weight-bold" name="wSize" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Giảm giá</label>
+                                <input type="date" class="form-control font-weight-bold" name="discount" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Nhà xuất bản</label>
+                                <select class="js-example-basic-multiple" multiple="multiple">
+                                    <option value="AL">Alabama</option>
+                                    <option value="WY">Wyoming</option>
+                                    <option value="AM">America</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="RU">Russia</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <input multiple name="FileUploads" type="file" />
 
 
 
-          </div>
+                    </div>
 
 
 
-          <input multiple name="FileUploads" type="file" />
 
 
-          </div>
-          
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Trọng lượng</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" name="weight" />
                 </div>
-              </div>
-            </div>
 
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Người dịch</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" name="translatorName" />
+
+               @* <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Hình ảnh sản phẩm</label>
+                            <div class="col-sm-12">
+                                <input type="file" name="imageFile" class="form-control" id="photoInput"
+                                       onchange="preview_image();" />
+
+                                <img src="" class="userAvatar" width="100px" height="100px" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>*@
+
+                @*<div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Nhà xuất bản</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="publisher_id" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Tác giả</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="author_id" />
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-              </div>
-            </div>
 
-          </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Thể loại sách</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="genre_id" />
+                            </div>
+                        </div>
+                    </div>
 
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Chiều dài</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" name="hSize" />
+
                 </div>
-              </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Miêu tả</label>
+                            <div class="col-sm-12">
+                                <textarea type="text" class="form-control" name="description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Thêm Nhà xuất bản</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
             </div>
 
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Chiều rộng</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" name="wSize" />
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Giảm giá</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" name="discount" />
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Hình ảnh sản phẩm</label>
-                <div class="col-sm-12">
-                  <input type="file" name="imageFile" class="form-control" id="photoInput"
-                    onchange="preview_image();" />
-
-                  <img src="" class="userAvatar" width="100px" height="100px" />
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Nhà xuất bản</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" name="publisher_id" />
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Tác giả</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" name="author_id" />
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Thể loại sách</label>
-                <div class="col-sm-12">
-                  <input type="text" class="form-control" name="genre_id" />
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Miêu tả</label>
-                <div class="col-sm-12">
-                  <textarea type="text" class="form-control" name="description"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Thêm Nhà xuất bản</button>
-
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-        </div>
-      </form>
+        </form>
 
     </div>
-  </div>
+</div>
 </div>
 
