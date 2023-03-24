@@ -21,9 +21,9 @@ namespace bookstore.Areas.Identity.Pages.Account
     public class ResendEmailConfirmationModel : PageModel
     {
         private readonly UserManager<UserModel> _userManager;
-        private readonly IEmailSender _emailSender;
+        private readonly bookstore.Email.IEmailSender _emailSender;
 
-        public ResendEmailConfirmationModel(UserManager<UserModel> userManager, IEmailSender emailSender)
+        public ResendEmailConfirmationModel(UserManager<UserModel> userManager, bookstore.Email.IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

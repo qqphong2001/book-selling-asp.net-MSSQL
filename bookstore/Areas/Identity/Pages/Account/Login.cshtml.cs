@@ -130,11 +130,7 @@ namespace bookstore.Areas.Identity.Pages.Account
                     _logger.LogInformation("User logged in.");
                     var user = await _userManager.FindByNameAsync(Input.Email);
                     var roles = await _userManager.GetRolesAsync(user);
-                    if (roles.Contains("Admin"))
-                    {
-                        _toastNotification.AddSuccessToastMessage("Đăng nhập thành công");
-                        return RedirectToPage("/Admin/home/index");
-                    }
+                 
                     _toastNotification.AddSuccessToastMessage("Đăng nhập thành công");
 
                     return LocalRedirect(returnUrl);

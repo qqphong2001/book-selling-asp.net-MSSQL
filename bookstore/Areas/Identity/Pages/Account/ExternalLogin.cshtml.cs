@@ -28,7 +28,7 @@ namespace bookstore.Areas.Identity.Pages.Account
         private readonly UserManager<UserModel> _userManager;
         private readonly IUserStore<UserModel> _userStore;
         private readonly IUserEmailStore<UserModel> _emailStore;
-        private readonly IEmailSender _emailSender;
+        private readonly bookstore.Email.IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
 
         public ExternalLoginModel(
@@ -36,7 +36,7 @@ namespace bookstore.Areas.Identity.Pages.Account
             UserManager<UserModel> userManager,
             IUserStore<UserModel> userStore,
             ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+            bookstore.Email.IEmailSender emailSender)
         {
             _signInManager = signInManager;
             _userManager = userManager;

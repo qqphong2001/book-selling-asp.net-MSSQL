@@ -79,6 +79,7 @@ builder.Services.Configure<IdentityOptions>(options => {
 builder.Services.ConfigureApplicationCookie(options => {
     // options.Cookie.HttpOnly = true;  
     options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+    
     options.LoginPath = $"/Identity/Account/Login/";                                 // Url đến trang đăng nhập
     options.LogoutPath = $"/Identity/Account/Login/";
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";   // Trang khi User bị cấm truy cập
@@ -89,18 +90,18 @@ builder.Services.Configure<SecurityStampValidatorOptions>(options =>
     // SecurityStamp trong bảng User đổi -> nạp lại thông tinn Security
     options.ValidationInterval = TimeSpan.FromSeconds(5);
 });
-var gconfigurationgoogle = builder.Configuration.GetSection("Authentication:Google");
 
 builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 {
+    IConfigurationSection gconfigurationgoogle = builder.Configuration.GetSection("Authentication:Google");
+
     googleOptions.ClientId = gconfigurationgoogle["ClientId"];
     googleOptions.ClientSecret = gconfigurationgoogle["ClientSecret"];
     googleOptions.CallbackPath = "/dang-nhap-tu-google";
-});
-var gconfigurationfacebook = builder.Configuration.GetSection("Authentication:Facebook");
-
-builder.Services.AddAuthentication().AddFacebook(facebookOptions =>
+}).AddFacebook(facebookOptions =>
 {
+    var gconfigurationfacebook = builder.Configuration.GetSection("Authentication:Facebook");
+
     facebookOptions.AppId = gconfigurationfacebook["AppId"];
     facebookOptions.AppSecret = gconfigurationfacebook["AppSecret"];
     facebookOptions.CallbackPath = "/dang-nhap-tu-facebook";
