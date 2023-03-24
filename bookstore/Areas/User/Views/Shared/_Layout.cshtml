@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<bookstore.Areas.Admin.Models.UserModel> SignInManager
+@inject UserManager<bookstore.Areas.Admin.Models.UserModel> UserManager
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +17,9 @@
     <link type="text/css" rel="stylesheet" href="~/User/public/css/nouislider.min.css" />
     <link type="text/css" rel="stylesheet" href="~/User/public/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="~/User/public/css/style.css" />
-    <link type="text/css" rel="stylesheet" href="~/User/public/css/stylenew.css" />
+    <link type="text/css" rel="stylesheet" href="~/User/public/css/stylenew1.css" />
 
-    <link type="text/css" rel="stylesheet" href="~/User/public/css/custom.css" />
+    <link type="text/css" rel="stylesheet" href="~/User/public/css/custom1.css" />
 
 </head>
 <body>
@@ -62,13 +64,44 @@
                     <div class="col-md-3 clearfix">
                         <div class="header-ctn">
 
-                            <div>
-                                <a asp-area="Identity" asp-page="/Account/Login">
-                                    <i class="bx bxs-user"></i>
-                                    <span>Đăng nhập</span>
-                                </a>
-                            </div>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                        <i class='bx bxs-user'></i>
+                                        <span>Giỏ hàng</span>
+                                        
+                                    </a>
+                                    <div class="cart-dropdown" style="width:150px;text-align:center">
+                                        <div style="cursor:pointer" onclick="location.href='@Url.Action("Index","infoCustomer",new {id = UserManager.GetUserId(User)})'">
+                                            <a>Thông tin</a>
+                                            <i class='bx bx-cog'></i>
+                                        </div>
+                                        <div onclick="location.href='@Url.Action("logout","Account",new {Area = "Admin"})'" style="cursor:pointer">
+                                            <a>Đăng xuất</a>
+                                            <i  class='bx bx-power-off'></i>
+
+                                        </div>
+
+                                        
+
+                                    </div>
+                                </div>
+                                
+                            }
+                            else
+                            {
+                                <div>
+                                    <a asp-area="Identity" asp-page="/Account/Login">
+                                        <i class="bx bxs-user"></i>
+                                        <span>Đăng nhập</span>
+                                    </a>
+                                </div>
+                            }
+                         
                             
+
+
                             @await Html.PartialAsync("_PartialCart.cshtml")
                             
 

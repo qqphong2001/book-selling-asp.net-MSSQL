@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using NToastNotify;
 
 namespace bookstore.Areas.Identity.Pages.Account
 {
@@ -21,11 +22,12 @@ namespace bookstore.Areas.Identity.Pages.Account
     {
         private readonly UserManager<UserModel> _userManager;
         private readonly bookstore.Email.IEmailSender _emailSender;
-
-        public ForgotPasswordModel(UserManager<UserModel> userManager, bookstore.Email.IEmailSender emailSender)
+        private readonly IToastNotification _toastNotification;
+        public ForgotPasswordModel(UserManager<UserModel> userManager, bookstore.Email.IEmailSender emailSender,IToastNotification toastNotification)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            _toastNotification = toastNotification;
         }
 
         /// <summary>
@@ -76,7 +78,8 @@ namespace bookstore.Areas.Identity.Pages.Account
                     "Reset Password",
                     $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                return RedirectToPage("./ForgotPasswordConfirmation");
+                _toastNotification.AddSuccessToastMessage("Mail đã được gửi tới hòm thư của bạn, Vui lòng kiểm tra");
+                return Page();
             }
 
             return Page();

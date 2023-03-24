@@ -97,6 +97,22 @@ namespace bookstore.Areas.User.Controllers
         }
 
 
+        public async Task<IActionResult> checkout([FromRoute] int productid)
+        {
+            var cart = _cartSevice.GetCartItems();
+
+            var cartitem = cart.Find(p => p.product.Id == productid);
+
+
+
+
+            return Ok(cart);    
+
+        }
+
+
+
+
 
 
 

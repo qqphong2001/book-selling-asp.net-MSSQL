@@ -3,9 +3,242 @@
     Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
 
 }
-<h2>GIỎ HÀNG</h2>
+<div class="section">
+    <div class="container">
 
+        
 @if (Model.Count > 0)
+        {
+            float totalMax = 0;
+            int stt = 1;
+            <form method="post" asp-action="checkout" asp-controller="shoppingCart">
+
+            <div class="row">
+
+            <div class="col-md-7">
+
+                <div class="billing-details">
+
+                    <div class="section-title">
+                        <h3>Thông tin vận chuyển</h3>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Họ và tên</label>
+                                <input class="form-control font-weight-bold" type="text" name="fullName" value="Shio Nguyễn" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Số điện thoại</label>
+                                <input class="form-control font-weight-bold" type="text" name="phone" value="8081508" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input class="form-control font-weight-bold" type="text" name="email" value="abc@gmail.com" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="">Địa chỉ</label>
+                                <select class="form-control">
+                                    <option selected>Chọn</option>
+                                    <option value="1">828 HUFLIT</option>
+                                    <option value="2">10 QL22 HUFLIT</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="">Hình thức giao hàng</label>
+                                <select class="form-control">
+                                    <option selected>Chọn</option>
+                                    <option value="1">GHTK - 13.000đ</option>
+                                    <option value="2">Lahamove - 15.000đ</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="">Ghi chú thêm</label>
+                                <textarea class="input" placeholder="Ví dụ: Giao vào giờ hành chính" rows="10"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <!-- Order Details -->
+            <div class="col-md-5 order-details">
+
+                <div class="section-title text-center">
+                    <h3>Giỏ hàng</h3>
+                </div>
+
+                <div class="order-summary">
+                    <div class="order-col">
+                        <div><strong>Sản phẩm</strong></div>
+                        <div><strong></strong></div>
+                    </div>
+
+                    <div class="order-products">
+                            @foreach (var cartitem in Model)
+                            {
+                                var total = cartitem.quantity * cartitem.product.unitPrice;
+                                totalMax += total;
+                        <div class="order-item">
+
+                            <div class="close"><i class="fa fa-trash"></i></div>
+
+                            <div class="row">
+
+                                <div class="col-sm-12">
+                                    <div class="order-item-left">
+                                        <img src="@cartitem.product.cover" alt="">
+                                        <div>
+                                                    <div class="order-item-title">@cartitem.quantity x @cartitem.product.title</div>
+                                            <div class="qty-label">
+                                                <div class="input-number">
+                                                    <input type="number" value="@cartitem.quantity">
+                                                    <span class="qty-up">+</span>
+                                                    <span class="qty-down">-</span>
+                                                </div>
+                                            </div>
+                                                    <div class="order-item-price">@(total.ToString("#,##0.00 đ"))</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                            }
+                        
+
+                    </div>
+
+                    <hr>
+
+                    <div class="input-group" style="width: 100%; max-width: 600px;">
+                        <div class="header-search">
+                            <form>
+                                <div style="width: 100%;">
+                                    <input class="input" placeholder="Mã giảm giá">
+                                    <button type="button" class="search-btn">Áp dụng</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="order-col">
+                        <div><strong>Tạm tính</strong></div>
+                        <div>@totalMax</div>
+                    </div>
+
+                    <div class="order-col">
+                        <div><strong>Giảm giá</strong></div>
+                        <div>-10.000đ</div>
+                    </div>
+
+                    <div class="order-col">
+                        <div><strong>Tổng tiền</strong></div>
+                            <div><strong class="order-total">@((totalMax - 10).ToString("#,##0.00 đ"))</strong></div>
+                    </div>
+                </div>
+
+                <div class="payment-method">
+
+                    <div class="order-col">
+                        <div><strong>Phương thức thanh toán</strong></div>
+                        <div><strong></strong></div>
+                    </div>
+
+                    <div class="input-radio" style="margin: 10px 0;">
+                        <input type="radio" name="payment" id="payment-1">
+                        <label for="payment-1">
+                            <span style="top: 6px;"></span>
+                                <img src="~/User/public/images/cod.svg" alt="icon" width="32" height="32">
+                            Thanh toán tiền mắt khi nhận hàng
+                        </label>
+                    </div>
+
+                    <div class="input-radio" style="margin: 10px 0;">
+                        <input type="radio" name="payment" id="payment-2">
+                        <label for="payment-2">
+                            <span style="top: 6px;"></span>
+                            <img src="~/User/public/images/vnpay.png" alt="icon" width="32" height="32">
+                            Thanh toán bằng VNPAY
+                        </label>
+                    </div>
+
+                    <div class="input-radio" style="margin: 10px 0;">
+                        <input type="radio" name="payment" id="payment-3">
+                        <label for="payment-3">
+                            <span style="top: 6px;"></span>
+                                <img src="~/User/public/images/card.svg" alt="icon" width="32" height="32">
+                            Thanh toán bằng thẻ VISA
+                        </label>
+                    </div>
+
+                </div>
+
+                  <button type="submit" class="primary-btn order-submit" style="width:100%;">Đặt hàng</button>
+            </div>
+
+            </div>
+
+            </form>
+
+            @section Scripts {
+            <script>
+                $(document).ready(function () {
+                    $(".updatecartitem").click(function (event) {
+                        event.preventDefault();
+                        var productid = $(this).attr("data-productid");
+                        var quantity = $("#quantity-" + productid).val();
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.RouteUrl("updatecart")",
+                            data: {
+                                productid: productid,
+                                quantity: quantity
+                            },
+                            success: function (result) {
+                                window.location.href = "@Url.RouteUrl("cart")";
+                            }
+                        });
+                    });
+                });
+            </script>
+        }
+
+
+
+
+
+        }
+        else
+        {
+            <span>Bạn chưa có thêm sản phẩm nào vào giỏ hàng</span>
+        }
+    </div>
+</div>
+
+
+@*@if (model.count > 0)
 {
     float total = 0;
     int stt = 1;
@@ -13,58 +246,58 @@
     <table class="table">
         <tr>
             <th>#</th>
-            <th>Sản phẩm</th>
-            <th>Giá</th>
-            <th>Số lượng</th>
-            <th>Thành tiền</th>
+            <th>sản phẩm</th>
+            <th>giá</th>
+            <th>số lượng</th>
+            <th>thành tiền</th>
             <th></th>
         </tr>
-        @foreach (var cartitem in Model)
+        @foreach (var cartitem in model)
         {
-            var thanhtien = cartitem.quantity * cartitem.product.unitPrice;
+            var thanhtien = cartitem.quantity * cartitem.product.unitprice;
             total += thanhtien;
 
             <tr>
                 <td>@(stt++)</td>
                 <td>@cartitem.product.title</td>
-                <td>@(cartitem.product.unitPrice.ToString("n0"))</td>
-                <td><input asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.product.Id}")" /></td>
-                <td>@(thanhtien.ToString("n0"))</td>
+                <td>@(cartitem.product.unitprice.tostring("n0"))</td>
+                <td><input asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.product.id}")" /></td>
+                <td>@(thanhtien.tostring("n0"))</td>
                 <td>
                     <button class="btn btn-success updatecartitem"
-                            data-productid="@cartitem.product.Id">
-                        Cập nhật
+                            data-productid="@cartitem.product.id">
+                        cập nhật
                     </button>
-                    <a asp-route="removecart" asp-route-productid="@cartitem.product.Id"
-                       class="btn btn-danger">Xóa</a>
+                    <a asp-route="removecart" asp-route-productid="@cartitem.product.id"
+                       class="btn btn-danger">xóa</a>
                 </td>
             </tr>
         }
         <tr>
-            <td colspan="4" class="text-right">Tổng tiền</td>
-            <td>@(total.ToString("n0"))</td>
+            <td colspan="4" class="text-right">tổng tiền</td>
+            <td>@(total.tostring("n0"))</td>
             <td></td>
         </tr>
     </table>
 
-    <a asp-controller="Product" asp-action="Checkout" class="btn btn-success">Gửi đơn hàng</a>
+    <a asp-controller="product" asp-action="checkout" class="btn btn-success">gửi đơn hàng</a>
 
-    @section Scripts {
+    @section scripts {
     <script>
         $(document).ready(function () {
             $(".updatecartitem").click(function (event) {
-                event.preventDefault();
+                event.preventdefault();
                 var productid = $(this).attr("data-productid");
                 var quantity = $("#quantity-" + productid).val();
                 $.ajax({
-                    type: "POST",
-                    url:"@Url.RouteUrl("updatecart")",
+                    type: "post",
+                    url:"@url.routeurl("updatecart")",
                     data: {
                         productid: productid,
                         quantity:quantity
                     },
                     success: function (result) {
-                        window.location.href = "@Url.RouteUrl("cart")";
+                        window.location.href = "@url.routeurl("cart")";
                     }
                 });
             });
@@ -75,5 +308,5 @@
 }
 else
 {
-    <p class="alert alert-danger">Giỏ hàng trống</p>
-}
+    <p class="alert alert-danger">giỏ hàng trống</p>
+}*@

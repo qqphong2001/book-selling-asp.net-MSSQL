@@ -37,6 +37,12 @@ public class ApplicationDbContext : IdentityDbContext<UserModel>
     public DbSet<BookModel> Books { get; set; }
 
     public DbSet<BookImagesModel> BookImages { get; set; }
+    public DbSet<OrderModel> Orders { get; set; }
+
+    public DbSet<OrderDetailModel> OrderDetails { get; set; }
+
+    public DbSet<CustomerModel> Customers { get; set; }
+
 
 
 

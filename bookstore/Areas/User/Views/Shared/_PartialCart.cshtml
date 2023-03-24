@@ -37,7 +37,7 @@
                             </div>
                             <div class="product-body">
                                 <h3 class="product-name"><a href="#">@item.product.title</a> x @item.quantity</h3>
-                                <h4 class="product-price"><span class="qty">@total</span></h4>
+                                <h4 class="product-price"><span class="qty">@total.ToString("#,##0.00 đ")</span></h4>
                             </div>
                             <button class="delete"><i class="bx bx-x"></i></button>
                         </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="cart-summary">
                     <small>@cart.Count sản phẩm được chọn</small>
-                    <h5>Tổng tiền: @Maxtoal</h5>
+                    <h5>Tổng tiền: @Maxtoal.ToString("#,##0.00 đ")</h5>
                 </div>
                 <div class="cart-btns">
                     <a asp-action="Index" asp-controller="shoppingCart">Xem giỏ hàng</a>
@@ -68,9 +68,6 @@
                 <div class="cart-list">
 
                     bạn chưa có sản phẩm nào
-
-
-
                 </div>
           
             </div>

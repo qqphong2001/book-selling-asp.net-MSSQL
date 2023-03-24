@@ -7125,8 +7125,8 @@
       "PackagePath": "staticwebassets\\User\\public\\css\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\custom.css",
-      "PackagePath": "staticwebassets\\User\\public\\css\\custom.css"
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\custom1.css",
+      "PackagePath": "staticwebassets\\User\\public\\css\\custom1.css"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\font-awesome.min.css",
@@ -7149,8 +7149,8 @@
       "PackagePath": "staticwebassets\\User\\public\\css\\style.css"
     },
     {
-      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\stylenew.css",
-      "PackagePath": "staticwebassets\\User\\public\\css\\stylenew.css"
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\css\\stylenew1.css",
+      "PackagePath": "staticwebassets\\User\\public\\css\\stylenew1.css"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\fonts\\FontAwesome.otf",
@@ -7193,8 +7193,20 @@
       "PackagePath": "staticwebassets\\User\\public\\fonts\\slick.woff"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\images\\card.svg",
+      "PackagePath": "staticwebassets\\User\\public\\images\\card.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\images\\cod.svg",
+      "PackagePath": "staticwebassets\\User\\public\\images\\cod.svg"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\images\\cover.jpg",
       "PackagePath": "staticwebassets\\User\\public\\images\\cover.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\images\\vnpay.png",
+      "PackagePath": "staticwebassets\\User\\public\\images\\vnpay.png"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\User\\public\\js\\bootstrap.min.js",

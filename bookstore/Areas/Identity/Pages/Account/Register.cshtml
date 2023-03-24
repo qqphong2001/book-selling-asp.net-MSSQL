@@ -79,16 +79,24 @@
                         <p>
                             @foreach (var provider in Model.ExternalLogins)
                             {
-                                <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                <button 
+                                    type="submit" 
+                                    name="provider" 
+                                    value="@provider.Name" 
+                                    title="Đăng nhập với tài khoản @provider.DisplayName"
+                                    class="btn btn-primary btn-block" id=@( $"btn{@provider.DisplayName}")
+                                >
+                                    Đăng ký với @provider.DisplayName<i class='bx @( $"bxl-{@provider.DisplayName.ToLower()}")'></i>
+                                </button>
+
+                                
                             }
                         </p>
                     </div>
                 </form>
             </section>
         }
-        <button class="btn btn-primary btn-block" id="btnFacebook">Đăng ký với Facebook<i class='bx bxl-facebook-square'></i></button>
-        <button class="btn btn-primary btn-block" id="btnGoogle">Đăng ký với Google<i class='bx bxl-google'></i></button>
-
+       
         <div class="auth-modal-options" style="justify-content: center;">
             <div>
                 <a asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
