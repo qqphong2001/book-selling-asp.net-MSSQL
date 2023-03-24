@@ -73,7 +73,7 @@
                                         
                                     </a>
                                     <div class="cart-dropdown" style="width:150px;text-align:center">
-                                        <div style="cursor:pointer" onclick="location.href='@Url.Action("Index","infoCustomer",new {id = UserManager.GetUserId(User)})'">
+                                        <div style="cursor:pointer" onclick="location.href='@Url.Action("Index","infoCustomer",new {customer_id = UserManager.GetUserId(User)})'">
                                             <a>Thông tin</a>
                                             <i class='bx bx-cog'></i>
                                         </div>
