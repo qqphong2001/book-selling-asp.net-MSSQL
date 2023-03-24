@@ -64,7 +64,7 @@
         <div class="modal-content" style="max-height: 600px; overflow-y: scroll;">
 
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm sách</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tạo sách</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -92,15 +92,61 @@
 
                         <div class="col-sm-12 col-md-4">
                             <div class="form-group">
-                                <label>Số trang</label>
-                                <input type="number" class="form-control font-weight-bold" name="numPages" />
+                                <label>Giá bán</label>
+                                <input type="number" class="form-control font-weight-bold" name="unitPrice" />
                             </div>
                         </div>
 
+                    </div>
+                    
+                    <hr />
+
+                    @*Tải ảnh*@
+                    <div class="row">
                         <div class="col-sm-12 col-md-4">
                             <div class="form-group">
-                                <label>Giá bán</label>
-                                <input type="number" class="form-control font-weight-bold" name="unitPrice" />
+                                <label>Ảnh bìa sách</label>
+                                <input type="file" name="img[]" class="file-upload-default">
+                                <div class="input-group col-xs-12">
+                                    <span class="">
+                                        <button class="file-upload-browse btn btn-primary" type="button">Tải ảnh</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <img class="rounded" src="~/images/products/thumbnail/8e2aa91d-132f-4dec-9db6-2c9c9e48c702.png" width="90px" height="110px"/>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-8">
+                            <hr class="d-sm-none d-block"/>  
+
+                            <div class="form-group">
+                                <label>Ảnh miêu tả sách</label>
+                                <input type="file" name="img[]" class="file-upload-default">
+                                <div class="input-group col-xs-12">
+                                    <span class="">
+                                        <button class="file-upload-browse btn btn-primary" type="button">Tải ảnh</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <img class="rounded mx-2" src="~/images/products/thumbnail/8e2aa91d-132f-4dec-9db6-2c9c9e48c702.png" width="90px" height="110px" />
+                                <img class="rounded mx-2" src="~/images/products/thumbnail/8e2aa91d-132f-4dec-9db6-2c9c9e48c702.png" width="90px" height="110px" />
+                                <img class="rounded mx-2" src="~/images/products/thumbnail/8e2aa91d-132f-4dec-9db6-2c9c9e48c702.png" width="90px" height="110px" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+
+                    <div class="row">
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Số trang</label>
+                                <input type="number" class="form-control font-weight-bold" name="numPages" />
                             </div>
                         </div>
 
@@ -130,43 +176,9 @@
 
                         <div class="col-sm-12 col-md-4">
                             <div class="form-group">
-                                <label>Trọng lượng</label>
-                                <input type="date" class="form-control font-weight-bold" name="weight" />
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-4">
-                            <div class="form-group">
-                                <label>Người dịch</label>
-                                <input type="date" class="form-control font-weight-bold" name="translatorName" />
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-4">
-                            <div class="form-group">
-                                <label>Chiều dài</label>
-                                <input type="date" class="form-control font-weight-bold" name="hSize" />
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-4">
-                            <div class="form-group">
-                                <label>Chiều rộng</label>
-                                <input type="date" class="form-control font-weight-bold" name="wSize" />
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-4">
-                            <div class="form-group">
-                                <label>Giảm giá</label>
-                                <input type="date" class="form-control font-weight-bold" name="discount" />
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-4">
-                            <div class="form-group">
-                                <label>Nhà xuất bản</label>
-                                <select class="js-example-basic-multiple" multiple="multiple">
+                                <label>Nhà xuất bản</label><br />
+                                <select class="js-example-basic-single" style="width: 100%;">
+                                    <option value="">Lựa chọn</option>
                                     <option value="AL">Alabama</option>
                                     <option value="WY">Wyoming</option>
                                     <option value="AM">America</option>
@@ -176,89 +188,82 @@
                             </div>
                         </div>
 
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Tác giả</label><br />
+                                <select class="js-example-basic-single" style="width: 100%;">
+                                    <option value="">Lựa chọn</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="WY">Wyoming</option>
+                                    <option value="AM">America</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="RU">Russia</option>
+                                </select>
+                            </div>
+                        </div>
 
-                        <input multiple name="FileUploads" type="file" />
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Thể loại</label><br />
+                                <select class="js-example-basic-single" style="width: 100%;">
+                                    <option value="">Lựa chọn</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="WY">Wyoming</option>
+                                    <option value="AM">America</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="RU">Russia</option>
+                                </select>
+                            </div>
+                        </div>
 
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Trọng lượng</label>
+                                <input type="text" class="form-control font-weight-bold" name="weight" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Người dịch</label>
+                                <input type="text" class="form-control font-weight-bold" name="translatorName" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Chiều dài</label>
+                                <input type="text" class="form-control font-weight-bold" name="hSize" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Chiều rộng</label>
+                                <input type="text" class="form-control font-weight-bold" name="wSize" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Giảm giá</label>
+                                <input type="text" class="form-control font-weight-bold" name="discount" />
+                            </div>
+                        </div>
+
+                       
 
 
                     </div>
-
-
-
-
-
                 </div>
 
 
-               @* <div class="row">
-
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-5 col-form-label">Hình ảnh sản phẩm</label>
-                            <div class="col-sm-12">
-                                <input type="file" name="imageFile" class="form-control" id="photoInput"
-                                       onchange="preview_image();" />
-
-                                <img src="" class="userAvatar" width="100px" height="100px" />
-                            </div>
-                        </div>
-                    </div>
-
-                </div>*@
-
-                @*<div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-5 col-form-label">Nhà xuất bản</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" name="publisher_id" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-5 col-form-label">Tác giả</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" name="author_id" />
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Tạo</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                            <label class="col-sm-5 col-form-label">Thể loại sách</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" name="genre_id" />
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group row">
-                            <label class="col-sm-5 col-form-label">Miêu tả</label>
-                            <div class="col-sm-12">
-                                <textarea type="text" class="form-control" name="description"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
-
-
-
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Thêm Nhà xuất bản</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-            </div>
-
-        </form>
+            </form>
 
     </div>
 </div>
