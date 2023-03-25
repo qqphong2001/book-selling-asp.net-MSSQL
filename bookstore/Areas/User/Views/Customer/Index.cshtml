@@ -1,0 +1,150 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<bookstore.Areas.Admin.Models.UserModel> SignInManager
+@inject UserManager<bookstore.Areas.Admin.Models.UserModel> UserManager
+@{
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "Trang thông tin người dùng";
+
+    
+
+}
+<section>
+    <div class="container">
+        <h3 class="title" style="padding: 20px 0;">Thông tin tài khoản</h3>
+
+        <form method="post" id="userInfoForm" asp-action="saveInfo" asp-controller="customer" enctype="multipart/form-data">
+            <div class="user-info-box">
+                <input type="hidden" name="Id" value="@ViewBag.customer.Id"/>
+                <div class="user-info-box-partial" id="userInfo">
+                    <p class="user-info-title">Thông tin cá nhân</p>
+
+                    <label class="form-label">Ảnh đại diện</label>
+                    <div class="row">
+                        <div class="userAvatarBox">
+                            <img class="img-thumbnail userAvatar" src=@(ViewBag.customer.avatar) alt="" id="photo" width="100" height="100">
+                            <span class="iconCover">
+                                <input type="file" name="avatar" id="photoInput" onchange="preview_image()">
+                                <i class='bx bx-edit-alt'></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-sm-12 col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="firstName" class="form-label">Họ</label>
+                                <input type="text" id="firstName" class="form-control" name="firstName" value="@(ViewBag.customer.firstName)">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="lastName" class="form-label">Tên</label>
+                                <input type="text" id="lastName" class="form-control" name="lastName" value="@(ViewBag.customer.lastName)">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-sm-12 col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="dob" class="form-label">Ngày sinh</label>
+                                <input type="date" id="dob" class="form-control" required name="dob" value="@(ViewBag.customer.dob.ToString("yyyy-MM-dd"))">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="gender" class="form-label">Giới tính</label><br>
+                                @if (ViewBag.customer.gender == 1)
+                                {
+                                    <label class="radio-inline" for="male">
+                                        <input type="radio" name="gender" id="male" value="1" checked> Nam
+                                    </label>
+
+                                    <label class="radio-inline" for="female">
+                                        <input type="radio" name="gender" id="female" value="0" > Nữ
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label class="radio-inline" for="male">
+                                        <input type="radio" name="gender" id="male" value="1" > Nam
+                                    </label>
+
+                                    <label class="radio-inline" for="female">
+                                        <input type="radio" name="gender" id="female" value="0" checked> Nữ
+                                    </label>
+                                }
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="user-info-box-divider user-info-box-divider-vertical"></div>
+
+                <div class="user-info-box-divider user-info-box-divider-horizontal"></div>
+
+
+                <div class="user-info-box-partial" id="userContact">
+                    <p class="user-info-title">Thông tin liên hệ</p>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 mb-2">
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Số điện thoại</label>
+                                <input type="text" id="phone" class="form-control" name="phoneNumber" value=@(ViewBag.customer.phoneNumber)>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-2">
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" class="form-control" name="email" value=@UserManager.GetUserName(User) disabled>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-sm-12 mb-2">
+                            <div class="form-group">
+                                <label for="address1" class="form-label">Địa chỉ 1</label>
+                              
+                                <input type="text" id="address1" class="form-control" name="address1"
+                                       value="@(ViewBag.address != null ? ViewBag.address.address : "")">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 mb-2">
+                            <div class="form-group">
+                                <label for="address2" class="form-label">Địa chỉ 2</label>
+                                <input type="text" id="address2" class="form-control" name="address2"
+                                       value="@(ViewBag.address2 != null ? ViewBag.address2.address : "")">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="user-info-submit">Lưu thay đổi</button>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+</section>
+<script>
+    function preview_image() {
+        document.querySelector('#photo').src = URL.createObjectURL(document.getElementById("photoInput").files[0])
+    }
+
+</script>

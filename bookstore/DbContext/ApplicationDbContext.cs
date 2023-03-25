@@ -43,6 +43,8 @@ public class ApplicationDbContext : IdentityDbContext<UserModel>
 
     public DbSet<CustomerModel> Customers { get; set; }
 
+    public DbSet<CustomerAddress> customerAddresses { get; set; }
+
 
 
 

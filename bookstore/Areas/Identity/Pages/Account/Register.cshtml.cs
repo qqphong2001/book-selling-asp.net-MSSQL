@@ -32,13 +32,16 @@ namespace bookstore.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly bookstore.Email.IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _db;
         public RegisterModel(
             UserManager<UserModel> userManager,
             IUserStore<UserModel> userStore,
             SignInManager<UserModel> signInManager,
             ILogger<RegisterModel> logger,
             bookstore.Email.IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext db
+            )
         {
             _roleManager = roleManager;
             _userManager = userManager;
@@ -47,6 +50,7 @@ namespace bookstore.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _db = db;
         }
 
         /// <summary>
@@ -140,6 +144,21 @@ namespace bookstore.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+
+                    var newCustomer = new CustomerModel
+                    {
+                        lastName = Request.Form["lastName"],
+                        firstName = Request.Form["firstName"],
+                        phoneNumber = Request.Form["phone"],
+                        account_id = userId,
+                        avatar = @"images/logo/logo.png"
+
+                    };
+
+                    await _db.Customers.AddAsync(newCustomer);
+                    await _db.SaveChangesAsync();
+
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

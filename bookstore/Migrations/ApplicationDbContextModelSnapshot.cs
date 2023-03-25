@@ -140,6 +140,26 @@ namespace bookstore.Migrations
                     b.ToTable("Books");
                 });
 
+            modelBuilder.Entity("bookstore.Areas.Admin.Models.CustomerAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("customer_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("customerAddresses");
+                });
+
             modelBuilder.Entity("bookstore.Areas.Admin.Models.CustomerModel", b =>
                 {
                     b.Property<int>("Id")
@@ -148,8 +168,9 @@ namespace bookstore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("account_id")
-                        .HasColumnType("int");
+                    b.Property<string>("account_id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("avatar")
                         .IsRequired()
