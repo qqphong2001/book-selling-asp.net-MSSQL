@@ -1,4 +1,4 @@
-﻿@model bookstore.Areas.Admin.Models.GenreModel
+﻿@model bookstore.Areas.Admin.Models.AuthorModel
 
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -9,11 +9,11 @@
     <div class="card">
         <div class="card-body">
             <button onclick="location.href='@Url.Action("Index","Genre")'" class="btn btn-secondary mt-5 mb-5">Trờ về</button>
-            <h4 class="card-title">Thể loại</h4>
-            <form class="form-sample" method="post" asp-action="EditPost" asp-controller="Genre">
+            <h4 class="card-title">Tác giả</h4>
+            <form class="form-sample" method="post" asp-action="EditPost" asp-controller="Author">
              
                 <p class="card-description">
-                    Thông tin thể loại
+                    Thông tin tác giả
                 </p>
                 <div class="row">
                     <div class="col-md-6">
@@ -34,6 +34,16 @@
                     </div>
 
 
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tên thể loại</label>
+                            <div class="col-sm-9">
+                                <textarea type="text" class="form-control" asp-for="Description" >@Model.Description</textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             
 

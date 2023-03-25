@@ -1,0 +1,69 @@
+﻿@model bookstore.Areas.Admin.Models.PaymentMethodModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <button onclick="location.href='@Url.Action("Index","PaymentMethod")'" class="btn btn-secondary mt-5 mb-5">Trờ về</button>
+            <h4 class="card-title">Thể loại</h4>
+            <form class="form-sample" method="post" asp-action="EditPost" asp-controller="PaymentMethod">
+             
+                <p class="card-description">
+                    Thông tin thanht toán
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Id</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" value="@Model.Id" asp-for="Id"  />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tên phương thức thanh toán</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" value="@Model.Name" asp-for="Name" />
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-4">
+                        <div class="form-group">
+                            <label>Ảnh phương thức thanh toán</label>
+                            <input type="file" name="imageFile" class="file-upload-default" onchange="preview_imageBook()" id="photoInputBook">
+                            <div class="input-group col-xs-12">
+                                <span class="">
+                                    <button class="file-upload-browse btn btn-primary" type="button">Tải ảnh</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div>
+                            <img class="rounded" id="photoBook" src="@Model.picture" width="90px" height="110px" />
+                        </div>
+                    </div>
+                </div>
+            
+
+                <button type="submit" class="btn btn-success" >Lưu</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function preview_imageBook() {
+        document.getElementById('photoBook').src = URL.createObjectURL(document.getElementById("photoInputBook").files[0])
+    }
+
+
+</script>

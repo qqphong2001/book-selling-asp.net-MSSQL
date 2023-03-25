@@ -20,6 +20,8 @@ namespace bookstore.Areas.Admin.Models
         public int promotion_id { get; set; }
         public int emloyee_id { get; set; }
 
+        public string description { get; set;}
+
 
 
     }
