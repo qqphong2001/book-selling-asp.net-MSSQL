@@ -106,15 +106,15 @@
                         <div class="col-sm-12 col-md-4">
                             <div class="form-group">
                                 <label>Ảnh bìa sách</label>
-                                <input type="file" name="img[]" class="file-upload-default">
+                                <input type="file" name="imageFile" class="file-upload-default" onchange="preview_imageBook()" id="photoInputBook">
                                 <div class="input-group col-xs-12">
                                     <span class="">
-                                        <button class="file-upload-browse btn btn-primary" type="button">Tải ảnh</button>
+                                        <button class="file-upload-browse btn btn-primary"  type="button">Tải ảnh</button>
                                     </span>
                                 </div>
                             </div>
                             <div>
-                                <img class="rounded" src="~/images/products/thumbnail/8e2aa91d-132f-4dec-9db6-2c9c9e48c702.png" width="90px" height="110px"/>
+                                <img class="rounded" id="photoBook" src="~/images/logo/default.jpg" width="90px" height="110px" />
                             </div>
                         </div>
 
@@ -123,17 +123,15 @@
 
                             <div class="form-group">
                                 <label>Ảnh miêu tả sách</label>
-                                <input type="file" name="img[]" class="file-upload-default">
+                                <input type="file" name="FileUploads[]" multiple id="photoInputBooks" onchange="preview_imageBooks()" class="file-upload-default">
                                 <div class="input-group col-xs-12">
                                     <span class="">
                                         <button class="file-upload-browse btn btn-primary" type="button">Tải ảnh</button>
                                     </span>
                                 </div>
                             </div>
-                            <div>
-                                <img class="rounded mx-2" src="~/images/products/thumbnail/8e2aa91d-132f-4dec-9db6-2c9c9e48c702.png" width="90px" height="110px" />
-                                <img class="rounded mx-2" src="~/images/products/thumbnail/8e2aa91d-132f-4dec-9db6-2c9c9e48c702.png" width="90px" height="110px" />
-                                <img class="rounded mx-2" src="~/images/products/thumbnail/8e2aa91d-132f-4dec-9db6-2c9c9e48c702.png" width="90px" height="110px" />
+                            <div id="image_previews">
+                               
                             </div>
                         </div>
                     </div>
@@ -160,9 +158,9 @@
                         <div class="col-sm-12 col-md-4">
                             <div class="form-group">
                                 <label>Hình thức</label>
-                                <select name="" class="form-control font-weight-bold">
-                                    <option value="">Bìa cứng</option>
-                                    <option value="">Bìa mềm</option>
+                                <select name="layout" class="form-control font-weight-bold">
+                                    <option value="Bìa cứng">Bìa cứng</option>
+                                    <option value="Bìa mềm">Bìa mềm</option>
                                 </select>
                             </div>
                         </div>
@@ -178,12 +176,13 @@
                             <div class="form-group">
                                 <label>Nhà xuất bản</label><br />
                                 <select class="js-example-basic-single" style="width: 100%;">
-                                    <option value="">Lựa chọn</option>
-                                    <option value="AL">Alabama</option>
-                                    <option value="WY">Wyoming</option>
-                                    <option value="AM">America</option>
-                                    <option value="CA">Canada</option>
-                                    <option value="RU">Russia</option>
+                                    @foreach (var item in ViewBag.publisher)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+
+                                    }
+
+                                   
                                 </select>
                             </div>
                         </div>
@@ -192,12 +191,11 @@
                             <div class="form-group">
                                 <label>Tác giả</label><br />
                                 <select class="js-example-basic-single" style="width: 100%;">
-                                    <option value="">Lựa chọn</option>
-                                    <option value="AL">Alabama</option>
-                                    <option value="WY">Wyoming</option>
-                                    <option value="AM">America</option>
-                                    <option value="CA">Canada</option>
-                                    <option value="RU">Russia</option>
+                                    @foreach (var item in ViewBag.authors)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -206,12 +204,11 @@
                             <div class="form-group">
                                 <label>Thể loại</label><br />
                                 <select class="js-example-basic-single" style="width: 100%;">
-                                    <option value="">Lựa chọn</option>
-                                    <option value="AL">Alabama</option>
-                                    <option value="WY">Wyoming</option>
-                                    <option value="AM">America</option>
-                                    <option value="CA">Canada</option>
-                                    <option value="RU">Russia</option>
+                                    @foreach (var item in ViewBag.genres)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -251,7 +248,12 @@
                             </div>
                         </div>
 
-                       
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label>Mô tả</label>
+                                <textarea type="text" class="form-control font-weight-bold" name="description" rows="10" ></textarea>
+                            </div>
+                        </div>
 
 
                     </div>
@@ -268,4 +270,24 @@
     </div>
 </div>
 </div>
+
+<script>
+    function preview_imageBook() {
+        document.getElementById('photoBook').src = URL.createObjectURL(document.getElementById("photoInputBook").files[0])
+    }
+
+
+    function preview_imageBooks() {
+        var total_file = document.getElementById("photoInputBooks").files.length;
+        for (var i = 0; i < total_file; i++) {
+            var img = document.createElement('img');
+            img.className = 'rounded mx-2';
+            img.src = URL.createObjectURL(document.getElementById("photoInputBooks").files[i]);
+            img.width = 90;
+            img.height = 110;
+            document.getElementById("image_previews").appendChild(img);
+        }
+        
+    }
+</script>
 

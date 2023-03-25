@@ -32,6 +32,14 @@ namespace bookstore.Areas.Admin.Controllers
         {
 
             IEnumerable<BookModel> books = _db.Books;
+            IEnumerable<AuthorModel> authors = _db.Authors.ToList();
+            IEnumerable<PublisherModel> publishers = _db.Publisher.ToList();
+            IEnumerable<GenreModel> genres = _db.Genres.ToList();
+
+            ViewBag.authors = authors;
+            ViewBag.publisher = publishers;
+            ViewBag.genres = genres;
+
 
             return View(books);
         }
