@@ -175,7 +175,7 @@
                         <div class="col-sm-12 col-md-4">
                             <div class="form-group">
                                 <label>Nhà xuất bản</label><br />
-                                <select class="js-example-basic-single" style="width: 100%;">
+                                <select class="js-example-basic-single" style="width: 100%;" name="publisher_id">
                                     @foreach (var item in ViewBag.publisher)
                                     {
                                         <option value="@item.Id">@item.Name</option>
@@ -190,7 +190,7 @@
                         <div class="col-sm-12 col-md-4">
                             <div class="form-group">
                                 <label>Tác giả</label><br />
-                                <select class="js-example-basic-single" style="width: 100%;">
+                                <select class="js-example-basic-single" style="width: 100%;" name="author_id">
                                     @foreach (var item in ViewBag.authors)
                                     {
                                         <option value="@item.Id">@item.Name</option>
@@ -203,7 +203,7 @@
                         <div class="col-sm-12 col-md-4">
                             <div class="form-group">
                                 <label>Thể loại</label><br />
-                                <select class="js-example-basic-single" style="width: 100%;">
+                                <select class="js-example-basic-single" style="width: 100%;" name="genre_id">
                                     @foreach (var item in ViewBag.genres)
                                     {
                                         <option value="@item.Id">@item.Name</option>

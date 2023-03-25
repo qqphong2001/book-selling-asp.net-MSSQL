@@ -12,11 +12,16 @@ namespace bookstore.Areas.User.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly IToastNotification _toastNotification;
-      
-        public HomeController(ApplicationDbContext db,IToastNotification toastNotification)
+        private readonly SignInManager<bookstore.Areas.Admin.Models.UserModel> _SignInManager;
+        private readonly UserManager<bookstore.Areas.Admin.Models.UserModel> _UserManager;
+
+        public HomeController(ApplicationDbContext db,IToastNotification toastNotification, SignInManager<bookstore.Areas.Admin.Models.UserModel> SignInManager, UserManager<bookstore.Areas.Admin.Models.UserModel> UserManager)
         {
             _db = db;
             _toastNotification = toastNotification;
+
+            _SignInManager = SignInManager;
+            _UserManager = UserManager;
           
         }
 
@@ -46,7 +51,16 @@ namespace bookstore.Areas.User.Controllers
 
             ViewData["title"] = "Trang chủ";
             return View();
+        
         }
-       
+
+        [Route("logout")]
+        public async Task<IActionResult> logout()
+        {
+            await _SignInManager.SignOutAsync();
+
+            return RedirectToAction("index");
+        }
+
     }
 }

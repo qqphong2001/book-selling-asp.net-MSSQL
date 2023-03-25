@@ -7253,6 +7253,10 @@
       "PackagePath": "staticwebassets\\images\\avatar\\eb61c0dc-d400-4080-889a-dc8eb87763b8.png"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\genre\\07b751aa-995e-41b5-85ab-04f9ababb4a0.jpg",
+      "PackagePath": "staticwebassets\\images\\genre\\07b751aa-995e-41b5-85ab-04f9ababb4a0.jpg"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\genre\\1fc48460-572e-4517-96eb-680209cdb14a.png",
       "PackagePath": "staticwebassets\\images\\genre\\1fc48460-572e-4517-96eb-680209cdb14a.png"
     },
@@ -7293,6 +7297,10 @@
       "PackagePath": "staticwebassets\\images\\logo\\logo.png"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\payment\\6823ef7d-662d-40c2-ad0f-edfad2d724a4.jpg",
+      "PackagePath": "staticwebassets\\images\\payment\\6823ef7d-662d-40c2-ad0f-edfad2d724a4.jpg"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\products\\15cd009c-6c1a-40d5-ba3c-880ee23a4979.png",
       "PackagePath": "staticwebassets\\images\\products\\15cd009c-6c1a-40d5-ba3c-880ee23a4979.png"
     },
@@ -7327,6 +7335,14 @@
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\products\\aaf42b86-e47d-4ba2-84f9-078b1410b623.jpg",
       "PackagePath": "staticwebassets\\images\\products\\aaf42b86-e47d-4ba2-84f9-078b1410b623.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\products\\ab3537ab-4496-4154-be9e-e5ca84b8758e.jpg",
+      "PackagePath": "staticwebassets\\images\\products\\ab3537ab-4496-4154-be9e-e5ca84b8758e.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\products\\b2bfd524-e1e1-46bf-84e6-9a9f05d929fa.jpg",
+      "PackagePath": "staticwebassets\\images\\products\\b2bfd524-e1e1-46bf-84e6-9a9f05d929fa.jpg"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\products\\ebf043b4-60bf-4ea5-885e-4b699ea84880.png",

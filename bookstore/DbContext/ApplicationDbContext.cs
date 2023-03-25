@@ -45,7 +45,16 @@ public class ApplicationDbContext : IdentityDbContext<UserModel>
 
     public DbSet<CustomerAddress> customerAddresses { get; set; }
 
+    public DbSet<CustomerTypeModel> CustomerTypes { get; set; }
 
+    public DbSet<EmployeeModel> Employees { get; set; }
 
+    public DbSet<OrderStatus> orderStatuses { get; set; }
+
+    public DbSet<PaymentMethodModel> PaymentMethods { get; set; }
+
+    public DbSet<Promotion> promotions { get; set; }
+
+    public DbSet<ShippingMethodModel> ShippingMethods { get; set; }
 
 }

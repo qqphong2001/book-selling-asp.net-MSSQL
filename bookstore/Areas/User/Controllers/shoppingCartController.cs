@@ -6,6 +6,8 @@ using bookstore.Areas.User.Service;
 using bookstore.Areas.User.Models;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Asn1.Ocsp;
+using bookstore.Areas.Admin.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace bookstore.Areas.User.Controllers
 {
@@ -15,17 +17,48 @@ namespace bookstore.Areas.User.Controllers
         private readonly CartSevice _cartSevice;
         private readonly IToastNotification _toastNotification;
         private readonly ApplicationDbContext _db;
-        public shoppingCartController(ApplicationDbContext db, IToastNotification toastNotification, CartSevice cartSevice)
+        private readonly SignInManager<bookstore.Areas.Admin.Models.UserModel> _SignInManager;
+        private readonly UserManager<bookstore.Areas.Admin.Models.UserModel> _UserManager;
+        public shoppingCartController(ApplicationDbContext db, IToastNotification toastNotification, CartSevice cartSevice, SignInManager<bookstore.Areas.Admin.Models.UserModel> SignInManager, UserManager<bookstore.Areas.Admin.Models.UserModel> UserManager)
         {
             _db = db;
             _toastNotification = toastNotification;
             _cartSevice = cartSevice;
+            _SignInManager = SignInManager;
+            _UserManager = UserManager;
         }
 
         [Route("/cart")]
         public IActionResult Index()
         {
             ViewData["title"] = "Trang giỏ hàng";
+
+
+
+            if (_SignInManager.IsSignedIn(User))
+            {
+                var addresss = _db.Customers.Join(
+                    _db.customerAddresses,
+                    customers => customers.Id,
+                    address => address.customer_id,
+                    (customers, address) => new { customers = customers, address = address }
+                    ).Where(x => x.customers.account_id == _UserManager.GetUserId(User)).ToList();
+
+                ViewBag.address = addresss;
+
+                var customer  = _db.Customers.Where(x => x.account_id == _UserManager.GetUserId(User)).FirstOrDefault();
+                ViewBag.customer = customer;    
+            }
+            else
+            {
+                ViewBag.address = null;
+                ViewBag.customer = null;
+            }
+
+
+
+
+
 
             return View(_cartSevice.GetCartItems());
         }
@@ -103,13 +136,14 @@ namespace bookstore.Areas.User.Controllers
 
             var cartitem = cart.Find(p => p.product.Id == productid);
 
-
+          
 
 
             return Ok(cart);    
 
         }
 
+      
 
 
 

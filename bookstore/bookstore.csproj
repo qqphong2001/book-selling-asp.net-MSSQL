@@ -46,6 +46,7 @@
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\images\genre\" />
     <Folder Include="wwwroot\images\avatar\" />
+    <Folder Include="wwwroot\images\payment\" />
     <Folder Include="wwwroot\images\products\thumbnail\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\lib\bootstrap\" />

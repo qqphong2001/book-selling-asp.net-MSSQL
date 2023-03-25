@@ -300,27 +300,39 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" asp-controller="book" asp-action="index">
                             <i class="icon-grid menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
+                            <span class="menu-title">Sách</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  asp-controller="Author">
+                        <a class="nav-link" asp-controller="Author" asp-action="index">
                             <i class="icon-grid menu-icon"></i>
                             <span class="menu-title">Tác giả</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Publisher">
+                        <a class="nav-link" asp-controller="Publisher" asp-action="index">
                             <i class="icon-grid menu-icon"></i>
                             <span class="menu-title">Nhà xuất bản</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Genre">
+                        <a class="nav-link" asp-controller="Genre" asp-action="index">
                             <i class="icon-grid menu-icon"></i>
                             <span class="menu-title">Thể loại</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="shippingMethod" asp-action="index">
+                            <i class="icon-grid menu-icon"></i>
+                            <span class="menu-title">Phương thức giao hàng</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="paymentMethod" asp-action="index">
+                            <i class="icon-grid menu-icon"></i>
+                            <span class="menu-title">Phương thức thanh toán</span>
                         </a>
                     </li>
                     <li class="nav-item">

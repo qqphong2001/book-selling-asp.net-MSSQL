@@ -1,4 +1,8 @@
 ﻿@model List<bookstore.Areas.User.Models.CartItem>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<bookstore.Areas.Admin.Models.UserModel> SignInManager
+@inject UserManager<bookstore.Areas.Admin.Models.UserModel> UserManager
+
 @{
     Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
 
@@ -28,21 +32,21 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="">Họ và tên</label>
-                                <input class="form-control font-weight-bold" type="text" name="fullName" value="Shio Nguyễn" readonly>
+                                        <input class="form-control font-weight-bold" type="text" name="fullName" value="@(ViewBag.customer != null ?  ViewBag.customer.firstName + ViewBag.customer.lastName : "")" readonly>
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="">Số điện thoại</label>
-                                <input class="form-control font-weight-bold" type="text" name="phone" value="8081508" readonly>
+                                        <input class="form-control font-weight-bold" type="text" name="phone" value="@(ViewBag.customer != null ? ViewBag.customer.phoneNumber : "")" readonly>
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="">Email</label>
-                                <input class="form-control font-weight-bold" type="text" name="email" value="abc@gmail.com" readonly>
+                                        <input class="form-control font-weight-bold" type="text" name="email" value="@(SignInManager.IsSignedIn(User) == true ? UserManager.GetUserName(User) : "")" readonly>
                             </div>
                         </div>
 
@@ -50,9 +54,24 @@
                             <div class="form-group">
                                 <label for="">Địa chỉ</label>
                                 <select class="form-control">
-                                    <option selected>Chọn</option>
-                                    <option value="1">828 HUFLIT</option>
-                                    <option value="2">10 QL22 HUFLIT</option>
+                                            @if(ViewBag.address != null)
+                                            {
+                                                <option selected>Chọn</option>
+                                                @foreach (var item in ViewBag.address)
+                                                {
+                                                    <option value="@item.address.Id">@item.address.address</option>
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <option selected>Chọn</option>
+                                                <span class="text-danger">Bạn chưa thêm địa chỉ vui lòng vào <a asp-action="Index" asp-controller="Customer" asp-route-customer_id="@UserManager.GetUserId(User)">thông tin cá nhân để cập nhật địa chỉ</a>  </span>
+
+                                            }
+
+                                         
+                                 
                                 </select>
                             </div>
                         </div>
@@ -71,7 +90,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="">Ghi chú thêm</label>
-                                <textarea class="input" placeholder="Ví dụ: Giao vào giờ hành chính" rows="10"></textarea>
+                                <textarea class="input" name="description" placeholder="Ví dụ: Giao vào giờ hành chính" rows="10"></textarea>
                             </div>
                         </div>
 
