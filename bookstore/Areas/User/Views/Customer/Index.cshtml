@@ -118,8 +118,9 @@
                         <div class="col-sm-12 mb-2">
                             <div class="form-group">
                                 <label for="address1" class="form-label">Địa chỉ 1</label>
+                              
                                 <input type="text" id="address1" class="form-control" name="address1"
-                                       value="@ViewBag.address.address">
+                                       value="@(ViewBag.address != null ? ViewBag.address.address : "")">
                             </div>
                         </div>
 
@@ -127,7 +128,7 @@
                             <div class="form-group">
                                 <label for="address2" class="form-label">Địa chỉ 2</label>
                                 <input type="text" id="address2" class="form-control" name="address2"
-                                       value="@ViewBag.address.address2">
+                                       value="@(ViewBag.address2 != null ? ViewBag.address2.address : "")">
                             </div>
                         </div>
                     </div>

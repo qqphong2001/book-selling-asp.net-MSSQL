@@ -152,10 +152,6 @@ namespace bookstore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("address2")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("customer_id")
                         .HasColumnType("int");
 
