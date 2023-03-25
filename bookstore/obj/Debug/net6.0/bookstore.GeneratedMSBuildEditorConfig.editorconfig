@@ -264,6 +264,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[c:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Email/emailOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RW1haWxcZW1haWxPcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [c:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
