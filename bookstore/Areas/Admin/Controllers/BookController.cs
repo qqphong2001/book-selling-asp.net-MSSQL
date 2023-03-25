@@ -9,7 +9,7 @@ using System.Collections;
 
 namespace bookstore.Areas.Admin.Controllers
 {
-    [Authorize(Roles = Role.Role_Admin)]
+    //[authorize(roles = role.role_admin)]
     [Area("admin")]
     
     [Route("/admin/book")]
