@@ -1,0 +1,53 @@
+﻿@model bookstore.Areas.Admin.Models.ShippingMethodModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <button onclick="location.href='@Url.Action("Index","shippingmethod")'" class="btn btn-secondary mt-5 mb-5">Trờ về</button>
+            <h4 class="card-title">Thể loại</h4>
+            <form class="form-sample" method="post" asp-action="EditPost" asp-controller="shippingmethod">
+             
+                <p class="card-description">
+                    Thông tin giao hàng
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Id</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" value="@Model.Id" asp-for="Id"  />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tên phương thức giao hàng</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" value="@Model.Name" asp-for="Name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Giá</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" value="@Model.price" asp-for="price" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            
+
+                <button type="submit" class="btn btn-success" >Lưu</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>

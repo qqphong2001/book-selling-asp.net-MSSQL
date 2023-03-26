@@ -2,7 +2,8 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<bookstore.Areas.Admin.Models.UserModel> SignInManager
 @inject UserManager<bookstore.Areas.Admin.Models.UserModel> UserManager
-
+@using Microsoft.Extensions.Options
+@inject IOptions<bookstore.payment.StripeSettings> Stripe
 @{
     Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
 
@@ -32,28 +33,30 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="">Họ và tên</label>
-                                        <input class="form-control font-weight-bold" type="text" name="fullName" value="@(ViewBag.customer != null ?  ViewBag.customer.firstName + ViewBag.customer.lastName : "")" readonly>
-                            </div>
+                                        <input class="form-control font-weight-bold" type="text" name="fullName" value="@(ViewBag.customer != null ?  ViewBag.customer.firstName + ViewBag.customer.lastName : "")" >
+                                        <input class="form-control font-weight-bold" type="hidden" name="customer_id" value="@(ViewBag.customer != null ?  ViewBag.customer.Id : "")">
+
+                                    </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="">Số điện thoại</label>
-                                        <input class="form-control font-weight-bold" type="text" name="phone" value="@(ViewBag.customer != null ? ViewBag.customer.phoneNumber : "")" readonly>
+                                        <input class="form-control font-weight-bold" type="text" name="phone" value="@(ViewBag.customer != null ? ViewBag.customer.phoneNumber : "")" >
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="">Email</label>
-                                        <input class="form-control font-weight-bold" type="text" name="email" value="@(SignInManager.IsSignedIn(User) == true ? UserManager.GetUserName(User) : "")" readonly>
+                                        <input class="form-control font-weight-bold" type="text" name="email" value="@(SignInManager.IsSignedIn(User) == true ? UserManager.GetUserName(User) : "")" >
                             </div>
                         </div>
 
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="">Địa chỉ</label>
-                                <select class="form-control">
+                                <select class="form-control" name="address">
                                             @if(ViewBag.address != null)
                                             {
                                                 <option selected>Chọn</option>
@@ -81,9 +84,11 @@
                                 <label for="">Hình thức giao hàng</label>
                                 <select class="form-control">
                                     <option selected>Chọn</option>
-                                    <option value="1">GHTK - 13.000đ</option>
-                                    <option value="2">Lahamove - 15.000đ</option>
-                                </select>
+                                            @foreach (var item in ViewBag.shippingMethod)
+                                            {
+                                                <option value="@item.Id"> @item.Name - @item.price.ToString("#,##0 đ") </option>
+                                            }
+                                        </select>
                             </div>
                         </div>
 
@@ -121,7 +126,7 @@
                                 totalMax += total;
                         <div class="order-item">
 
-                            <div class="close"><i class="fa fa-trash"></i></div>
+                                        <a class="close" style="z-index:99" asp-action="removecart" asp-controller="shoppingCart" asp-route-productid=@cartitem.product.Id ><i class="fa fa-trash"></i></a>
 
                             <div class="row">
 
@@ -132,21 +137,18 @@
                                                     <div class="order-item-title">@cartitem.quantity x @cartitem.product.title</div>
                                             <div class="qty-label">
                                                 <div class="input-number">
-                                                    <input type="number" value="@cartitem.quantity">
-                                                    <span class="qty-up">+</span>
+                                                                <input type="number" class="updatecartitem" data-productid="@cartitem.product.Id" id="@($"quantity-{cartitem.product.Id}")" value="@cartitem.quantity">
+                                                                <span class="qty-up ">+</span>
                                                     <span class="qty-down">-</span>
                                                 </div>
                                             </div>
-                                                    <div class="order-item-price">@(total.ToString("#,##0.00 đ"))</div>
+                                                    <div class="order-item-price">@(total.ToString("#,##0 đ"))</div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                             }
-                        
-
                     </div>
 
                     <hr>
@@ -170,11 +172,11 @@
                     <div class="order-col">
                         <div><strong>Giảm giá</strong></div>
                         <div>-10.000đ</div>
-                    </div>
+                    </div>  
 
                     <div class="order-col">
                         <div><strong>Tổng tiền</strong></div>
-                            <div><strong class="order-total">@((totalMax - 10).ToString("#,##0.00 đ"))</strong></div>
+                            <div><strong class="order-total">@((totalMax - 10).ToString("#,##0 đ"))</strong></div>
                     </div>
                 </div>
 
@@ -186,7 +188,7 @@
                     </div>
 
                     <div class="input-radio" style="margin: 10px 0;">
-                        <input type="radio" name="payment" id="payment-1">
+                        <input type="radio" name="payment" id="payment-1" value="COD">
                         <label for="payment-1">
                             <span style="top: 6px;"></span>
                                 <img src="~/User/public/images/cod.svg" alt="icon" width="32" height="32">
@@ -195,7 +197,7 @@
                     </div>
 
                     <div class="input-radio" style="margin: 10px 0;">
-                        <input type="radio" name="payment" id="payment-2">
+                        <input type="radio" name="payment" id="payment-2" value="VNPAY">
                         <label for="payment-2">
                             <span style="top: 6px;"></span>
                             <img src="~/User/public/images/vnpay.png" alt="icon" width="32" height="32">
@@ -203,8 +205,8 @@
                         </label>
                     </div>
 
-                    <div class="input-radio" style="margin: 10px 0;">
-                        <input type="radio" name="payment" id="payment-3">
+                    <div class="input-radio" style="margin: 10px 0;" > 
+                        <input type="radio" name="payment" id="payment-3" value="VISA">
                         <label for="payment-3">
                             <span style="top: 6px;"></span>
                                 <img src="~/User/public/images/card.svg" alt="icon" width="32" height="32">
@@ -224,7 +226,7 @@
             @section Scripts {
             <script>
                 $(document).ready(function () {
-                    $(".updatecartitem").click(function (event) {
+                    $(".updatecartitem").change(function (event) {
                         event.preventDefault();
                         var productid = $(this).attr("data-productid");
                         var quantity = $("#quantity-" + productid).val();
@@ -236,7 +238,7 @@
                                 quantity: quantity
                             },
                             success: function (result) {
-                                window.location.href = "@Url.RouteUrl("cart")";
+                                window.location.href = "@Url.RouteUrl("cart.order-details")";
                             }
                         });
                     });

@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using bookstore.DbContext;
+using Newtonsoft.Json;
 
 namespace bookstore.Areas.Identity.Pages.Account
 {
@@ -30,13 +32,14 @@ namespace bookstore.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<UserModel> _emailStore;
         private readonly bookstore.Email.IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
-
+        private readonly ApplicationDbContext _db;
         public ExternalLoginModel(
             SignInManager<UserModel> signInManager,
             UserManager<UserModel> userManager,
             IUserStore<UserModel> userStore,
             ILogger<ExternalLoginModel> logger,
-            bookstore.Email.IEmailSender emailSender)
+            bookstore.Email.IEmailSender emailSender,
+            ApplicationDbContext db)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -44,6 +47,7 @@ namespace bookstore.Areas.Identity.Pages.Account
             _emailStore = GetEmailStore();
             _logger = logger;
             _emailSender = emailSender;
+            _db = db;
         }
 
         /// <summary>
@@ -51,12 +55,15 @@ namespace bookstore.Areas.Identity.Pages.Account
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [BindProperty]
+     
         public InputModel Input { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        /// 
+
         public string ProviderDisplayName { get; set; }
 
         /// <summary>
@@ -82,9 +89,11 @@ namespace bookstore.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Bạn chưa nhập email")]
+            [EmailAddress(ErrorMessage = "Bạn chưa nhập đúng email")]
             public string Email { get; set; }
+
+            
         }
         
         public IActionResult OnGet() => RedirectToPage("./Login");
@@ -111,7 +120,7 @@ namespace bookstore.Areas.Identity.Pages.Account
                 ErrorMessage = "Error loading external login information.";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
-
+          
             // Sign in the user with this external login provider if the user already has a login.
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
             if (result.Succeeded)
@@ -132,11 +141,14 @@ namespace bookstore.Areas.Identity.Pages.Account
                 {
                     Input = new InputModel
                     {
-                        Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                        
+
                     };
                 }
                 return Page();
             }
+
         }
 
         public async Task<IActionResult> OnPostConfirmationAsync(string returnUrl = null)
@@ -164,6 +176,10 @@ namespace bookstore.Areas.Identity.Pages.Account
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
+                        await _userManager.AddToRoleAsync(user, Role.Role_User);
+
+
+
 
                         var userId = await _userManager.GetUserIdAsync(user);
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -176,6 +192,24 @@ namespace bookstore.Areas.Identity.Pages.Account
 
                         await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                             $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                        var newCustomer = new CustomerModel
+                        {
+                            lastName = Request.Form["lastName"],
+                            firstName = Request.Form["firstName"],
+                            phoneNumber = Request.Form["phone"],
+                            account_id = userId,
+                            avatar = @"images/logo/logo.png",
+                           
+
+                        };
+
+                        await _db.Customers.AddAsync(newCustomer);
+                        await _db.SaveChangesAsync();
+
+
+
+
 
                         // If account confirmation is required, we need to show the link if we don't have a real email sender
                         if (_userManager.Options.SignIn.RequireConfirmedAccount)

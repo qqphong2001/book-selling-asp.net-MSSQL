@@ -2,6 +2,7 @@ using bookstore.Areas.Admin.Models;
 using bookstore.Areas.User.Service;
 using bookstore.DbContext;
 using bookstore.Email;
+using bookstore.payment;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NToastNotify;
 using Org.BouncyCastle.Crypto.Tls;
+using Stripe;
 using System.Configuration;
 using System.Security.Principal;
 
@@ -22,6 +24,7 @@ builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
     ProgressBar = true,
     Timeout = 5000
 });
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("StripeSettings"));
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddMvc();
@@ -36,6 +39,7 @@ builder.Services.AddOptions();
 var mailsetting = builder.Configuration.GetSection("MailSettings");
 builder.Services.Configure<MailSettings>(mailsetting);
 builder.Services.AddSingleton<bookstore.Email.IEmailSender, emailSender>();
+builder.Services.AddSingleton(mailsetting);
 
 
 builder.Services.AddSession(cfg => {                    // Đăng ký dịch vụ Session
@@ -129,6 +133,8 @@ app.UseStaticFiles();
 app.MapRazorPages();
 app.UseRouting();
 app.MapRazorPages();
+
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("StripeSettings:SecretKey").Get<string>();
 
 app.UseAuthentication();   // Phục hồi thông tin đăng nhập (xác thực)
 app.UseAuthorization();   // Phục hồi thông tinn về quyền của User

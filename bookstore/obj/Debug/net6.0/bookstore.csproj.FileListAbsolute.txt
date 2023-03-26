@@ -1748,3 +1748,4 @@ C:\Shio\programming\dotnet\book-selling-asp.net-MSSQL\bookstore\obj\Debug\net6.0
 C:\Shio\programming\dotnet\book-selling-asp.net-MSSQL\bookstore\obj\Debug\net6.0\bookstore.pdb
 C:\Shio\programming\dotnet\book-selling-asp.net-MSSQL\bookstore\obj\Debug\net6.0\bookstore.genruntimeconfig.cache
 C:\Shio\programming\dotnet\book-selling-asp.net-MSSQL\bookstore\obj\Debug\net6.0\ref\bookstore.dll
+C:\Users\ADMIN\source\repos\bookstore\book-selling-asp.net-MSSQL\bookstore\bin\Debug\net6.0\Stripe.net.dll
