@@ -56,6 +56,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Areas/Admin/Views/OrderStatus/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcT3JkZXJTdGF0dXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Areas/Admin/Views/OrderStatus/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcT3JkZXJTdGF0dXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Areas/Admin/Views/Order/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcT3JkZXJcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Areas/Admin/Views/PaymentMethod/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUGF5bWVudE1ldGhvZFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

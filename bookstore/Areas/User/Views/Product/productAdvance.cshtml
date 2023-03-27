@@ -161,11 +161,11 @@
                                     @if (item.Book.discount > 0)
                                     {
 
-                                        <h4 class="product-price">@((item.Book.unitPrice - (item.Book.unitPrice * (item.Book.discount / 100))).ToString("#,##0.00 đ")) <del class="product-old-price">@item.Book.unitPrice.ToString("#,##0.00 đ")</h4>
+                                        <h4 class="product-price">@((item.Book.unitPrice - (item.Book.unitPrice * (item.Book.discount / 100))).ToString("#,##0 đ")) <del class="product-old-price">@item.Book.unitPrice.ToString("#,##0 đ")</h4>
                                     }
                                     else
                                     {
-                                        <h4 class="product-price">@item.Book.unitPrice.ToString("#,##0.00 đ")</h4>
+                                        <h4 class="product-price">@item.Book.unitPrice.ToString("#,##0 đ")</h4>
                                     }
 
                                 </div>

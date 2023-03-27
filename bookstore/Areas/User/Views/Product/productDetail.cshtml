@@ -82,7 +82,7 @@
 					@if( ViewBag.book.Book.discount > 0)
 					{
 						<div>
-							<h3 class="product-price">@((ViewBag.book.Book.unitPrice - (ViewBag.book.Book.unitPrice * (ViewBag.book.Book.discount / 100))).ToString("#,##0.00 đ")) <del class="product-old-price">@ViewBag.book.Book.unitPrice.ToString("#,##0.00 đ")</h3>
+							<h3 class="product-price">@((ViewBag.book.Book.unitPrice - (ViewBag.book.Book.unitPrice * (ViewBag.book.Book.discount / 100))).ToString("#,##0 đ")) <del class="product-old-price">@ViewBag.book.Book.unitPrice.ToString("#,##0 đ")</h3>
 							@if( ViewBag.book.Book.unitStock > 0)
 							{
 								<span class="product-available">Còn hàng</span>
@@ -100,7 +100,7 @@
 					else
 					{
 						<div>
-							<h3 class="product-price">@ViewBag.book.Book.unitPrice.ToString("#,##0.00 đ")</h3>
+							<h3 class="product-price">@ViewBag.book.Book.unitPrice.ToString("#,##0 đ")</h3>
 
 							@if (ViewBag.book.Book.unitStock > 0)
 							{
