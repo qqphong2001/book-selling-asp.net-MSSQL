@@ -67,7 +67,9 @@ namespace bookstore.Areas.User.Controllers
 
 
             var shippingMethod = _db.ShippingMethods.ToList();
+            var paymentMethod = _db.PaymentMethods.ToList();
 
+            ViewBag.paymentMethod = paymentMethod;
             ViewBag.shippingMethod = shippingMethod;
 
 
@@ -181,7 +183,11 @@ namespace bookstore.Areas.User.Controllers
                 description = Request.Form["description"],
                 customer_id = int.Parse(Request.Form["customer_id"]),
                 customerAddress_id = int.Parse(Request.Form["address"]),
-                status = 1
+                status = 0,
+                paymentMethod_id = int.Parse(Request.Form["payment"]),
+                shippingMethod_id = int.Parse(Request.Form["shipping"])
+                
+                
             };
             var order_id = await _db.Orders.AddAsync(order);
             await _db.SaveChangesAsync();
@@ -200,7 +206,7 @@ namespace bookstore.Areas.User.Controllers
             }
 
 
-            if (Request.Form["payment"] == "VISA")
+            if (Request.Form["payment"] == "6")
             {
                 var domain = "https://localhost:44355/";
                 var options = new SessionCreateOptions
@@ -212,20 +218,20 @@ namespace bookstore.Areas.User.Controllers
                     LineItems = new List<SessionLineItemOptions>()
                   ,
                     Mode = "payment",
-                    SuccessUrl = domain,
+                    SuccessUrl = domain+ $"successCart/{order_id.Entity.Id }",
                     CancelUrl = domain,
                 };
                 long StripeTotalMax = 0;
                 foreach (var item in cart)
                 {
-                    var StripeTotal = item.quantity * item.product.unitPrice;
+                    //var StripeTotal = item.quantity * item.product.unitPrice;
 
 
                   var newSessionLineItem = new SessionLineItemOptions
                     {
                         PriceData = new SessionLineItemPriceDataOptions
                         {
-                            UnitAmount =(long) (StripeTotal ) ,
+                            UnitAmount =(long) item.product.unitPrice ,
                             Currency = "VND",
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
@@ -245,13 +251,27 @@ namespace bookstore.Areas.User.Controllers
                 Response.Headers.Add("Location", session.Url);
                 return new StatusCodeResult(303);
             }
-
-
-
-
             return Redirect("/");
 
         }
+
+        [Route("successCart/{id}")]
+        public async Task<IActionResult> successCart(int? id)
+        {
+
+            var order =_db.Orders.Find(id);
+
+          
+            order.status = 1;
+
+            _db.Orders.Update(order);
+
+            _db.SaveChanges();
+
+
+            return View();
+        }
+
 
 
 

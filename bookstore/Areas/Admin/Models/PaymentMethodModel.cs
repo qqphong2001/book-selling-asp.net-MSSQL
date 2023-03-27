@@ -12,6 +12,7 @@ namespace bookstore.Areas.Admin.Models
         public string picture { get; set; }
 
         public int status { get; set; }
+       
 
 
 

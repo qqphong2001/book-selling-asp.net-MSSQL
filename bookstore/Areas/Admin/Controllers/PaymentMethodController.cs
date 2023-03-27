@@ -91,7 +91,7 @@ namespace bookstore.Areas.Admin.Controllers
         [Route("editpost")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> editpost([Bind("Id,Name")] ShippingMethodModel obj, IFormFile? imageFile)
+        public async Task<IActionResult> editpost([Bind("Id,Name,description")] PaymentMethodModel obj, IFormFile? imageFile)
         {
             var payment  = await _db.PaymentMethods.FindAsync(obj.Id);
             if (payment == null)
@@ -118,6 +118,8 @@ namespace bookstore.Areas.Admin.Controllers
 
 
             payment.Name = obj.Name;
+            
+
             await _db.SaveChangesAsync();
 
             _toastNotification.AddSuccessToastMessage("chỉnh sửa thành công");

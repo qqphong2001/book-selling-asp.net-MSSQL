@@ -10,7 +10,7 @@
 }
 <div class="section">
     <div class="container">
-
+      
         
 @if (Model.Count > 0)
         {
@@ -82,13 +82,13 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="">Hình thức giao hàng</label>
-                                <select class="form-control">
+                                <select class="form-control" name="shipping">
                                     <option selected>Chọn</option>
                                             @foreach (var item in ViewBag.shippingMethod)
                                             {
                                                 <option value="@item.Id"> @item.Name - @item.price.ToString("#,##0 đ") </option>
                                             }
-                                        </select>
+                                 </select>
                             </div>
                         </div>
 
@@ -187,32 +187,21 @@
                         <div><strong></strong></div>
                     </div>
 
-                    <div class="input-radio" style="margin: 10px 0;">
-                        <input type="radio" name="payment" id="payment-1" value="COD">
-                        <label for="payment-1">
-                            <span style="top: 6px;"></span>
-                                <img src="~/User/public/images/cod.svg" alt="icon" width="32" height="32">
-                            Thanh toán tiền mắt khi nhận hàng
-                        </label>
-                    </div>
+                            @foreach (var item in ViewBag.paymentMethod)
+                            {
+                                <div class="input-radio" style="margin: 10px 0;">
+                                    <input type="radio" name="payment" id="payment-@item.Id" value="@item.Id">
+                                    <label for="payment-@item.Id">
+                                        <span style="top: 6px;"></span>
+                                        <img src="@item.picture" alt="icon" width="32" height="32">
+                                        @item.Name
+                                    </label>
+                                </div>
+                            }
 
-                    <div class="input-radio" style="margin: 10px 0;">
-                        <input type="radio" name="payment" id="payment-2" value="VNPAY">
-                        <label for="payment-2">
-                            <span style="top: 6px;"></span>
-                            <img src="~/User/public/images/vnpay.png" alt="icon" width="32" height="32">
-                            Thanh toán bằng VNPAY
-                        </label>
-                    </div>
+                   
 
-                    <div class="input-radio" style="margin: 10px 0;" > 
-                        <input type="radio" name="payment" id="payment-3" value="VISA">
-                        <label for="payment-3">
-                            <span style="top: 6px;"></span>
-                                <img src="~/User/public/images/card.svg" alt="icon" width="32" height="32">
-                            Thanh toán bằng thẻ VISA
-                        </label>
-                    </div>
+              
 
                 </div>
 

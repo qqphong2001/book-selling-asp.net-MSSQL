@@ -7305,8 +7305,24 @@
       "PackagePath": "staticwebassets\\images\\logo\\logo.png"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\payment\\3618420d-947f-4485-9db1-a15b984760d6.png",
+      "PackagePath": "staticwebassets\\images\\payment\\3618420d-947f-4485-9db1-a15b984760d6.png"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\payment\\6823ef7d-662d-40c2-ad0f-edfad2d724a4.jpg",
       "PackagePath": "staticwebassets\\images\\payment\\6823ef7d-662d-40c2-ad0f-edfad2d724a4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\payment\\c1b527c3-2ab6-447e-af56-9a6f987d825b.svg",
+      "PackagePath": "staticwebassets\\images\\payment\\c1b527c3-2ab6-447e-af56-9a6f987d825b.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\payment\\e6021fc1-498f-4ac1-a04e-859eb7d956a6.svg",
+      "PackagePath": "staticwebassets\\images\\payment\\e6021fc1-498f-4ac1-a04e-859eb7d956a6.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\payment\\f1ae5433-aeac-4ab2-9175-abc76d2bcdef.svg",
+      "PackagePath": "staticwebassets\\images\\payment\\f1ae5433-aeac-4ab2-9175-abc76d2bcdef.svg"
     },
     {
       "Id": "C:\\Users\\ADMIN\\source\\repos\\bookstore\\book-selling-asp.net-MSSQL\\bookstore\\wwwroot\\images\\products\\15cd009c-6c1a-40d5-ba3c-880ee23a4979.png",

@@ -76,12 +76,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Areas/Admin/Views/ShippingMethod - Copy/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hpcHBpbmdNZXRob2QgLSBDb3B5XEVkaXQuY3NodG1s
+[C:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Areas/Admin/Views/ShippingMethod/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hpcHBpbmdNZXRob2RcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Areas/Admin/Views/ShippingMethod - Copy/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hpcHBpbmdNZXRob2QgLSBDb3B5XEluZGV4LmNzaHRtbA==
+[C:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Areas/Admin/Views/ShippingMethod/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hpcHBpbmdNZXRob2RcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Areas/Admin/_ViewImports.cshtml]
@@ -282,6 +282,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Areas/User/Views/shoppingCart/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xzaG9wcGluZ0NhcnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Areas/User/Views/shoppingCart/successCart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xzaG9wcGluZ0NhcnRcc3VjY2Vzc0NhcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/source/repos/bookstore/book-selling-asp.net-MSSQL/bookstore/Areas/User/Views/_ViewImports.cshtml]
