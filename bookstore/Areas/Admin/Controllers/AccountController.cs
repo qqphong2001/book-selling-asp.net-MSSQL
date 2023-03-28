@@ -2,6 +2,7 @@
 using bookstore.DbContext;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 
 namespace bookstore.Areas.Admin.Controllers
@@ -15,8 +16,9 @@ namespace bookstore.Areas.Admin.Controllers
         private readonly UserManager<UserModel> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<UserModel> _SignInManager;
+       
 
-        public AccountController(ApplicationDbContext db, IToastNotification toastNotification, RoleManager<IdentityRole> roleManager, UserManager<UserModel> userManager, SignInManager<UserModel> signInManager)
+        public AccountController(ApplicationDbContext db, IToastNotification toastNotification, RoleManager<IdentityRole> roleManager,UserManager<UserModel> userManager, SignInManager<UserModel> signInManager)
         {
             _db = db;
             _toastNotification = toastNotification;
@@ -24,8 +26,23 @@ namespace bookstore.Areas.Admin.Controllers
             _userManager = userManager;
             _SignInManager = signInManager;
         }
-        public IActionResult Index()
+        [Route("index")]
+        public async Task<IActionResult>  Index()
         {
+
+            
+            var usersWithRoles = await _userManager.Users.
+     
+             Join(
+                _db.Customers,
+                user => user.Id,
+                customer => customer.account_id,
+                (user,customer) => new { User = user, customer = customer })
+             .ToListAsync();
+
+            ViewBag.user = usersWithRoles;
+
+
             return View();
         }
         [Route("logout")]
@@ -55,5 +72,8 @@ namespace bookstore.Areas.Admin.Controllers
 
             return View("~/Areas/User/Views/Home/Index.cshtml");
         }
+
+        
+
     }
 }

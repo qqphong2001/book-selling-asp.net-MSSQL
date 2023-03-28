@@ -159,6 +159,7 @@ namespace bookstore.Areas.User.Controllers
 
                     };
                     _db.customerAddresses.Add(address1);
+                    await _db.SaveChangesAsync();
 
                 }
                 else if (Request.Form["address2"].Any())
@@ -170,6 +171,7 @@ namespace bookstore.Areas.User.Controllers
 
                     };
                     _db.customerAddresses.Add(address2);
+                    await _db.SaveChangesAsync();
 
                 }
 

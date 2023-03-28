@@ -1,0 +1,180 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<bookstore.Areas.Admin.Models.UserModel> SignInManager
+@inject UserManager<bookstore.Areas.Admin.Models.UserModel> UserManager
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Chi tiết hóa đơn";
+}
+
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <button onclick="location.href='@Url.Action("Index","order")'" class="btn btn-secondary mt-5 mb-5">Trờ về</button>
+            <h4 class="card-title">Chi tiết hóa đơn</h4>
+         
+                <p class="card-description">
+                    Thông tin đơn hàng
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Id</label>
+                            <div class="col-sm-9">
+                            <input type="text" class="form-control" value="@ViewBag.order.orders.Id" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Email</label>
+                            <div class="col-sm-12">
+                            <input type="text" class="form-control" value="@ViewBag.order.users.Email"  readonly/>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Tên khách hàng</label>
+                            <div class="col-sm-12">
+                            <input readonly type="text" class="form-control" value="@(ViewBag.order.customer.firstName + ViewBag.order.customer.lastName) " />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Số điện thoại</label>
+                            <div class="col-sm-12">
+                                <input readonly type="text" class="form-control" value="@ViewBag.order.customer.phoneNumber" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+          
+
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Địa chỉ giao hàng</label>
+                            <div class="col-sm-12">
+                                <input readonly type="text" class="form-control" value="@ViewBag.order.address.address"  />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Hình thức giao hàng</label>
+                            <div class="col-sm-12">
+                            <input  readonly type="text" class="form-control" value="@ViewBag.order.shipping.Name" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Hình thức thanh toán</label>
+                            <div class="col-sm-12">
+                            <input readonly type="text" class="form-control" value="@ViewBag.order.payment.Name" />
+                            </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">trạng thái thanh toán</label>
+                            <div class="col-sm-12">
+                                <input readonly type="text" class="form-control" value="@ViewBag.order.status.Name" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Tiền giảm giá</label>
+                            <div class="col-sm-12">
+                                <input readonly type="text" class="form-control" value="@ViewBag.order.orders.discount" />
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Tổng hóa đơn</label>
+                            <div class="col-sm-12">
+                                <input readonly type="text" class="form-control" value="@ViewBag.order.orders.total.ToString("#,##0 đ")" />
+                            </div>
+                        </div>
+
+                       
+
+                    </div>
+              
+                </div>  
+
+
+   
+
+
+        </div>
+    </div>
+</div>
+
+                    <hr />
+                    <hr />
+    <table class="table">
+
+        <thead>
+
+            <tr>
+                <td>Id sách</td>
+                <td>Tên sách</td>
+                <td>Hình ảnh</td>
+                <td>Số lượng</td>
+                <td>Giá tiền một sản phẩm</td>
+                
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var obj in ViewBag.cart)
+            {
+                <tr>
+                    <td>@obj.book.Id</td>
+                    <td>@obj.book.title</td>
+                    <td><img src="@obj.book.cover" width="50px" height="50px" /></td>
+
+                  
+                    <td>@obj.cart.quantity</td>
+                    <td>@obj.book.unitPrice.ToString("#,##0 đ")</td>
+                
+                </tr>
+            }
+
+        </tbody>
+
+    </table>

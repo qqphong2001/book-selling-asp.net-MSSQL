@@ -136,9 +136,28 @@ namespace bookstore.Areas.Admin.Controllers
 
         }
 
+        [Route("detail/{id}")]
+        public IActionResult detail(int? id)
+        {
+            var book = _db.Books.Find(id);
+            if (book == null)
+            {
+
+                _toastNotification.AddErrorToastMessage("Không tìm thấy sách");
+                return RedirectToAction("Index");
+            }
+
+            IEnumerable<BookImagesModel> obj = _db.BookImages.Where(i => i.book_id == id).ToList();
+
+            ViewBag.BookImages = obj;
+
+
+            return View(book);
+          
+        }
+
 
         [Route("edit/{id}")]
-
         public IActionResult Edit(int? id) { 
         
             var book = _db.Books.Find(id);

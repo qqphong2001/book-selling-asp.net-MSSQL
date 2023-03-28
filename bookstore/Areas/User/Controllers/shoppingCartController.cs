@@ -167,8 +167,9 @@ namespace bookstore.Areas.User.Controllers
 
             var orderNumbers = _db.Orders.Select(x => x.orderNumber).ToList();
 
-            if (orderNumbers.Contains(randomNumber))
+            while (orderNumbers.Contains(randomNumber))
             {
+                
                 randomNumber = random.Next(number).ToString();
 
             }
@@ -183,7 +184,7 @@ namespace bookstore.Areas.User.Controllers
                 description = Request.Form["description"],
                 customer_id = int.Parse(Request.Form["customer_id"]),
                 customerAddress_id = int.Parse(Request.Form["address"]),
-                status = 0,
+                status = 2,
                 paymentMethod_id = int.Parse(Request.Form["payment"]),
                 shippingMethod_id = int.Parse(Request.Form["shipping"])
                 
@@ -199,9 +200,19 @@ namespace bookstore.Areas.User.Controllers
                     book_id = item.product.Id,
                     quantity = item.quantity,
                     order_id = order_id.Entity.Id,
+                  
                 };
                 await _db.OrderDetails.AddAsync(orderdetail);
                 await _db.SaveChangesAsync();
+
+                var product = _db.Books.Find(item.product.Id);
+
+                product.unitStock = product.unitStock - item.quantity;
+
+                _db.Books.Update(product);
+                _db.SaveChanges();
+
+
 
             }
 
@@ -219,7 +230,7 @@ namespace bookstore.Areas.User.Controllers
                   ,
                     Mode = "payment",
                     SuccessUrl = domain+ $"successCart/{order_id.Entity.Id }",
-                    CancelUrl = domain,
+                    CancelUrl = domain+$"fail",
                 };
                 long StripeTotalMax = 0;
                 foreach (var item in cart)
@@ -242,6 +253,10 @@ namespace bookstore.Areas.User.Controllers
                     };
                     options.LineItems.Add(newSessionLineItem);
 
+                  
+
+
+
                     
                 }
 
@@ -251,7 +266,7 @@ namespace bookstore.Areas.User.Controllers
                 Response.Headers.Add("Location", session.Url);
                 return new StatusCodeResult(303);
             }
-            return Redirect("/");
+            return RedirectToAction("ordersuccess");
 
         }
 
@@ -267,6 +282,16 @@ namespace bookstore.Areas.User.Controllers
             _db.Orders.Update(order);
 
             _db.SaveChanges();
+            _toastNotification.AddSuccessToastMessage("chúc mừng bạn thanh toán thành công");
+
+            return View();
+        }
+
+        [Route("ordersuccess")]
+
+        public IActionResult ordersuccess()
+        {
+
 
 
             return View();

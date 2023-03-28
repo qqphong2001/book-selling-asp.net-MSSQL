@@ -21,7 +21,7 @@
             <td>Id</td>
             <td>Mã hóa đơn</td>
             <td>Tên người đặt</td>
-            <td>Email</td>
+
             <td>Số điện thoại</td>
             <td>Tổng tiền hóa đơn</td>
             <td>Thanh toán</td>
@@ -37,12 +37,13 @@
                 <td>@item.orders.Id</td>
                 <td>@item.orders.orderNumber</td>
                 <td>@item.customer.firstName  @item.customer.lastName </td>
-                <td>@item.users.UserName</td>
+       
                 <td>@item.customer.phoneNumber</td>
                 <td>@item.orders.total.ToString("#,##0 đ")</td>
                 <td>@item.status.Name</td>
                 <td>
-                    <button onclick="location.href='@Url.Action("Edit","Book",new{id = @item.orders.Id})'" class="btn btn-primary">Chỉnh sửa</button>
+                    <button onclick="location.href='@Url.Action("Detail","Order",new{id = @item.orders.Id })'" class="btn btn-info">Xem chi tiết</button>
+                  
                     <button class="btn btn-danger"
                             onclick="
               if(confirm('Bạn có muốn xóa nhà xuất bản này?')){
@@ -81,7 +82,7 @@
 
                         <div class="col-sm-12 col-md-4">
                             <div class="form-group">
-                                <label>Isbn</label>
+                                <label>Id</label>
                                 <input type="text" class="form-control font-weight-bold" name="isbn" />
                             </div>
                         </div>
@@ -170,7 +171,7 @@
                         <div class="col-sm-12 col-md-4">
                             <div class="form-group">
                                 <label>Ngày xuất bản</label>
-                                <input type="date" class="form-control font-weight-bold" name="publishDate" id="datepicker" />
+                                <input type="date" class="form-control font-weight-bold" name="publishDate"  />
                             </div>
                         </div>
 

@@ -39,6 +39,7 @@
                 <td>@obj.unitPrice</td>
                 <td>@(obj.unitStock < 1 ? "Hết hàng" : "Còn hàng")</td>
                 <td>
+                    <button onclick="location.href='@Url.Action("detail","Book",new{id = obj.Id})'" class="btn btn-info">Xem chi tiết</button>
                     <button onclick="location.href='@Url.Action("Edit","Book",new{id = obj.Id})'" class="btn btn-primary">Chỉnh sửa</button>
                     <button class="btn btn-danger"
                             onclick="

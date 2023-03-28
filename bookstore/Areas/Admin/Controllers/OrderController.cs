@@ -68,5 +68,59 @@ namespace bookstore.Areas.Admin.Controllers
 
             return View();
         }
+
+        [Route("detail/{id}")]
+        public IActionResult Detail(int? id)
+        {
+            var result = _db.Orders.Join(
+               _db.orderStatuses,
+               Orders => Orders.status,
+               orderStatuses => orderStatuses.Id,
+               (Orders, orderStatuses) => new { orders = Orders, orderStatuses = orderStatuses }
+               ).Join(
+               _db.ShippingMethods,
+               ordersOrStatus => ordersOrStatus.orders.shippingMethod_id,
+               shippingMethod => shippingMethod.Id,
+               (ordersOrStatus, shippingMethod) => new { orders = ordersOrStatus.orders, status = ordersOrStatus.orderStatuses, shipping = shippingMethod }
+               ).Join(
+               _db.PaymentMethods,
+               ordersOrStatusPay => ordersOrStatusPay.orders.paymentMethod_id,
+               paymentMethod => paymentMethod.Id,
+               (ordersOrStatusPay, paymentMethod) => new { orders = ordersOrStatusPay.orders, status = ordersOrStatusPay.status, payment = paymentMethod , shipping = ordersOrStatusPay.shipping }
+               ).Join(
+               _db.Customers,
+               ordercustomer => ordercustomer.orders.customer_id,
+               customer => customer.Id,
+               (ordercustomer, customer) => new { orders = ordercustomer.orders, status = ordercustomer.status, payment = ordercustomer.payment, customer = customer , shipping = ordercustomer.shipping }
+               ).Join(
+               _db.customerAddresses,
+               orderaddress => orderaddress.orders.customerAddress_id,
+               address => address.Id,
+               (orderaddress, address) => new { orders = orderaddress.orders, status = orderaddress.status, payment = orderaddress.payment, customer = orderaddress.customer, address = address,shipping = orderaddress.shipping }
+               ).
+               Join(
+               _userManager.Users,
+               ordercustomer => ordercustomer.customer.account_id,
+               user => user.Id,
+               (ordercustomer, user) => new { orders = ordercustomer.orders, status = ordercustomer.status, payment = ordercustomer.payment, customer = ordercustomer.customer, address = ordercustomer.address, users = user, shipping = ordercustomer.shipping }
+               )
+               .Where(x => x.orders.Id == id).FirstOrDefault();
+
+            ViewBag.order = result;
+
+            ViewBag.cart = _db.OrderDetails.Where(x => x.order_id == id).
+                Join(
+                _db.Books,
+                cart => cart.book_id,
+                book => book.Id,
+                (cart , book) => new {cart = cart , book = book }
+                )
+                .
+                ToList();
+
+
+
+            return View();
+        }
     }
 }

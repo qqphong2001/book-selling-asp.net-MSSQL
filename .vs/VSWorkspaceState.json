@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\bookstore",
+    "\\bookstore\\Areas",
+    "\\bookstore\\Areas\\Admin",
+    "\\bookstore\\Areas\\Admin\\Views",
+    "\\bookstore\\Areas\\Admin\\Views\\Order"
+  ],
+  "SelectedNode": "\\bookstore\\appsettings.json",
+  "PreviewInSolutionExplorer": false
+}
