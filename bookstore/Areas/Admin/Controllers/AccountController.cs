@@ -17,7 +17,6 @@ namespace bookstore.Areas.Admin.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<UserModel> _SignInManager;
        
-
         public AccountController(ApplicationDbContext db, IToastNotification toastNotification, RoleManager<IdentityRole> roleManager,UserManager<UserModel> userManager, SignInManager<UserModel> signInManager)
         {
             _db = db;
@@ -29,7 +28,7 @@ namespace bookstore.Areas.Admin.Controllers
         [Route("index")]
         public async Task<IActionResult>  Index()
         {
-
+           
             
             var usersWithRoles = await _userManager.Users.
      
@@ -71,6 +70,53 @@ namespace bookstore.Areas.Admin.Controllers
             ViewData["title"] = "Trang chủ";
 
             return View("~/Areas/User/Views/Home/Index.cshtml");
+        }
+
+        [Route("create")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        
+        public async Task<IActionResult> create()
+        {
+            var userAdmin = new UserModel()
+            {
+                UserName = (string) Request.Form["email"],
+
+                Email = Request.Form["email"],
+                EmailConfirmed = true,
+
+            };
+         
+            var result = await _userManager.CreateAsync(userAdmin, Request.Form["password"]);
+            if (result.Succeeded)
+            {
+                var user = await _userManager.FindByNameAsync(userAdmin.UserName);
+                await _userManager.AddToRoleAsync(user, Role.Role_Employee);
+                var userId =  user.Id;
+
+                var customer = new CustomerModel()
+                {
+                    dob = DateTime.Parse(Request.Form["dob"]),
+                    firstName = Request.Form["firstName"],
+                    lastName = Request.Form["lastName"],
+                    gender = Int16.Parse(Request.Form["gender"]),
+                    createdAt = DateTime.Now,
+                    avatar = @"images/logo/logo.png",
+                    phoneNumber = Request.Form["phone"],
+                    account_id =  userId
+                };
+
+                _db.Customers.Add(customer);
+
+
+
+                await _db.SaveChangesAsync();
+
+                // ... rest of the code
+            }
+
+            return RedirectToAction("index");
+
         }
 
         

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using NToastNotify;
 
 namespace bookstore.Areas.Identity.Pages.Account.Manage
 {
@@ -18,15 +19,19 @@ namespace bookstore.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<UserModel> _userManager;
         private readonly SignInManager<UserModel> _signInManager;
         private readonly ILogger<ChangePasswordModel> _logger;
+        private readonly IToastNotification _toastNotification;
 
         public ChangePasswordModel(
             UserManager<UserModel> userManager,
             SignInManager<UserModel> signInManager,
-            ILogger<ChangePasswordModel> logger)
+            ILogger<ChangePasswordModel> logger,
+            IToastNotification toastNotification
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _toastNotification = toastNotification;
         }
 
         /// <summary>
@@ -63,7 +68,8 @@ namespace bookstore.Areas.Identity.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Mật khẩu dài từ {2} đến {1} kí tự", MinimumLength = 6)]
+
             [DataType(DataType.Password)]
             [Display(Name = "New password")]
             public string NewPassword { get; set; }
@@ -74,7 +80,7 @@ namespace bookstore.Areas.Identity.Pages.Account.Manage
             /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Confirm new password")]
-            [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+            [Compare("NewPassword", ErrorMessage = "Mật khẩu không trùng nhau")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -105,7 +111,7 @@ namespace bookstore.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound("không tìm thấy người dùng");
             }
 
             var changePasswordResult = await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
@@ -120,7 +126,7 @@ namespace bookstore.Areas.Identity.Pages.Account.Manage
 
             await _signInManager.RefreshSignInAsync(user);
             _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Your password has been changed.";
+            _toastNotification.AddSuccessToastMessage("Bạn đã đổi mật khẩu thành công");
 
             return RedirectToPage();
         }

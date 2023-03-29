@@ -92,14 +92,26 @@
       <div class="modal-body">
        
                 <p class="card-description">
-                    Thông tin thể loại
+                    Thông tin nhân viên
                 </p>
-                <div class="row">
+
+                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group row">
-                            <label class="col-sm-5 col-form-label">Tên thể loại</label>
+                            <label class="col-sm-5 col-form-label">Email</label>
                             <div class="col-sm-12">
-                                <input type="text" class="form-control" name="Name" />
+                                <input type="text" class="form-control" name="email" />
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                   <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Password</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="password" />
                             </div>
                         </div>
                     </div>
@@ -107,13 +119,62 @@
                 </div>
 
                 <div class="row">
-                     <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-5 col-form-label">Hình thể loại</label>
+                            <label class="col-sm-5 col-form-label">Họ Nhân viên</label>
                             <div class="col-sm-12">
-                                <input type="file" name="imageFile" class="form-control" id="photoInput" onchange="preview_image();" />
-                                
-                                <img src="" class="userAvatar" width="100px" height="100px"/>
+                                <input type="text" class="form-control" name="firstName" />
+                            </div>
+                        </div>
+                    </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Tên Nhân viên</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="lastName" />
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+
+                <div class="row">
+                     <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Số điện thoại</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="phone" />
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Địa chỉ nhà</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="address" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <div class="row">
+                     <div class="col-sm-12 col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="dob" class="form-label">Ngày sinh</label>
+                                <input type="date" id="dob" class="form-control"  name="dob" >
+                            </div>
+                        </div>
+                     <div class="col-md-6">
+                        <div class="form-group row">
+                                                           <label for="gender" class="form-label">Giới tính</label>
+
+                            <div class="col-sm-12">
+                                 <label class="radio-inline" for="male">
+                                        <input type="radio" name="gender" id="male" value="1" checked> Nam
+                                    </label>
+
+                                    <label class="radio-inline" for="female">
+                                        <input type="radio" name="gender" id="female" value="0" > Nữ
+                                    </label>
                             </div>
                         </div>
                     </div>
@@ -123,7 +184,7 @@
                 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Thêm thể loại</button>
+        <button type="submit" class="btn btn-primary">Tạo tài khoản nhân viên</button>
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
       </div>
