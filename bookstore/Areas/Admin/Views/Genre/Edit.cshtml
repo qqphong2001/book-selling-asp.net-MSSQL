@@ -1,0 +1,58 @@
+﻿@model bookstore.Areas.Admin.Models.GenreModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+
+            @*<button onclick="location.href='@Url.Action("Index","Genre")'" class="btn btn-secondary mt-5 mb-5">Trờ về</button>*@
+
+            <div class="card-title">Cập nhật thể loại</div>
+
+            <form class="form-sample" method="post" asp-action="editpost" asp-controller="Genre" enctype="multipart/form-data">
+
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Id</label>
+                            <input type="text" class="form-control font-weight-bold" value="@Model.Id" asp-for="Id" readonly/>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Tên thể loại</label>
+                            <input type="text" class="form-control font-weight-bold" value="@Model.Name" asp-for="Name" />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Ảnh mô tả</label>
+                                <input type="file" name="imageFile" class="file-upload-default" onchange="preview_imageBook()" id="photoInputBook">
+                                <div class="input-group col-xs-12">
+                                    <span class="">
+                                        <button class="file-upload-browse btn btn-primary" type="button">Tải ảnh</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <img class="rounded" id="photoBook" src="~/images/logo/default.jpg" width="90px" height="110px" />
+                            </div>
+
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">Cập nhật</button>
+
+
+            </form>
+        </div>
+    </div>
+    </div>
+</div>

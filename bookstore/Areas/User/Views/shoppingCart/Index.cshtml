@@ -1,0 +1,322 @@
+﻿@model List<bookstore.Areas.User.Models.CartItem>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<bookstore.Areas.Admin.Models.UserModel> SignInManager
+@inject UserManager<bookstore.Areas.Admin.Models.UserModel> UserManager
+@using Microsoft.Extensions.Options
+@inject IOptions<bookstore.payment.StripeSettings> Stripe
+@{
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+
+}
+<div class="section">
+    <div class="container">
+      
+        
+@if (Model.Count > 0)
+        {
+            float totalMax = 0;
+            int stt = 1;
+            <form method="post" asp-action="checkout" asp-controller="shoppingCart">
+
+            <div class="row">
+
+            <div class="col-md-7">
+
+                <div class="billing-details">
+
+                    <div class="section-title">
+                        <h3>Thông tin vận chuyển</h3>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Họ và tên</label>
+                                        <input class="form-control font-weight-bold" type="text" name="fullName" value="@(ViewBag.customer != null ?  ViewBag.customer.firstName + ViewBag.customer.lastName : "")" >
+                                        <input class="form-control font-weight-bold" type="hidden" name="customer_id" value="@(ViewBag.customer != null ?  ViewBag.customer.Id : "")">
+
+                                    </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Số điện thoại</label>
+                                        <input class="form-control font-weight-bold" type="text" name="phone" value="@(ViewBag.customer != null ? ViewBag.customer.phoneNumber : "")" >
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                        <input class="form-control font-weight-bold" type="text" name="email" value="@(SignInManager.IsSignedIn(User) == true ? UserManager.GetUserName(User) : "")" >
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="">Địa chỉ</label>
+                                <select class="form-control" name="address">
+                                            @if(ViewBag.address != null)
+                                            {
+                                                <option selected>Chọn</option>
+                                                @foreach (var item in ViewBag.address)
+                                                {
+                                                    <option value="@item.address.Id">@item.address.address</option>
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <option selected>Chọn</option>
+                                                <span class="text-danger">Bạn chưa thêm địa chỉ vui lòng vào <a asp-action="Index" asp-controller="Customer" asp-route-customer_id="@UserManager.GetUserId(User)">thông tin cá nhân để cập nhật địa chỉ</a>  </span>
+
+                                            }
+
+                                         
+                                 
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="">Hình thức giao hàng</label>
+                                <select class="form-control" name="shipping">
+                                    <option selected>Chọn</option>
+                                            @foreach (var item in ViewBag.shippingMethod)
+                                            {
+                                                <option value="@item.Id"> @item.Name - @item.price.ToString("#,##0 đ") </option>
+                                            }
+                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="">Ghi chú thêm</label>
+                                <textarea class="input" name="description" placeholder="Ví dụ: Giao vào giờ hành chính" rows="10"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <!-- Order Details -->
+            <div class="col-md-5 order-details">
+
+                <div class="section-title text-center">
+                    <h3>Giỏ hàng</h3>
+                </div>
+
+                <div class="order-summary">
+                    <div class="order-col">
+                        <div><strong>Sản phẩm</strong></div>
+                        <div><strong></strong></div>
+                    </div>
+
+                    <div class="order-products">
+                            @foreach (var cartitem in Model)
+                            {
+                                var total = cartitem.quantity * cartitem.product.unitPrice;
+                                totalMax += total;
+                        <div class="order-item">
+
+                                        <a class="close" style="z-index:99" asp-action="removecart" asp-controller="shoppingCart" asp-route-productid=@cartitem.product.Id ><i class="fa fa-trash"></i></a>
+
+                            <div class="row">
+
+                                <div class="col-sm-12">
+                                    <div class="order-item-left">
+                                        <img src="@cartitem.product.cover" alt="">
+                                        <div>
+                                                    <div class="order-item-title">@cartitem.quantity x @cartitem.product.title</div>
+                                            <div class="qty-label">
+                                                <div class="input-number">
+                                                                <input type="number" class="updatecartitem" data-productid="@cartitem.product.Id" id="@($"quantity-{cartitem.product.Id}")" value="@cartitem.quantity">
+                                                                <span class="qty-up ">+</span>
+                                                    <span class="qty-down">-</span>
+                                                </div>
+                                            </div>
+                                                    <div class="order-item-price">@(total.ToString("#,##0 đ"))</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            }
+                    </div>
+
+                    <hr>
+
+                    <div class="input-group" style="width: 100%; max-width: 600px;">
+                        <div class="header-search">
+                            <form>
+                                <div style="width: 100%;">
+                                    <input class="input" placeholder="Mã giảm giá">
+                                    <button type="button" class="search-btn">Áp dụng</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="order-col">
+                        <div><strong>Tạm tính</strong></div>
+                        <div>@totalMax</div>
+                    </div>
+
+                    <div class="order-col">
+                        <div><strong>Giảm giá</strong></div>
+                        <div>-10.000đ</div>
+                    </div>  
+
+                    <div class="order-col">
+                        <div><strong>Tổng tiền</strong></div>
+                            <div><strong class="order-total">@((totalMax - 10).ToString("#,##0 đ"))</strong></div>
+                    </div>
+                </div>
+
+                <div class="payment-method">
+
+                    <div class="order-col">
+                        <div><strong>Phương thức thanh toán</strong></div>
+                        <div><strong></strong></div>
+                    </div>
+
+                            @foreach (var item in ViewBag.paymentMethod)
+                            {
+                                <div class="input-radio" style="margin: 10px 0;">
+                                    <input type="radio" name="payment" id="payment-@item.Id" value="@item.Id">
+                                    <label for="payment-@item.Id">
+                                        <span style="top: 6px;"></span>
+                                        <img src="@item.picture" alt="icon" width="32" height="32">
+                                        @item.Name
+                                    </label>
+                                </div>
+                            }
+
+                   
+
+              
+
+                </div>
+
+                  <button type="submit" class="primary-btn order-submit" style="width:100%;">Đặt hàng</button>
+            </div>
+
+            </div>
+
+            </form>
+
+            @section Scripts {
+            <script>
+                $(document).ready(function () {
+                    $(".updatecartitem").change(function (event) {
+                        event.preventDefault();
+                        var productid = $(this).attr("data-productid");
+                        var quantity = $("#quantity-" + productid).val();
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.RouteUrl("updatecart")",
+                            data: {
+                                productid: productid,
+                                quantity: quantity
+                            },
+                            success: function (result) {
+                                window.location.href = "@Url.RouteUrl("cart.order-details")";
+                            }
+                        });
+                    });
+                });
+            </script>
+        }
+
+
+
+
+
+        }
+        else
+        {
+            <span>Bạn chưa có thêm sản phẩm nào vào giỏ hàng</span>
+        }
+    </div>
+</div>
+
+
+@*@if (model.count > 0)
+{
+    float total = 0;
+    int stt = 1;
+
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>sản phẩm</th>
+            <th>giá</th>
+            <th>số lượng</th>
+            <th>thành tiền</th>
+            <th></th>
+        </tr>
+        @foreach (var cartitem in model)
+        {
+            var thanhtien = cartitem.quantity * cartitem.product.unitprice;
+            total += thanhtien;
+
+            <tr>
+                <td>@(stt++)</td>
+                <td>@cartitem.product.title</td>
+                <td>@(cartitem.product.unitprice.tostring("n0"))</td>
+                <td><input asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.product.id}")" /></td>
+                <td>@(thanhtien.tostring("n0"))</td>
+                <td>
+                    <button class="btn btn-success updatecartitem"
+                            data-productid="@cartitem.product.id">
+                        cập nhật
+                    </button>
+                    <a asp-route="removecart" asp-route-productid="@cartitem.product.id"
+                       class="btn btn-danger">xóa</a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="4" class="text-right">tổng tiền</td>
+            <td>@(total.tostring("n0"))</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <a asp-controller="product" asp-action="checkout" class="btn btn-success">gửi đơn hàng</a>
+
+    @section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".updatecartitem").click(function (event) {
+                event.preventdefault();
+                var productid = $(this).attr("data-productid");
+                var quantity = $("#quantity-" + productid).val();
+                $.ajax({
+                    type: "post",
+                    url:"@url.routeurl("updatecart")",
+                    data: {
+                        productid: productid,
+                        quantity:quantity
+                    },
+                    success: function (result) {
+                        window.location.href = "@url.routeurl("cart")";
+                    }
+                });
+            });
+        });
+    </script>
+      }
+
+}
+else
+{
+    <p class="alert alert-danger">giỏ hàng trống</p>
+}*@

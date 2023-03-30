@@ -1,0 +1,124 @@
+﻿
+@model IEnumerable<bookstore.Areas.Admin.Models.GenreModel>
+
+@{
+    ViewData["Title"] = "Thể loại";
+}
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div class="row">
+
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">Quản lý thể loại</div>
+
+                <button class="btn btn-success" data-toggle="modal" data-target="#genreAddModal">Thêm thể loại</button>
+
+                <hr />
+
+                <div class="table-responsive">
+                    <table class="table">
+
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Id</th>
+                                <th>Tên thể loại</th>
+                                <th>Hình ảnh</th>
+                                <th>Lựa chọn</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var obj in Model)
+                            {
+                                <tr>
+                                  <td class="font-weight-bold">@obj.Id</td>
+                                  <td class="font-weight-bold">@obj.Name</td>
+                                  <td>
+                                      <img src="@obj.image" style="border-radius: 0px; height: 80px; width: 60px;"/>
+                                  </td>
+                                  <td>                    
+                                      <button onclick="location.href='@Url.Action("Edit","Genre",new{id = obj.Id})'" class="btn btn-primary" >Chỉnh sửa</button>
+                                      <button class="btn btn-danger" onclick="
+                                           if(confirm('Bạn có muốn xóa thể loại này?')){
+                                                location.href='@Url.Action("Delete","Genre",new{id = @obj.Id})'
+                                            }
+                                        " >Xóa</button>
+                                  </td>
+                              </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="genreAddModal" tabindex="-1" role="dialog" aria-labelledby="genreModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm thể loại</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form class="form-sample" method="post" asp-action="create" enctype="multipart/form-data">
+
+            <div class="modal-body">
+       
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Tên thể loại</label>
+                            <input type="text" class="form-control" name="Name" />
+                        </div>
+                    </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Ảnh thể loại</label>
+                                <input type="file" name="imageFile" id="photoInput"  class="file-upload-default" onchange="preview_image();">
+                                <div class="input-group col-xs-12">
+                                    <span class="">
+                                        <button class="file-upload-browse btn btn-primary" type="button">Tải ảnh</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div>
+                                <img class="userAvatar rounded" src="~/images/logo/default.jpg" width="90px" height="110px" />
+                            </div>
+                        </div>
+
+                   
+                </div>
+
+             </div>
+
+             <div class="modal-footer">
+                 <button type="submit" class="btn btn-primary">Thêm thể loại</button>
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+             </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>

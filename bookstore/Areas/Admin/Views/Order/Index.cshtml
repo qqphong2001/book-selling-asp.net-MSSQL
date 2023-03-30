@@ -1,0 +1,92 @@
+﻿@model IEnumerable<bookstore.Areas.Admin.Models.OrderModel>
+
+
+@{
+    ViewData["Title"] = "Hóa đơn";
+}
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+            <div class="card-title">Quản lý đơn hàng</div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+
+                        <thead class="table-primary">
+
+                            <tr>
+                                <th>Id</th>
+                                <th>Mã hóa đơn</th>
+                                <th>Tên người đặt</th>
+                                <th>Số điện thoại</th>
+                                <th>Tổng tiền hóa đơn</th>
+                                <th>Thanh toán</th>
+                                <th>Tình trạng</th>
+                                <th>Lựa chọn</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in ViewBag.order)
+                            {
+                                <tr>
+                                    <td class="font-weight-bold">@item.orders.Id</td>
+                                    <td class="font-weight-bold">@item.orders.orderNumber</td>
+                                    <td class="font-weight-bold">@item.customer.firstName  @item.customer.lastName </td>
+                                    <td class="font-weight-bold">@item.customer.phoneNumber</td>
+                                    <td class="font-weight-bold">@item.orders.total.ToString("#,##0 đ")</td>
+                                    <td class="font-weight-bold">@item.status.Name</td>
+                                    <td class="font-weight-bold">
+                                        <button onclick="location.href='@Url.Action("Detail","Order",new{id = @item.orders.Id })'" class="btn btn-info">Xem chi tiết</button>
+
+                                        <button class="btn btn-danger"
+                                                onclick="
+                                                  if(confirm('Bạn có muốn xóa nhà xuất bản này?')){
+                                                    location.href='@Url.Action("Delete","Book",new{id = @item.orders.Id})'
+                                                  }
+                                                "
+                                        >Xóa</button>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*<script>
+    function preview_imageBook() {
+        document.getElementById('photoBook').src = URL.createObjectURL(document.getElementById("photoInputBook").files[0])
+    }
+
+
+    function preview_imageBooks() {
+        var total_file = document.getElementById("photoInputBooks").files.length;
+        for (var i = 0; i < total_file; i++) {
+            var img = document.createElement('img');
+            img.className = 'rounded mx-2';
+            img.src = URL.createObjectURL(document.getElementById("photoInputBooks").files[i]);
+            img.width = 90;
+            img.height = 110;
+            document.getElementById("image_previews").appendChild(img);
+        }
+
+    }
+</script>*@
+

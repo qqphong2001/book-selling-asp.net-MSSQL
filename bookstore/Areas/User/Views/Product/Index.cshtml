@@ -1,0 +1,79 @@
+﻿@{
+
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "Trang chi tiết sản phẩm";
+}
+
+<section>
+    <div class="container">
+        <h3 class="page-title">Title</h3>
+
+        <div class="row">
+
+            <div id="store" class="col-md-12">
+
+                <div class="store-filter clearfix">
+                    <div class="store-sort">
+                        <label>
+                            Sắp xếp theo :
+                            <select class="input-select">
+                                <option value="0">Giá tăng dần</option>
+                                <option value="1">Giá giảm dần</option>
+                                <option value="2">Bán chạy nhất</option>
+                                <option value="3">Mới nhất</option>
+                                <option value="4">Cũ nhất</option>
+                            </select>
+                        </label>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    @foreach (var item in  ViewBag.books)
+                    {
+                        <div class="col-md-3 col-xs-6">
+                            <div class="product">
+                                <a  asp-action="productDetail" asp-controller="product" asp-route-id="@item.Book.Id" >
+                                    <div class="product-img">
+                                        <img src=@item.Book.cover alt="">
+                                    </div>
+                                </a>
+                                <div class="product-body">
+                                    <p class="product-category">@item.Genre</p>
+                                    <h3 class="product-name"><a href="/">@item.Book.title</a></h3>
+                                    <p class="product-category"><a href="#">@item.Author</a></p>
+                                    @if(item.Book.discount>0){
+
+                                        <h4 class="product-price">@((item.Book.unitPrice - (item.Book.unitPrice * (item.Book.discount / 100))).ToString("#,##0 đ")) <del class="product-old-price">@item.Book.unitPrice.ToString("#,##0 đ")</h4>
+                                    }
+                                    else
+                                    {
+                                        <h4 class="product-price">@item.Book.unitPrice.ToString("#,##0 đ")</h4>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                  
+
+                    
+
+                </div>
+
+
+                <div class="store-filter clearfix">
+                    <ul class="store-pagination">
+                        <li class="active">1</li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>

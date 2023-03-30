@@ -1,0 +1,571 @@
+﻿@page
+
+@{
+
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+    
+}
+
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+           
+
+            <div class="col-md-4 col-xs-6">
+                <div class="shop">
+                    <div class="shop-img">
+                        <img src="~/User/public/images/cover.jpg" alt="">
+                    </div>
+                    <div class="shop-body">
+                        <h3>Theo chân thám tử Poirot cùng Agatha Christie</h3>
+                        <a href="#" class="cta-btn">Xem thêm <i class='bx bx-chevron-right'></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-6">
+                <div class="shop">
+                    <div class="shop-img">
+                        <img src="~/User/public/images/cover.jpg" alt="">
+                    </div>
+                    <div class="shop-body">
+                        <h3>Trở về tuổi thơ với Nguyễn Nhật Ánh</h3>
+                        <a href="#" class="cta-btn">Xem thêm <i class='bx bx-chevron-right'></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-6">
+                <div class="shop">
+                    <div class="shop-img">
+                        <img src="~/User/public/images/cover.jpg" alt="">
+                    </div>
+                    <div class="shop-body">
+                        <h3>Những nỗi niềm của Haruki Murakami</h3>
+                        <a href="#" class="cta-btn">Xem thêm <i class='bx bx-chevron-right'></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Danh mục -->
+<section class="section">
+    <div class="container">
+
+        <div class="box">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="section-title">
+                        <h3 class="title">Thể loại</h3>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+
+                    <div class="row">
+                        <div class="products-tabs">
+
+                            <div id="tab1" class="tab-pane active">
+
+                                <div class="categories-slick" data-nav="#slick-nav-1">
+
+
+                                    @foreach (var item in ViewBag.genre)
+                                    {
+                                        <a class="category-box" href="@Url.Action("genrebook","product", new {id = @item.Id})">
+                                            <img src="@item.image" alt="" class="category-img">
+                                            <p class="category-name">@item.Name</p>
+                                        </a>
+                                    }                                  
+                                </div>
+
+                                <div id="slick-nav-1" class="categories-slick-nav"></div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Sách nổi bật -->
+<section class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="box">
+            <div class="row">
+                <!-- section title -->
+                <div class="col-md-12">
+                    <div class="section-title">
+                        <h3 class="title">Sách nổi bật</h3>
+                        <a asp-action="productHot" asp-controller="product">xem thêm</a>
+                    </div>
+                </div>
+                <!-- /section title -->
+                <!-- Products tab & slick -->
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="products-tabs">
+                            <!-- tab -->
+                            <div id="tab1" class="tab-pane active">
+                                <div class="products-slick" data-nav="#slick-nav-2">
+
+                                    @foreach (var item in ViewBag.book)
+                                    {
+                                        <div class="product">
+                                            <a asp-action="productDetail" asp-controller="product" asp-route-id="@item.Book.Id">
+                                                <div class="product-img">
+                                                    <img src="@item.Book.cover" alt="">
+                                                </div>
+                                            </a>
+                                            <div class="product-body">
+                                                <p class="product-category">@item.Genre</p>
+                                                <h3 class="product-name"><a href="/">@item.Book.title</a></h3>
+                                                <p class="product-category"><a href="#">@item.Author</a></p>
+                                                @if (item.Book.discount > 0)
+                                                {
+                                                    <h4 class="product-price">@((item.Book.unitPrice - (item.Book.unitPrice * (item.Book.discount / 100))).ToString("#,##0 đ")) <del class="product-old-price">@item.Book.unitPrice.ToString("#,##0 đ")</del></h4>
+
+                                                }
+                                                else
+                                                {
+                                                    <h4 class="product-price">@item.Book.unitPrice.ToString("#,##0 đ") </h4>
+
+                                                }
+
+
+                                            </div>
+                                        </div>
+
+                                    }
+
+
+
+                                </div>
+                                <div id="slick-nav-2" class="products-slick-nav"></div>
+                            </div>
+                            <!-- /tab -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Products tab & slick -->
+            </div>
+        </div>
+        <!-- /row -->
+    
+       
+
+
+    </div>
+    <!-- /container -->
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="box">
+            <div class="row">
+                <!-- section title -->
+                <div class="col-md-12">
+                    <div class="section-title">
+                        <h3 class="title">Sách đang được giảm giá</h3>
+                        <a asp-action="productSale" asp-controller="product">xem thêm</a>
+                    </div>
+                </div>
+                <!-- /section title -->
+                <!-- Products tab & slick -->
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="products-tabs">
+                            <!-- tab -->
+                            <div id="tab1" class="tab-pane active">
+                                <div class="products-slick" data-nav="#slick-nav-2">
+
+                                    @foreach (var item in ViewBag.sale)
+                                    {
+                                        <div class="product">
+                                            <a asp-action="productDetail" asp-controller="product" asp-route-id="@item.Book.Id">
+                                                <div class="product-img">
+                                                    <img src="@item.Book.cover" alt="">
+                                                </div>
+                                            </a>
+                                            <div class="product-body">
+                                                <p class="product-category">@item.Genre</p>
+                                                <h3 class="product-name"><a href="/">@item.Book.title</a></h3>
+                                                <p class="product-category"><a href="#">@item.Author</a></p>
+                                                @if (item.Book.discount > 0)
+                                                {
+                                                    <h4 class="product-price">@((item.Book.unitPrice - (item.Book.unitPrice * (item.Book.discount / 100))).ToString("#,##0 đ")) <del class="product-old-price">@item.Book.unitPrice.ToString("#,##0 đ")</del></h4>
+
+                                                }
+                                                else
+                                                {
+                                                    <h4 class="product-price">@item.Book.unitPrice.ToString("#,##0 đ") </h4>
+
+                                                }
+
+
+                                            </div>
+                                        </div>
+
+                                    }
+
+
+
+                                </div>
+                                <div id="slick-nav-2" class="products-slick-nav"></div>
+                            </div>
+                            <!-- /tab -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Products tab & slick -->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container">
+        <div class="box">
+            <div class="row">
+                <!-- section title -->
+                <div class="col-md-12">
+                    <div class="section-title">
+                        <h3 class="title">Sách được bán nhiều nhất</h3>
+                        <a asp-action="index" asp-controller="product">xem thêm</a>
+                    </div>
+                </div>
+                <!-- /section title -->
+                <!-- Products tab & slick -->
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="products-tabs">
+                            <!-- tab -->
+                            <div id="tab1" class="tab-pane active">
+                                <div class="products-slick" data-nav="#slick-nav-2">
+
+                                    @foreach (var item in ViewBag.bookBuy)
+                                    {
+                                        <div class="product">
+                                            <a asp-action="productDetail" asp-controller="product" asp-route-id="@item.book.book.book.bookId">
+                                                <div class="product-img">
+                                                    <img src="@item.book.book.book.bookdicover" alt="">
+                                                </div>
+                                            </a>
+                                            <div class="product-body">
+                                                <p class="product-category">@item.genre</p>
+                                                <h3 class="product-name"><a href="/">@item.book.book.book.bookpubtitle</a></h3>
+                                                <p class="product-category"><a href="#">@item.book.author</a></p>
+                                                @if (item.book.book.book.bookdiscount > 0)
+                                                {
+                                                    <h4 class="product-price">@((item.book.book.book.bookdiunitprice - (item.book.book.book.bookdiunitprice * (item.book.book.book.bookdiscount / 100))).ToString("#,##0 đ")) <del class="product-old-price">@item.book.book.book.bookdiunitprice.ToString("#,##0 đ")</del></h4>
+
+                                                }
+                                                else
+                                                {
+                                                    <h4 class="product-price">@item.book.book.book.bookdiunitprice.ToString("#,##0 đ") </h4>
+
+                                                }
+
+
+                                            </div>
+                                        </div>
+
+                                    }
+
+
+
+                                </div>
+                                <div id="slick-nav-2" class="products-slick-nav"></div>
+                            </div>
+                            <!-- /tab -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Products tab & slick -->
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Hot deal -->
+<div class="section">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4 col-xs-6">
+                <div class="section-title">
+                    <h4 class="title">Sản phẩm nổi bật</h4>
+
+                    <div class="section-nav">
+                        <div id="slick-nav-3" class="products-slick-nav"></div>
+                    </div>
+
+                </div>
+
+                <div class="products-widget-slick" data-nav="#slick-nav-3">
+
+                    <div>
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/13-nguyen-tac-nghi-giau-lam-giau.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/tuoi-tre-dang-gia-bao-nhieu.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/bo-gia.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/13-nguyen-tac-nghi-giau-lam-giau.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/tuoi-tre-dang-gia-bao-nhieu.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/bo-gia.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4 col-xs-6">
+                <div class="section-title">
+                    <h4 class="title">Top selling</h4>
+
+                    <div class="section-nav">
+                        <div id="slick-nav-4" class="products-slick-nav"></div>
+                    </div>
+
+                </div>
+
+                <div class="products-widget-slick" data-nav="#slick-nav-4">
+
+                    <div>
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/13-nguyen-tac-nghi-giau-lam-giau.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/tuoi-tre-dang-gia-bao-nhieu.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/bo-gia.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/13-nguyen-tac-nghi-giau-lam-giau.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/tuoi-tre-dang-gia-bao-nhieu.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/bo-gia.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4 col-xs-6">
+                <div class="section-title">
+                    <h4 class="title">Top selling</h4>
+
+                    <div class="section-nav">
+                        <div id="slick-nav-5" class="products-slick-nav"></div>
+                    </div>
+
+                </div>
+
+                <div class="products-widget-slick" data-nav="#slick-nav-5">
+
+                    <div>
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/13-nguyen-tac-nghi-giau-lam-giau.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/tuoi-tre-dang-gia-bao-nhieu.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/bo-gia.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/13-nguyen-tac-nghi-giau-lam-giau.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/tuoi-tre-dang-gia-bao-nhieu.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="~/User/public/book/bo-gia.png" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Category</p>
+                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

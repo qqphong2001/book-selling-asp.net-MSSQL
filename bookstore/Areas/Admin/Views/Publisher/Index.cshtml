@@ -1,0 +1,104 @@
+﻿
+@model IEnumerable<bookstore.Areas.Admin.Models.PublisherModel>
+
+@{
+    ViewData["Title"] = "Nhà xuất bản";
+}
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+<div class="row">
+
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">Quản lý nhà xuất bản</div>
+
+                <button class="btn btn-success" data-toggle="modal" data-target="#publisherAddModal">Thêm nhà xuất bản</button>
+
+                <hr />
+
+                <div class="table-responsive">
+                    <table class="table">
+
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Id</th>
+                                <th>Tên NXB</th>
+                                <th>Lựa chọn</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var obj in Model)
+                            {
+                                <tr>
+                                    <td class="font-weight-bold">@obj.Id</td>
+                                    <td class="font-weight-bold">@obj.Name</td>
+                                    <td>
+                                        <button onclick="location.href='@Url.Action("Edit","Publisher",new{id = obj.Id})'" class="btn btn-primary">Chỉnh sửa</button>
+                                        <button class="btn btn-danger"
+                                                onclick="
+                                                   if(confirm('Bạn có muốn xóa nhà xuất bản này?')){
+                                                        location.href='@Url.Action("Delete","Publisher",new{id = @obj.Id})'
+                                                    }
+                                                ">
+                                            Xóa
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="publisherAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm Nhà xuất bản</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+       <form class="form-sample" method="post" asp-action="create">
+
+            <div class="modal-body">
+       
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Tên nhà xuất bản</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="Name" />
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                
+            </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Tạo</button>
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+          </div>
+       </form>
+
+    </div>
+  </div>
+</div>

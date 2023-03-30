@@ -1,0 +1,77 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@using bookstore.Areas.User.Models;
+@using bookstore.Areas.User.Service;
+@inject IHttpContextAccessor HttpContextAccessor
+
+@inject CartSevice _cartService;
+
+@{
+    var session = HttpContextAccessor.HttpContext.Session;
+    string jsoncart = session.GetString(CartSevice.CARTKEY);
+
+    float Maxtoal = 0;
+
+
+    if (jsoncart != null)
+    {
+      
+        var cart = JsonConvert.DeserializeObject<List<CartItem>>(jsoncart);
+
+        <div class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" >
+                <i class='bx bxs-cart'></i>
+                <span>Giỏ hàng</span>
+                <div class="qty">@cart.Count</div>
+            </a>
+            <div class="cart-dropdown">
+                <div class="cart-list">
+                   @foreach(var item in cart)
+                    {
+                        var total = @item.quantity * item.product.unitPrice;
+                        Maxtoal += total;
+
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="@item.product.cover" alt="">
+                            </div>
+                            <div class="product-body">
+                                <h3 class="product-name"><a href="#">@item.product.title</a> x @item.quantity</h3>
+                                <h4 class="product-price"><span class="qty">@total.ToString("#,##0.00 đ")</span></h4>
+                            </div>
+                            <button class="delete"><i class="bx bx-x"></i></button>
+                        </div>
+                    }
+
+
+                </div>
+                <div class="cart-summary">
+                    <small>@cart.Count sản phẩm được chọn</small>
+                    <h5>Tổng tiền: @Maxtoal.ToString("#,##0.00 đ")</h5>
+                </div>
+                <div class="cart-btns">
+                    <a asp-action="Index" asp-controller="shoppingCart">Xem giỏ hàng</a>
+                    <a href="#">Thanh toán</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                <i class='bx bxs-cart'></i>
+                <span>Giỏ hàng</span>
+                <div class="qty">0</div>
+            </a>
+            <div class="cart-dropdown">
+                <div class="cart-list">
+
+                    bạn chưa có sản phẩm nào
+                </div>
+          
+            </div>
+        </div>
+    }
+}
+

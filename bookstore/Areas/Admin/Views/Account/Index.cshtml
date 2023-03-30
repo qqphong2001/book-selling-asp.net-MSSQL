@@ -1,0 +1,195 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<bookstore.Areas.Admin.Models.UserModel> UserManager
+
+@{
+    ViewData["Title"] = "Tài khoản";
+}
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+   <div class="mt-5 mb-5">
+    <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Tạo tài khoản nhân viên</button>
+    </div>
+
+    <table class="table">
+            
+        <thead>
+            <tr>
+                <td>
+                    Id
+                </td>
+                
+                <td>
+                    Email
+                </td>
+                <td>
+                    Vai trò
+                </td>
+
+                <td>
+                    Họ tên 
+                </td>
+                <td>
+                    Xác thực tài khoản
+                </td>
+                <td>
+
+                </td>
+            </tr
+
+        </thead>
+        <tbody>
+
+       @foreach(var obj in ViewBag.user)
+{
+    <tr>
+        <td>
+            @obj.User.Id
+        </td>
+        <td>
+            @obj.User.Email
+        </td>
+     
+        <td>
+            @string.Join(", ", await UserManager.GetRolesAsync(obj.User))
+        </td>
+        <td>
+            @obj.customer.firstName @obj.customer.lastName
+        </td>
+        <td>
+              @(obj.User.EmailConfirmed == true ? "đã xác thực" : "Chưa xác thực")
+        </td>
+        <td>                    
+            <button onclick="location.href='@Url.Action("Edit","account",new{id = @obj.User.Id})'" class="btn btn-primary" >Chỉnh sửa</button>
+            <button class="btn btn-danger" onclick="
+                if(confirm('Bạn có muốn xóa thể loại này?')){
+                    location.href='@Url.Action("Delete","account",new{id = @obj.User.Id})'
+                }
+            " >Xóa</button>
+        </td>
+    </tr>
+}
+         
+        </tbody>
+
+    </table>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thêm thể loại</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+            <form class="form-sample" method="post" asp-action="create" enctype="multipart/form-data">
+
+      <div class="modal-body">
+       
+                <p class="card-description">
+                    Thông tin nhân viên
+                </p>
+
+                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Email</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="email" />
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                   <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Password</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="password" />
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Họ Nhân viên</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="firstName" />
+                            </div>
+                        </div>
+                    </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Tên Nhân viên</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="lastName" />
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+
+                <div class="row">
+                     <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Số điện thoại</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="phone" />
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Địa chỉ nhà</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" name="address" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <div class="row">
+                     <div class="col-sm-12 col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="dob" class="form-label">Ngày sinh</label>
+                                <input type="date" id="dob" class="form-control"  name="dob" >
+                            </div>
+                        </div>
+                     <div class="col-md-6">
+                        <div class="form-group row">
+                                                           <label for="gender" class="form-label">Giới tính</label>
+
+                            <div class="col-sm-12">
+                                 <label class="radio-inline" for="male">
+                                        <input type="radio" name="gender" id="male" value="1" checked> Nam
+                                    </label>
+
+                                    <label class="radio-inline" for="female">
+                                        <input type="radio" name="gender" id="female" value="0" > Nữ
+                                    </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Tạo tài khoản nhân viên</button>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+      </div>
+            </form>
+
+    </div>
+  </div>
+</div>

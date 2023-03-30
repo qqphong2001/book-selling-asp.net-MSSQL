@@ -1,0 +1,45 @@
+﻿@model bookstore.Areas.Admin.Models.CustomerTypeModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <button onclick="location.href='@Url.Action("Index","CustomerType")'" class="btn btn-secondary mt-5 mb-5">Trờ về</button>
+            <h4 class="card-title">Cấp bậc hội viên</h4>
+            <form class="form-sample" method="post" asp-action="EditPost" asp-controller="CustomerType">
+             
+                <p class="card-description">
+                    Thông tin cấp bậc thành viên
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Id</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" value="@Model.Id" asp-for="Id"  />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tên cấp bậc thành viên</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" value="@Model.Name" asp-for="Name" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            
+
+                <button type="submit" class="btn btn-success" >Lưu</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
