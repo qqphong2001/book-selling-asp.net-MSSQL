@@ -274,9 +274,25 @@ namespace bookstore.Areas.User.Controllers
         public async Task<IActionResult> successCart(int? id)
         {
 
+            var cart = _cartSevice.GetCartItems();
+            float totalMax = 0;
+
+
+            foreach (var item in cart)
+            {
+                float total = item.quantity * item.product.unitPrice;
+                totalMax += total;
+            }
+
             var order =_db.Orders.Find(id);
 
-          
+            var customer = _db.Customers.Find(order.customer_id);
+
+            customer.point += (int) Math.Floor(totalMax / 100) ;
+
+            _db.Customers.Update(customer);
+            _db.SaveChanges();
+
             order.status = 1;
 
             _db.Orders.Update(order);
