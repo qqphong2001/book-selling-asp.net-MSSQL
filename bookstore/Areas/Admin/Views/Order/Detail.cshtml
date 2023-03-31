@@ -1,0 +1,129 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<bookstore.Areas.Admin.Models.UserModel> SignInManager
+@inject UserManager<bookstore.Areas.Admin.Models.UserModel> UserManager
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Chi tiết hóa đơn";
+}
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+
+                @*<button onclick="location.href='@Url.Action("Index","order")'" class="btn btn-secondary mt-5 mb-5">Trờ về</button>*@
+
+                    <div class="card-title">Chi tiết hóa đơn</div>
+         
+               
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Id</label>
+                                <input type="text" class="form-control font-weight-bold" value="@ViewBag.order.orders.Id" readonly />
+                            </div>
+                        </div>
+
+                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Email</label>
+                            <input type="text" class="form-control font-weight-bold" value="@ViewBag.order.users.Email" readonly />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Tên khách hàng</label>
+                                <input readonly type="text" class="form-control font-weight-bold" value="@(ViewBag.order.customer.firstName + ViewBag.order.customer.lastName)"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                            <input readonly type="text" class="form-control font-weight-bold" value="@ViewBag.order.customer.phoneNumber" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Địa chỉ giao hàng</label>
+                                <input readonly type="text" class="form-control font-weight-bold" value="@ViewBag.order.address.address" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Hình thức giao hàng</label>
+                                <input readonly type="text" class="form-control font-weight-bold" value="@ViewBag.order.shipping.Name" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Hình thức thanh toán</label>
+                                <input readonly type="text" class="form-control font-weight-bold" value="@ViewBag.order.payment.Name" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>trạng thái thanh toán</label>
+                                <input readonly type="text" class="form-control font-weight-bold" value="@ViewBag.order.status.Name" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Chiết khấu</label>
+                                <input readonly type="text" class="form-control font-weight-bold" value="@ViewBag.order.orders.discount" />
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Tổng hóa đơn</label>
+                                <input readonly type="text" class="form-control" value="@ViewBag.order.orders.total.ToString("#,##0 đ")" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>Id sách</th>
+                                    <th>Tên sách</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá tiền một sản phẩm</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var obj in ViewBag.cart)
+                                {
+                                    <tr>
+                                        <td class="font-weight-bold">@obj.book.Id</td>
+                                        <td class="font-weight-bold">@obj.book.title</td>
+                                        <td class="font-weight-bold"><img src="@obj.book.cover" width="50" height="50"/></td>
+                                        <td class="font-weight-bold">@obj.cart.quantity</td>
+                                        <td class="font-weight-bold">@obj.book.unitPrice.ToString("#,##0 đ")</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+

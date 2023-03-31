@@ -1,0 +1,129 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Đăng ký";
+}
+
+
+
+
+
+<section class="container">
+    <div class="auth-form-box">
+        <h3 class="text-center">Đăng ký</h3>
+
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-lg" name="firstName" placeholder="Họ của bạn">
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-lg" name="lastName" placeholder="Tên của bạn">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input type="email" class="form-control form-control-lg" asp-for="Input.Email" placeholder="Email của bạn">
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-lg" name="phone" placeholder="SĐT của bạn">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input type="password" class="form-control form-control-lg" asp-for="Input.Password" placeholder="Mật khẩu">
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                   
+                     <input type="password" class="form-control form-control-lg" asp-for="Input.ConfirmPassword" placeholder="Nhập lại mật khẩu">
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block" id="btnLogin">Đăng ký</button>
+        </form>
+
+        <div class="auth-form-devider">
+            <hr>
+            <span>Hoặc</span>
+        </div>
+        @if ((Model.ExternalLogins?.Count ?? 0) != 0)
+        {
+            <section>
+                <h4>Sử dụng dịch vụ</h4>
+                <hr />
+                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                    <div>
+                        <p>
+                            @foreach (var provider in Model.ExternalLogins)
+                            {
+                                <button 
+                                    type="submit" 
+                                    name="provider" 
+                                    value="@provider.Name" 
+                                    title="Đăng nhập với tài khoản @provider.DisplayName"
+                                    class="btn btn-primary btn-block" id=@( $"btn{@provider.DisplayName}")
+                                >
+                                    Đăng ký với @provider.DisplayName<i class='bx @( $"bxl-{@provider.DisplayName.ToLower()}")'></i>
+                                </button>
+
+                                
+                            }
+                        </p>
+                    </div>
+                </form>
+            </section>
+        }
+       
+        <div class="auth-modal-options" style="justify-content: center;">
+            <div>
+                <a asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,238 @@
+﻿@model bookstore.Areas.Admin.Models.BookModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Chi tiết hóa đơn";
+}
+
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+
+                @*<button onclick="location.href='@Url.Action("Index","Book")'" class="btn btn-secondary mt-5 mb-5">Trờ về</button>*@
+
+
+                    <div class="row">
+
+                        @*isbn*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>ISBN</label>
+                                <input type="text" class="form-control font-weight-bold" value="@Model.isbn" asp-for="isbn" />
+                            </div>
+                        </div>
+
+
+                        @*title*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Tên sách</label>
+                                <input type="text" class="form-control font-weight-bold" value="@Model.title" name="title" />
+                            </div>
+                        </div>
+
+
+                        @*unitPrice*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Giá bán</label>
+                                <input type="text" class="form-control font-weight-bold" value="@Model.unitPrice" name="unitPrice" />
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <hr />
+
+                    <div class="row">
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Ảnh bìa sách</label>
+                               @* <input type="file" name="imageFile" class="file-upload-default" onchange="preview_imageBook()" id="photoInputBook">
+                                <div class="input-group col-xs-12">
+                                    <span class="">
+                                        <button class="file-upload-browse btn btn-primary" type="button">Tải ảnh</button>
+                                    </span>
+                                </div>*@
+                            </div>
+                            <div>
+                                <img src="@Model.cover" width="90" height="110" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-8">
+                            <hr class="d-sm-none d-block" />
+
+                            <div class="form-group">
+                                <label>Ảnh mô tả sách</label>
+                                @*<input type="file" name="FileUploads[]" multiple id="photoInputBooks" onchange="preview_imageBooks()" class="file-upload-default">
+                                <div class="input-group col-xs-12">
+                                    <span class="">
+                                        <button class="file-upload-browse btn btn-primary" type="button">Tải ảnh</button>
+                                    </span>
+                                </div>*@
+                            </div>
+                            <div id="image_previews">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+
+                    <div class="row">
+
+                        @*unitStock*@
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Số trang</label>
+                                <input type="text" class="form-control font-weight-bold" value="@Model.numPages" name="numPages" />
+                            </div>
+                        </div>
+                        @*unitStock*@
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Số lượng</label>
+                                <input type="text" class="form-control font-weight-bold" value="@Model.unitStock" name="unitStock" />
+                            </div>
+                        </div>
+
+
+                        @*layout*@
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label>Hình thức</label>
+                                <select class="form-control font-weight-bold" name="layout">
+                                    @if (Model.layout == "Bìa cứng")
+                                    {
+                                        <option selected value="Bình cứng">Bìa cứng</option>
+                                        <option value="Bình mềm">Bìa mềm</option>
+
+                                    }
+                                    else
+                                    {
+                                        <option value="Bình cứng">Bìa cứng</option>
+                                        <option selected value="Bình mềm">Bìa mềm</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        @*publishDate*@
+                        <div class="col-md-4">
+                            <div class="form-groupw">
+                                <label>Ngày xuất bản</label>
+                                <input type="date" class="form-control font-weight-bold" value="@Model.publishDate" name="publishDate" />
+                            </div>
+                        </div>
+
+
+                        @*weight*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Trọng lượng</label>
+                                <input type="text" class="form-control font-weight-bold" value="@Model.weight" name="weight" />
+                            </div>
+                        </div>
+
+
+                        @*translatorName*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Người dịch</label>
+                                <input type="text" class="form-control font-weight-bold" value="@Model.translatorName" name="translatorName" />
+                            </div>
+                        </div>
+
+
+
+                        @*hSize*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Chiều dài</label>
+                                <input type="text" class="form-control font-weight-bold" value="@Model.hSize" name="hSize" />
+                            </div>
+                        </div>
+
+
+
+                        @*wSize*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Chiều rộng</label>
+                                <input type="text" class="form-control font-weight-bold" value="@Model.wSize" name="wSize" />
+                            </div>
+                        </div>
+
+
+
+                        @*discount*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Giảm giá</label>
+                                <input type="text" class="form-control font-weight-bold" value="@Model.discount" name="discount" />
+                            </div>
+                        </div>
+
+
+
+                        @*publisher*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Nhà xuất bản</label><br />
+                                <select class="js-example-basic-single" style="width: 100%;" name="publisher">
+                                    <option value="">Lựa chọn</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        @*author*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Tác giả</label><br />
+                                <select class="js-example-basic-single" style="width: 100%;" name="author">
+                                    <option value="">Lựa chọn</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        @*genre*@
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Thể loại</label><br />
+                                <select class="js-example-basic-single" style="width: 100%;" name="genre">
+                                    <option value="">Lựa chọn</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        @*desc*@
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Miêu tả</label>
+                                <textarea type="text" class="form-control" name="description">@Model.description</textarea>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
