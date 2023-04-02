@@ -307,7 +307,12 @@
 
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="account" asp-action="index">
+                            <i class='menu-icon bx bxs-user-account'></i>
+                            <span class="menu-title">Tài khoản</span>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="book" asp-action="index">
                             <i class='menu-icon bx bxs-book'></i>
@@ -357,17 +362,6 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link">
-                            <i class='menu-icon bx bxs-bar-chart-alt-2'></i>
-                            <span class="menu-title">Báo cáo thống kê</span>
-                        </a>
-                    </li>
-
-
-
-
-
 
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="customerType" asp-action="index">
@@ -383,6 +377,16 @@
                             <span class="menu-title">Tình trạng đơn hàng</span>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            <i class='menu-icon bx bxs-bar-chart-alt-2'></i>
+                            <span class="menu-title">Báo cáo thống kê</span>
+                        </a>
+                    </li>
+
+
+                  
 
                 </ul>
             </nav>

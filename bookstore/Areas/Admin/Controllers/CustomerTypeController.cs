@@ -1,5 +1,6 @@
 ﻿using bookstore.Areas.Admin.Models;
 using bookstore.DbContext;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 
@@ -7,6 +8,7 @@ namespace bookstore.Areas.Admin.Controllers
 {
     [Area("admin")]
     [Route("/admin/CustomerType")]
+    [Authorize(Roles = Role.Role_Admin + "," + Role.Role_Employee)]
 
     public class CustomerTypeController : Controller
     {

@@ -187,7 +187,7 @@ namespace bookstore.Areas.User.Controllers
         }
 
         [Route("/order/customer/{order}")]
-        public IActionResult order(string? order)
+        public IActionResult order(string? order, int? a )
         {
             var customer = _db.Customers.Join(
                 _db.Orders,
@@ -219,6 +219,8 @@ namespace bookstore.Areas.User.Controllers
           
             ViewBag.order = customer;
 
+            if (a != null)
+                _toastNotification.AddSuccessToastMessage("Bạn đã đánh giá thành công");
 
 
 

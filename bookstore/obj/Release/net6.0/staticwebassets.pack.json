@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\bookstore.bundle.scp.css"
     },
     {
+      "Id": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\404.html",
+      "PackagePath": "staticwebassets\\404.html"
+    },
+    {
       "Id": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\Admin\\Asset\\css\\maps\\vertical-layout-light\\style.css.map",
       "PackagePath": "staticwebassets\\Admin\\Asset\\css\\maps\\vertical-layout-light\\style.css.map"
     },
@@ -7193,6 +7197,10 @@
       "PackagePath": "staticwebassets\\User\\public\\fonts\\slick.woff"
     },
     {
+      "Id": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\User\\public\\images\\agatha-christie.jpg",
+      "PackagePath": "staticwebassets\\User\\public\\images\\agatha-christie.jpg"
+    },
+    {
       "Id": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\User\\public\\images\\card.svg",
       "PackagePath": "staticwebassets\\User\\public\\images\\card.svg"
     },
@@ -7203,6 +7211,14 @@
     {
       "Id": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\User\\public\\images\\cover.jpg",
       "PackagePath": "staticwebassets\\User\\public\\images\\cover.jpg"
+    },
+    {
+      "Id": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\User\\public\\images\\haruki-murakami.jpg",
+      "PackagePath": "staticwebassets\\User\\public\\images\\haruki-murakami.jpg"
+    },
+    {
+      "Id": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\User\\public\\images\\nguyen-nhat-anh.png",
+      "PackagePath": "staticwebassets\\User\\public\\images\\nguyen-nhat-anh.png"
     },
     {
       "Id": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\User\\public\\images\\vnpay.png",

@@ -187,7 +187,7 @@
 									<p>Mã hàng : @ViewBag.book.Book.isbn </p>
 									<p>Tác giả : @ViewBag.book.Author </p>
 									<p>NXB : @ViewBag.book.Publisher </p>
-									<p>Năm XB : @ViewBag.book.Book.publishDate </p>
+									<p>Năm XB : @ViewBag.book.Book.publishDate.ToString("dd-MM-yyyy") </p>
 									<p>Trọng lượng (gr) : @ViewBag.book.Book.weight </p>
 									<p>Kích thước : @ViewBag.book.Book.hSize x @ViewBag.book.Book.wSize </p>
 									<p>Số trang : @ViewBag.book.Book.numPages </p>
@@ -428,7 +428,7 @@
 												}
 												else
 												{
-													<h4 class="product-price">@item.Book.unitPrice.ToString("#,##0.00 đ") </h4>
+													<h4 class="product-price">@item.Book.unitPrice.ToString("#,##0 đ") </h4>
 
 												}
 

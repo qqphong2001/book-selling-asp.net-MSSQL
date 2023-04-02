@@ -15,6 +15,7 @@ using System.Security.Policy;
 using NuGet.Common;
 using Org.BouncyCastle.Asn1.X9;
 using Stripe.Checkout;
+using Stripe;
 
 namespace bookstore.Areas.User.Controllers
 {
@@ -140,7 +141,8 @@ namespace bookstore.Areas.User.Controllers
             }
 
             _cartSevice.SaveCartSession(cart);
-            return RedirectToAction("index");
+            return Redirect(Request.Headers["Referer"].ToString());
+
         }
 
 
@@ -183,7 +185,7 @@ namespace bookstore.Areas.User.Controllers
                 description = Request.Form["description"],
                 customer_id = int.Parse(Request.Form["customer_id"]),
                 customerAddress_id = int.Parse(Request.Form["address"]),
-                status = 0,
+                status = 2,
                 paymentMethod_id = int.Parse(Request.Form["payment"]),
                 shippingMethod_id = int.Parse(Request.Form["shipping"])
 
@@ -249,8 +251,12 @@ namespace bookstore.Areas.User.Controllers
                 Session session = service.Create(options);
 
                 Response.Headers.Add("Location", session.Url);
+                _cartSevice.ClearCart();
+
                 return new StatusCodeResult(303);
             }
+            _cartSevice.ClearCart();
+
             return Redirect("/");
 
         }
@@ -267,6 +273,53 @@ namespace bookstore.Areas.User.Controllers
             _db.Orders.Update(order);
 
             _db.SaveChanges();
+
+            var customer = _db.Orders.Join(_db.Customers,
+                order => order.customer_id,
+                customer => customer.Id,
+                (order , customer ) => new { order = order , customer = customer }).Where(x => x.order.Id == id).FirstOrDefault();
+
+          
+
+
+            var newPointCustomer = _db.Customers.Find(customer.customer.Id);
+            newPointCustomer.point += (int)customer.order.total / 1000;
+
+            _db.Customers.Update(newPointCustomer);
+            _db.SaveChanges();
+
+
+
+            var ordersuccess = _db.Orders.Join(
+                _db.ShippingMethods,
+                order => order.shippingMethod_id,
+                shipping => shipping.Id,
+                (order , shipping) => new { order = order, shipping = shipping })
+                .Join(
+                _db.PaymentMethods,
+                orderpayment => orderpayment.order.paymentMethod_id,
+                payment => payment.Id,
+                (orderpayment , payment) => new { order = orderpayment.order , shipping = orderpayment.shipping , payment = payment }).
+                Join(
+                _db.Customers,
+                ordercustomer => ordercustomer.order.customer_id,
+                customer => customer.Id,
+                (ordercustomer, customer) => new {order = ordercustomer.order, shipping = ordercustomer.shipping , payment = ordercustomer.payment, customer = customer }
+                ).
+                Join(
+                _UserManager.Users,
+                orderuser => orderuser.customer.account_id,
+                user => user.Id,
+                (orderuser , user )=> new { order = orderuser.order, shipping = orderuser.shipping, payment = orderuser.payment, customer = orderuser.customer , user = user })
+                .Join(
+                _db.customerAddresses,
+                orderaddress => orderaddress.order.customerAddress_id,
+                address => address.Id,
+                (orderaddress, address) => new { order = orderaddress.order, shipping = orderaddress.shipping, payment = orderaddress.payment, customer = orderaddress.customer, user = orderaddress.user , address =address })
+                .Where( x => x.order.Id == id ).FirstOrDefault();
+
+
+            ViewBag.ordersuccess = ordersuccess;
 
 
             return View();

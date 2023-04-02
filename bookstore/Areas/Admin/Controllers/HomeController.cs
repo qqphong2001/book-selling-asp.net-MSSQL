@@ -6,7 +6,8 @@ namespace bookstore.Areas.Admin.Controllers
 {
     [Area("admin")]
     [Route("/Admin")]
-    [Authorize(Roles = Role.Role_Admin)]
+    [Authorize(Roles = Role.Role_Admin + "," + Role.Role_Employee)]
+
     public class HomeController : Controller
     {
         [Route("index")]

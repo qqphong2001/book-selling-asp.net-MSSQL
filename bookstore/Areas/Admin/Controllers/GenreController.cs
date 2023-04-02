@@ -1,5 +1,6 @@
 ﻿using bookstore.Areas.Admin.Models;
 using bookstore.DbContext;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
@@ -11,6 +12,8 @@ namespace bookstore.Areas.Admin.Controllers
 
     [Area("admin")]
     [Route("/admin/genre")]
+    [Authorize(Roles = Role.Role_Admin + "," + Role.Role_Employee)]
+
     public class GenreController : Controller
     {
         private readonly ApplicationDbContext _db;

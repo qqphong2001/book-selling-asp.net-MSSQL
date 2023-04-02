@@ -1,5 +1,6 @@
 ﻿using bookstore.Areas.Admin.Models;
 using bookstore.DbContext;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
@@ -9,6 +10,7 @@ namespace bookstore.Areas.Admin.Controllers
 {
     [Area("admin")]
     [Route("/admin/order")]
+    [Authorize(Roles = Role.Role_Admin + "," + Role.Role_Employee)]
 
     public class OrderController : Controller
     {
@@ -26,6 +28,7 @@ namespace bookstore.Areas.Admin.Controllers
         }
 
         [Route("index")]
+
         public IActionResult Index()
         {
 

@@ -1,5 +1,6 @@
 ﻿using bookstore.Areas.Admin.Models;
 using bookstore.DbContext;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 
@@ -7,6 +8,8 @@ namespace bookstore.Areas.Admin.Controllers
 {   
     [Area("admin")]
     [Route("/admin/paymentmethod")]
+    [Authorize(Roles = Role.Role_Admin + "," + Role.Role_Employee)]
+
     public class PaymentMethodController : Controller
     {
         readonly private ApplicationDbContext _db;
@@ -20,7 +23,6 @@ namespace bookstore.Areas.Admin.Controllers
 
         }
 
-        [Route("index")]
         public IActionResult Index()
         {
             IEnumerable<PaymentMethodModel> payments = _db.PaymentMethods.ToList();

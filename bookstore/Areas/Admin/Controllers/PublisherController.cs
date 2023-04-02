@@ -1,5 +1,6 @@
 ﻿using bookstore.Areas.Admin.Models;
 using bookstore.DbContext;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using System.Security.Policy;
@@ -8,6 +9,8 @@ namespace bookstore.Areas.Admin.Controllers
 {
     [Area("admin")]
     [Route("/admin/publisher")]
+    [Authorize(Roles = Role.Role_Admin + "," + Role.Role_Employee)]
+
     public class PublisherController : Controller
     {
         private readonly ApplicationDbContext _db;

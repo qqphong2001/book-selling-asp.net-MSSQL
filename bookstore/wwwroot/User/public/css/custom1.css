@@ -1,7 +1,40 @@
 ﻿.page-title {
     margin: 20px 0;
 }
+.paymentSuccess-box {
+    margin: auto;
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid var(--main-color);
+    border-radius: 20px;
+}
 
+    .paymentSuccess-box h2 {
+        color: var(--main-color);
+    }
+
+    .paymentSuccess-box .paymentSuccess-orderInfo {
+        text-align: left;
+    }
+
+    .paymentSuccess-box .order-link {
+        display: inline-block;
+        margin: 10px 0;
+        padding: 10px 15px;
+        background-color: var(--main-color);
+        color: #fff;
+        border-radius: 10px;
+    }
+.user-point {
+    width: 120px;
+    margin: 10px 0;
+    padding: 10px;
+    background: #C0C0C0;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+}
 .category-box {
     display: inline-block;
     margin: 3rem 2rem;

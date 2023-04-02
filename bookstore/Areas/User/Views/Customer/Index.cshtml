@@ -96,6 +96,43 @@
 
 
 
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label for="gender" class="form-label">Điểm</label><br>
+                                    @if (ViewBag.customer.point < 1000)
+                                    {
+                                           <div class="user-point">
+                                            @ViewBag.customer.point / 1000
+                                            <p>Đồng</p>
+                                        </div>
+
+                                    }
+                                    else if (ViewBag.customer.point >= 1000 && ViewBag.customer.point < 10000)
+                                    {
+                                        <div class="user-point">
+                                            @ViewBag.customer.point / 10000
+                                            <p>Bạc</p>
+                                        </div>
+                                    }
+                                    else if (ViewBag.customer.point >= 10000 && ViewBag.customer.point<100000 )
+                                    {
+                                        <div class="user-point">
+                                            @ViewBag.customer.point / 100000
+                                            <p>Vàng</p>
+                                        </div>
+                                    }
+                                    else if (ViewBag.customer.point >= 100000)
+                                    {
+                                        <div class="user-point">
+                                            @ViewBag.customer.point 
+                                            <p>Kim cương</p>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+
+
                         </div>
 
                         <div class="user-info-box-divider user-info-box-divider-vertical"></div>

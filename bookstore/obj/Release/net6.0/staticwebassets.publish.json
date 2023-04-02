@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Hb1MRMWwBxHGaxe3NeR/85DlqmeVW/c5xNK9IrZccT4=",
+  "Hash": "sKm2LkyUnXa/ESs+lZ5KMcf2uGReOKNn05g7Tfh7Pt8=",
   "Source": "bookstore",
   "BasePath": "_content/bookstore",
   "Mode": "Default",
@@ -33048,6 +33048,23 @@
       "OriginalItemSpec": "wwwroot\\User\\public\\fonts\\slick.woff"
     },
     {
+      "Identity": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\User\\public\\images\\agatha-christie.jpg",
+      "SourceId": "bookstore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\",
+      "BasePath": "_content/bookstore",
+      "RelativePath": "User/public/images/agatha-christie.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\User\\public\\images\\agatha-christie.jpg"
+    },
+    {
       "Identity": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\User\\public\\images\\card.svg",
       "SourceId": "bookstore",
       "SourceType": "Discovered",
@@ -33097,6 +33114,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\User\\public\\images\\cover.jpg"
+    },
+    {
+      "Identity": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\User\\public\\images\\haruki-murakami.jpg",
+      "SourceId": "bookstore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\",
+      "BasePath": "_content/bookstore",
+      "RelativePath": "User/public/images/haruki-murakami.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\User\\public\\images\\haruki-murakami.jpg"
+    },
+    {
+      "Identity": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\User\\public\\images\\nguyen-nhat-anh.png",
+      "SourceId": "bookstore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\",
+      "BasePath": "_content/bookstore",
+      "RelativePath": "User/public/images/nguyen-nhat-anh.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\User\\public\\images\\nguyen-nhat-anh.png"
     },
     {
       "Identity": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\User\\public\\images\\vnpay.png",

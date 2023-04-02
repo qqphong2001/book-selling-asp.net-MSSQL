@@ -37,9 +37,9 @@
                             </div>
                             <div class="product-body">
                                 <h3 class="product-name"><a href="#">@item.product.title</a> x @item.quantity</h3>
-                                <h4 class="product-price"><span class="qty">@total.ToString("#,##0.00 đ")</span></h4>
+                                <h4 class="product-price"><span class="qty">@total.ToString("#,##0 đ")</span></h4>
                             </div>
-                            <button class="delete"><i class="bx bx-x"></i></button>
+                            <button onclick="location.href='@Url.Action("RemoveCart","shoppingcart", new {productid = @item.product.Id})'" class="delete"><i class="bx bx-x"></i></button>
                         </div>
                     }
 
@@ -47,11 +47,11 @@
                 </div>
                 <div class="cart-summary">
                     <small>@cart.Count sản phẩm được chọn</small>
-                    <h5>Tổng tiền: @Maxtoal.ToString("#,##0.00 đ")</h5>
+                    <h5>Tổng tiền: @Maxtoal.ToString("#,##0 đ")</h5>
                 </div>
                 <div class="cart-btns">
-                    <a asp-action="Index" asp-controller="shoppingCart">Xem giỏ hàng</a>
-                    <a href="#">Thanh toán</a>
+                    <a asp-action="Index" style="width:100%" asp-controller="shoppingCart">Xem giỏ hàng</a>
+                   
                 </div>
             </div>
         </div>

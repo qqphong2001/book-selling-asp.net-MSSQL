@@ -2,6 +2,7 @@ using bookstore.Areas.Admin.Models;
 using bookstore.Areas.User.Service;
 using bookstore.DbContext;
 using bookstore.Email;
+using bookstore.Error;
 using bookstore.payment;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Authentication.Google;
@@ -133,7 +134,7 @@ app.UseStaticFiles();
 app.MapRazorPages();
 app.UseRouting();
 app.MapRazorPages();
-
+app.UseMiddleware<ErrorHandlingMiddleware>();
 StripeConfiguration.ApiKey = builder.Configuration.GetSection("StripeSettings:SecretKey").Get<string>();
 
 app.UseAuthentication();   // Phục hồi thông tin đăng nhập (xác thực)

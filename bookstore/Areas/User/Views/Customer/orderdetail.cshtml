@@ -116,7 +116,15 @@
                                                 <td class="font-weight-bold"><img src="@obj.book.cover" width="50" height="50" /></td>
                                                 <td class="font-weight-bold">@obj.cart.quantity</td>
                                                 <td class="font-weight-bold">@obj.book.unitPrice.ToString("#,##0 đ")</td>
-                                                <td><button value="@obj.book.Id" class="btn btn-primary detailModel" data-toggle="modal" data-target="#exampleModal"> Đánh giá sản phẩm</button></td>
+                                                @if (ViewBag.order.orders.status == 1)
+                                                {
+                                                    <td><button value="@obj.book.Id" class="btn btn-primary detailModel" data-toggle="modal" data-target="#exampleModal"> Đánh giá sản phẩm</button></td>
+
+                                                }
+                                                else
+                                                {
+                                                    <td>Bạn chưa thanh toán</td>
+                                                }
                                             </tr>
                                         }
                                     </tbody>
