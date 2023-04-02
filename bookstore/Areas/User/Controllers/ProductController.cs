@@ -15,7 +15,7 @@ namespace bookstore.Areas.User.Controllers
         private readonly IToastNotification _toastNotification;
         private readonly UserManager<UserModel> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public ProductController(ApplicationDbContext db,IToastNotification toastNotification, RoleManager<IdentityRole> roleManager, UserManager<UserModel> userManager)
+        public ProductController(ApplicationDbContext db, IToastNotification toastNotification, RoleManager<IdentityRole> roleManager, UserManager<UserModel> userManager)
         {
             _db = db;
             _toastNotification = toastNotification;
@@ -179,7 +179,7 @@ namespace bookstore.Areas.User.Controllers
                 _toastNotification.AddErrorToastMessage("sản phẩm không tồn tại");
                 ViewData["title"] = "Trang chủ";
 
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
 
             var thumbnail = _db.BookImages.Where(x => x.book_id == id).ToList();
@@ -193,14 +193,14 @@ namespace bookstore.Areas.User.Controllers
             var bookgenre = _db.Books.
                 Join(
                 _db.Genres,
-				 book => book.genre_id,
-				genres => genres.Id,
-					(book, genres) => new { Book = book, genres = genres.Name }
-				).Join(
+                 book => book.genre_id,
+                genres => genres.Id,
+                    (book, genres) => new { Book = book, genres = genres.Name }
+                ).Join(
                 _db.Authors,
                 BookGenre => BookGenre.Book.author_id,
                 author => author.Id,
-                (BookGenre, author) => new {Book = BookGenre.Book , Genre = BookGenre.genres , Author = author.Name }
+                (BookGenre, author) => new { Book = BookGenre.Book, Genre = BookGenre.genres, Author = author.Name }
                 )
                 .Where(x => x.Book.genre_id == viewbook.genre_id).
                    Where(x => x.Book.Id != id).ToList();
@@ -212,6 +212,85 @@ namespace bookstore.Areas.User.Controllers
 
 
             _db.SaveChanges();
+
+            if (_db.Reviews.Where(x => x.book_id == id).Any())
+            {
+                var avgRanking = _db.Reviews.Where(x => x.book_id == id).Average(x => x.ranking);
+                ViewBag.RatingAverage = Math.Round(avgRanking);
+
+                var five = (float)_db.Reviews.Where(x => x.book_id == id).Where(x => x.ranking == 5).Sum(x => x.ranking) / 5;
+
+                var starFive = five * 100 / _db.Reviews.Where(x => x.book_id == id).Count();
+
+                ViewBag.fiveStar = starFive;
+
+
+                var four = (float)_db.Reviews.Where(x => x.book_id == id).Where(x => x.ranking == 4).Sum(x => x.ranking) / 4;
+
+                var starFour = four * 100 / _db.Reviews.Where(x => x.book_id == id).Count();
+
+                ViewBag.fourStar = starFour;
+
+
+                var three = (float)_db.Reviews.Where(x => x.book_id == id).Where(x => x.ranking == 3).Sum(x => x.ranking) / 3;
+
+                var starthree = three * 100 / _db.Reviews.Where(x => x.book_id == id).Count();
+
+                ViewBag.threeStar = starthree;
+
+                var two = (float)_db.Reviews.Where(x => x.book_id == id).Where(x => x.ranking == 2).Sum(x => x.ranking) / 2;
+
+                var starTwo = two * 100 / _db.Reviews.Where(x => x.book_id == id).Count();
+
+                ViewBag.twoStar = starTwo;
+
+                var one = (float)_db.Reviews.Where(x => x.book_id == id).Where(x => x.ranking == 1).Sum(x => x.ranking) / 1;
+
+                var starOne = one * 100 / _db.Reviews.Where(x => x.book_id == id).Count();
+
+                ViewBag.oneStar = starOne;
+
+                ViewBag.total = _db.Reviews.Where(x => x.book_id == id).Count();
+
+                var commet = new {
+                 SOne = _db.Reviews.Where(x => x.book_id == id).Where(x => x.ranking == 1).Count(),
+
+                 Stwo = _db.Reviews.Where(x => x.book_id == id).Where(x => x.ranking == 2).Count(),
+                 Sthree = _db.Reviews.Where(x => x.book_id == id).Where(x => x.ranking == 3).Count(),
+                 Sfour = _db.Reviews.Where(x => x.book_id == id).Where(x => x.ranking == 4).Count(),
+                 Sfive = _db.Reviews.Where(x => x.book_id == id).Where(x => x.ranking == 5).Count()
+
+                 };
+
+
+
+                ViewBag.totalcommet = commet;
+
+
+
+                ViewBag.customerReview = _db.Reviews.Join(
+                    _db.Customers,
+                    review => review.customer_id,
+                    customer => customer.Id,
+                    (review , customer )=> new {review = review , customer = customer }
+                    ).Where( x => x.review.book_id == id).ToList();
+
+
+
+
+
+			}
+			else
+            {
+                 ViewBag.RatingAverage =     null;
+
+            }
+
+
+
+
+
+
 
             return View();
         }
@@ -297,7 +376,7 @@ namespace bookstore.Areas.User.Controllers
         }
         [Route("searchProduct")]
         [HttpPost]
-        public IActionResult searchProduct([Bind("title")] BookModel obj )
+        public IActionResult searchProduct([Bind("title")] BookModel obj)
         {
 
             var result = _db.Books
@@ -305,19 +384,19 @@ namespace bookstore.Areas.User.Controllers
           _db.Authors,
           book => book.author_id,
           author => author.Id,
-          (book, author) => new { Book = book, Author = author.Name }
+          (book, author) => new { Book = book, Author = author }
        )
   .Join(
        _db.Genres,
        bookAuthor => bookAuthor.Book.genre_id,
       genre => genre.Id,
-      (bookAuthor, genre) => new { Book = bookAuthor.Book, Author = bookAuthor.Author, Genre = genre.Name }
+      (bookAuthor, genre) => new { Book = bookAuthor.Book, Author = bookAuthor.Author, Genre = genre }
 )
   .Join(
        _db.Publisher,
       bookAuthorGenre => bookAuthorGenre.Book.publisher_id,
       publisher => publisher.Id,
-      (bookAuthorGenre, publisher) => new { Book = bookAuthorGenre.Book, Author = bookAuthorGenre.Author, Genre = bookAuthorGenre.Genre, Publisher = publisher.Name }
+      (bookAuthorGenre, publisher) => new { Book = bookAuthorGenre.Book, Author = bookAuthorGenre.Author, Genre = bookAuthorGenre.Genre, Publisher = publisher }
       ).Where(x => x.Book.title.Contains(obj.title)).ToList();
 
             ViewBag.bookAll = result;
@@ -375,7 +454,7 @@ namespace bookstore.Areas.User.Controllers
 
 
         [Route("genrebook/{id}")]
-     
+
         public IActionResult genrebook(int? id)
         {
 
@@ -488,6 +567,15 @@ namespace bookstore.Areas.User.Controllers
             }
             _toastNotification.AddSuccessToastMessage("xong roi do");
             return RedirectToAction("index");
+        }
+
+        [Route("ajax/{id}")]
+        public IActionResult ajax(int id)
+        {
+            var product = _db.Books.Find(id);
+
+            return Json(product);
+
         }
     }
 }

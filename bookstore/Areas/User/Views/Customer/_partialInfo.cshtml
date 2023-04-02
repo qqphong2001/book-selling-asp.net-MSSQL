@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<bookstore.Areas.Admin.Models.UserModel> SignInManager
+@inject UserManager<bookstore.Areas.Admin.Models.UserModel> UserManager
+            <div class="col-md-2" style="padding: 20px;">
+                <ul class="nav flex-column user-opts">
+                     <li class="nav-item">
+                        <a class="nav-link"  href="/index/customer/@UserManager.GetUserId(User)">Thông tin cá nhânu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/order/customer/@UserManager.GetUserId(User)">Đơn hàng của bạn</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/identity/account/manage/changepassword">Đổi mật khẩu</a>
+                    </li>
+                 
+                </ul>
+            </div>
+
+          

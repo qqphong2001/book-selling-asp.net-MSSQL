@@ -167,9 +167,8 @@ namespace bookstore.Areas.User.Controllers
 
             var orderNumbers = _db.Orders.Select(x => x.orderNumber).ToList();
 
-            while (orderNumbers.Contains(randomNumber))
+            if (orderNumbers.Contains(randomNumber))
             {
-                
                 randomNumber = random.Next(number).ToString();
 
             }
@@ -184,11 +183,11 @@ namespace bookstore.Areas.User.Controllers
                 description = Request.Form["description"],
                 customer_id = int.Parse(Request.Form["customer_id"]),
                 customerAddress_id = int.Parse(Request.Form["address"]),
-                status = 2,
+                status = 0,
                 paymentMethod_id = int.Parse(Request.Form["payment"]),
                 shippingMethod_id = int.Parse(Request.Form["shipping"])
-                
-                
+
+
             };
             var order_id = await _db.Orders.AddAsync(order);
             await _db.SaveChangesAsync();
@@ -200,19 +199,9 @@ namespace bookstore.Areas.User.Controllers
                     book_id = item.product.Id,
                     quantity = item.quantity,
                     order_id = order_id.Entity.Id,
-                  
                 };
                 await _db.OrderDetails.AddAsync(orderdetail);
                 await _db.SaveChangesAsync();
-
-                var product = _db.Books.Find(item.product.Id);
-
-                product.unitStock = product.unitStock - item.quantity;
-
-                _db.Books.Update(product);
-                _db.SaveChanges();
-
-
 
             }
 
@@ -229,8 +218,8 @@ namespace bookstore.Areas.User.Controllers
                     LineItems = new List<SessionLineItemOptions>()
                   ,
                     Mode = "payment",
-                    SuccessUrl = domain+ $"successCart/{order_id.Entity.Id }",
-                    CancelUrl = domain+$"fail",
+                    SuccessUrl = domain + $"successCart/{order_id.Entity.Id}",
+                    CancelUrl = domain,
                 };
                 long StripeTotalMax = 0;
                 foreach (var item in cart)
@@ -238,11 +227,11 @@ namespace bookstore.Areas.User.Controllers
                     //var StripeTotal = item.quantity * item.product.unitPrice;
 
 
-                  var newSessionLineItem = new SessionLineItemOptions
+                    var newSessionLineItem = new SessionLineItemOptions
                     {
                         PriceData = new SessionLineItemPriceDataOptions
                         {
-                            UnitAmount =(long) item.product.unitPrice ,
+                            UnitAmount = (long)item.product.unitPrice,
                             Currency = "VND",
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
@@ -253,11 +242,7 @@ namespace bookstore.Areas.User.Controllers
                     };
                     options.LineItems.Add(newSessionLineItem);
 
-                  
 
-
-
-                    
                 }
 
                 var service = new SessionService();
@@ -266,7 +251,7 @@ namespace bookstore.Areas.User.Controllers
                 Response.Headers.Add("Location", session.Url);
                 return new StatusCodeResult(303);
             }
-            return RedirectToAction("ordersuccess");
+            return Redirect("/");
 
         }
 
@@ -274,24 +259,14 @@ namespace bookstore.Areas.User.Controllers
         public async Task<IActionResult> successCart(int? id)
         {
 
-            var order =_db.Orders.Find(id);
+            var order = _db.Orders.Find(id);
 
-          
+            order.paymentDate = DateTime.Now;
             order.status = 1;
 
             _db.Orders.Update(order);
 
             _db.SaveChanges();
-            _toastNotification.AddSuccessToastMessage("chúc mừng bạn thanh toán thành công");
-
-            return View();
-        }
-
-        [Route("ordersuccess")]
-
-        public IActionResult ordersuccess()
-        {
-
 
 
             return View();

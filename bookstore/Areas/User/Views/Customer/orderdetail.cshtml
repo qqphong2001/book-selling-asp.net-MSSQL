@@ -1,0 +1,245 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<bookstore.Areas.Admin.Models.UserModel> SignInManager
+@inject UserManager<bookstore.Areas.Admin.Models.UserModel> UserManager
+@{
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "Trang thông tin người dùng";
+
+
+
+}
+<section>
+    <div class="container">
+        <h3 class="title" style="padding: 20px 0;">Thông tin tài khoản</h3>
+
+        <div class="row">
+            @await Html.PartialAsync("_partialInfo.cshtml")
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-body">
+
+                        @*<button onclick="location.href='@Url.Action("Index","order")'" class="btn btn-secondary mt-5 mb-5">Trờ về</button>*@
+
+                        <div class="card-title">Chi tiết hóa đơn</div>
+
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Id</label>
+                                    <input type="text" class="form-control font-weight-bold" value="@ViewBag.order.orders.Id" readonly />
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tên khách hàng</label>
+                                    <input readonly type="text" class="form-control font-weight-bold" value="@(ViewBag.order.customer.firstName + ViewBag.order.customer.lastName)" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Số điện thoại</label>
+                                    <input readonly type="text" class="form-control font-weight-bold" value="@ViewBag.order.customer.phoneNumber" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Địa chỉ giao hàng</label>
+                                    <input readonly type="text" class="form-control font-weight-bold" value="@ViewBag.order.address.address" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Hình thức giao hàng</label>
+                                    <input readonly type="text" class="form-control font-weight-bold" value="@ViewBag.order.shipping.Name" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Hình thức thanh toán</label>
+                                    <input readonly type="text" class="form-control font-weight-bold" value="@ViewBag.order.payment.Name" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>trạng thái thanh toán</label>
+                                    <input readonly type="text" class="form-control font-weight-bold" value="@ViewBag.order.status.Name" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Chiết khấu</label>
+                                    <input readonly type="text" class="form-control font-weight-bold" value="@ViewBag.order.orders.discount" />
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tổng hóa đơn</label>
+                                    <input readonly type="text" class="form-control" value="@ViewBag.order.orders.total.ToString("#,##0 đ")" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+
+                                    <thead class="table-primary">
+                                        <tr>
+                                            <th>Id sách</th>
+                                            <th>Tên sách</th>
+                                            <th>Hình ảnh</th>
+                                            <th>Số lượng</th>
+                                            <th>Giá tiền một sản phẩm</th>
+                                            <th>Đánh giá sản phẩm</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var obj in ViewBag.cart)
+                                        {
+                                            <tr>
+                                                <td class="font-weight-bold">@obj.book.Id</td>
+                                                <td class="font-weight-bold">@obj.book.title</td>
+                                                <td class="font-weight-bold"><img src="@obj.book.cover" width="50" height="50" /></td>
+                                                <td class="font-weight-bold">@obj.cart.quantity</td>
+                                                <td class="font-weight-bold">@obj.book.unitPrice.ToString("#,##0 đ")</td>
+                                                <td><button value="@obj.book.Id" class="btn btn-primary detailModel" data-toggle="modal" data-target="#exampleModal"> Đánh giá sản phẩm</button></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+           
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Đánh giá sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding:20px 40px">
+                <section class='rating-widget'>
+
+
+                    <!-- Rating Stars Box -->
+                    <div class='rating-stars text-center'>
+                        <ul id='stars' name="stars">
+                            <li class='star' title='Poor' data-value='1'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='Fair' data-value='2'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='Good' data-value='3'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='Excellent' data-value='4'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='star' title='WOW!!!' data-value='5'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row text-center mt-5" style="margin-top:50px">
+                            <img src="" id="bookcover" width="100px" height="100px"  />
+                            <p type="text" id="booktitle"  ></p>
+
+
+                        <input type="hidden" name="idbook" id="bookid" />
+                            <input type="hidden" name="customerid" value="@ViewBag.order.customer.Id" />
+
+                    </div>
+                    <div class="row">
+                        <div class="col-10">
+
+                            <label>Bình luận</label>
+                            <textarea class="form-control" name="desciption"  rows="7" cols="50" ></textarea>
+
+                        </div>
+                    </div>
+
+
+
+
+
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" id="submit-btn" class="btn btn-primary">Đánh giá</button>
+            </div>
+                  
+
+        </div>
+    </div>
+</div>
+
+
+<style>
+   
+
+ 
+
+
+
+
+
+
+
+
+    /* Rating Star Widgets Style */
+    .rating-stars ul {
+        list-style-type: none;
+        padding: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+    }
+
+        .rating-stars ul > li.star {
+            display: inline-block;
+        }
+
+            /* Idle State of the stars */
+            .rating-stars ul > li.star > i.fa {
+                font-size: 2.5em; /* Change the size of the stars */
+                color: #ccc; /* Color on idle state */
+            }
+
+            /* Hover state of the stars */
+            .rating-stars ul > li.star.hover > i.fa {
+                color: #FFCC36;
+            }
+
+            /* Selected state of the stars */
+            .rating-stars ul > li.star.selected > i.fa {
+                color: #FF912C;
+            }
+
+</style>

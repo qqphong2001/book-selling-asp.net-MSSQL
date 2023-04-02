@@ -18,12 +18,12 @@
 
                     <div class="row">
 
-                       @* <div class="col-md-6">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Id</label>
-                                <input type="text" class="form-control" value="@Model.Id" asp-for="Id" />
+                                <input type="hidden" class="form-control" value="@Model.Id" asp-for="Id" />
                             </div>
-                        </div>*@
+                        </div>
                         
 
                         @*isbn*@
@@ -62,7 +62,7 @@
                         <div class="col-sm-12 col-md-4">
                             <div class="form-group">
                                 <label>Ảnh bìa sách</label>
-                                <input type="file" name="imageFile" class="file-upload-default" onchange="preview_imageBook()" id="photoInputBook">
+                                <input type="file" name="imageFile" class="file-upload-default" onchange="preview_imageBook()" id="photoInputBookedit">
                                 <div class="input-group col-xs-12">
                                     <span class="">
                                         <button class="file-upload-browse btn btn-primary" type="button">Tải ảnh</button>
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div>
-                                <img src="@Model.cover" width="90" height="110"/>
+                                <img src="@Model.cover" width="90" id="photoBookedit" height="110" />
                             </div>
                         </div>
 
@@ -79,7 +79,7 @@
 
                             <div class="form-group">
                                 <label>Ảnh mô tả sách</label>
-                                <input type="file" name="FileUploads[]" multiple id="photoInputBooks" onchange="preview_imageBooks()" class="file-upload-default">
+                                <input type="file" name="FileUploads[]" multiple id="file-inputs" class="file-upload-default">
                                 <div class="input-group col-xs-12">
                                     <span class="">
                                         <button class="file-upload-browse btn btn-primary" type="button">Tải ảnh</button>
@@ -87,6 +87,15 @@
                                 </div>
                             </div>
                             <div id="image_previews">
+                                @{
+                                    int count = 0;
+                                }
+                                @foreach (var item in ViewBag.BookImages)
+                                {
+                                    <img src="@item.image" width="90" class="images" height="110" />
+
+                                }
+
                             </div>
                         </div>
                     
@@ -191,14 +200,23 @@
                             </div>
                         </div>
 
-
+                      
                         
                         @*publisher*@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Nhà xuất bản</label><br/>
-                                <select class="js-example-basic-single" style="width: 100%;" name="publisher">
-                                    <option value="">Lựa chọn</option>
+                                <select class="js-example-basic-single" style="width: 100%;" name="publisher_id">
+
+                                    
+
+                                    <option selected value="@Model.publisher_id">@ViewBag.bookadd.publisher.publisher </option>
+
+                                    @foreach (var item in ViewBag.publisher)
+                                    {
+                                        <option  value="@item.Id">@item.Name</option>
+
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -209,8 +227,14 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Tác giả</label><br />
-                                <select class="js-example-basic-single" style="width: 100%;" name="author">
-                                    <option value="">Lựa chọn</option>
+                                <select class="js-example-basic-single" style="width: 100%;" name="author_id">
+                                    <option selected value="@Model.author_id">@ViewBag.bookadd.author.author </option>
+
+                                    @foreach (var item in ViewBag.authors)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -220,8 +244,14 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Thể loại</label><br />
-                                <select class="js-example-basic-single" style="width: 100%;" name="genre">
-                                    <option value="">Lựa chọn</option>
+                                <select class="js-example-basic-single" style="width: 100%;" name="genre_id">
+                                    <option selected value="@Model.genre_id">@ViewBag.bookadd.genre.genre </option>
+
+                                    @foreach (var item in ViewBag.genres)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -250,3 +280,34 @@
     </div>
 </div>
 
+<script>
+
+    const fileInputs = document.getElementById('file-inputs');
+    const images = document.querySelectorAll('.images');
+
+    function preview_imageBook() {
+        document.getElementById('photoBookedit').src = URL.createObjectURL(document.getElementById("photoInputBookedit").files[0])
+    }
+
+
+    fileInputs.addEventListener('change', function () {
+        const files = this.files;
+        const urls = [];
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
+
+            reader.addEventListener('load', function () {
+                urls.push(reader.result);
+                if (urls.length === files.length) {
+                    for (let j = 0; j < urls.length; j++) {
+                        images[j].setAttribute('src', urls[j]);
+                    }
+                }
+            });
+
+            reader.readAsDataURL(file);
+        }
+    });
+</script>

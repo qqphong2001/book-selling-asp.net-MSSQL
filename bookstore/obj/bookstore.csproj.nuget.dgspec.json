@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Shio\\programming\\dotnet\\book-selling-asp.net-MSSQL\\bookstore\\bookstore.csproj": {}
+    "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\bookstore.csproj": {}
   },
   "projects": {
-    "C:\\Shio\\programming\\dotnet\\book-selling-asp.net-MSSQL\\bookstore\\bookstore.csproj": {
+    "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\bookstore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Shio\\programming\\dotnet\\book-selling-asp.net-MSSQL\\bookstore\\bookstore.csproj",
+        "projectUniqueName": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\bookstore.csproj",
         "projectName": "bookstore",
-        "projectPath": "C:\\Shio\\programming\\dotnet\\book-selling-asp.net-MSSQL\\bookstore\\bookstore.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Shio\\programming\\dotnet\\book-selling-asp.net-MSSQL\\bookstore\\obj\\",
+        "projectPath": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\bookstore.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

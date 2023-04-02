@@ -444,6 +444,35 @@ namespace bookstore.Migrations
                     b.ToTable("Publisher");
                 });
 
+            modelBuilder.Entity("bookstore.Areas.Admin.Models.ReviewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("book_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("customer_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ranking")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("bookstore.Areas.Admin.Models.ShippingMethodModel", b =>
                 {
                     b.Property<int>("Id")

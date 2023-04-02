@@ -6,11 +6,14 @@ using NToastNotify;
 using bookstore.Areas.Admin.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.Collections;
+using Stripe;
+using Microsoft.AspNetCore.Identity;
 
 namespace bookstore.Areas.User.Controllers
 {
     [Authorize]
     [Area("user")]
+    [Route("/customer")]
     public class CustomerController : Controller
 
 
@@ -19,7 +22,7 @@ namespace bookstore.Areas.User.Controllers
         private readonly ApplicationDbContext _db;
         private readonly IToastNotification _toastNotification;
         private readonly IWebHostEnvironment _webHostEnvironment;
-
+        
         public CustomerController(IToastNotification toastNotification, ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
         {
             _toastNotification = toastNotification;
@@ -28,7 +31,7 @@ namespace bookstore.Areas.User.Controllers
 
         }
 
-        [Route("index/{customer_id}")]
+        [Route("/index/customer/{customer_id}")]
         public async Task<IActionResult> Index(string? customer_id)
         {
 
@@ -182,6 +185,118 @@ namespace bookstore.Areas.User.Controllers
             _toastNotification.AddSuccessToastMessage("Chỉnh sửa thông tin cá nhân thành công");
             return Redirect(Request.Headers["Referer"].ToString());
         }
+
+        [Route("/order/customer/{order}")]
+        public IActionResult order(string? order)
+        {
+            var customer = _db.Customers.Join(
+                _db.Orders,
+                customer => customer.Id,
+                order => order.customer_id,
+                (customer,order) => new {customer = customer , order = order}
+                ).Join(
+                _db.ShippingMethods,
+                customershipping => customershipping.order.shippingMethod_id,
+                shipping => shipping.Id,
+                (customershipping,shipping) => new { customer = customershipping.customer, order = customershipping.order, shipping = shipping }
+                ).Join(
+                _db.customerAddresses,
+                customeraddress =>customeraddress.order.customerAddress_id,
+                address => address.Id,
+                (customeraddress,address) => new { customer = customeraddress.customer , order = customeraddress.order, address = address,shipping = customeraddress.shipping }
+
+                )
+                .Join(
+                _db.orderStatuses,
+                customerpayment => customerpayment.order.status,
+                payment => payment.Id,
+                (customerpayment, payment) => new { customer = customerpayment.customer, order = customerpayment.order, address = customerpayment.address, shipping = customerpayment.shipping, payment = payment }
+                )
+
+                .Where(x => x.customer.account_id == order).ToList();
+
+
+          
+            ViewBag.order = customer;
+
+
+
+
+            return View();
+
+        }
+        [Route("/detail/customer/{id}")]
+        public IActionResult Detail(int? id)
+        {
+            var result = _db.Orders.Join(
+               _db.orderStatuses,
+               Orders => Orders.status,
+               orderStatuses => orderStatuses.Id,
+               (Orders, orderStatuses) => new { orders = Orders, orderStatuses = orderStatuses }
+               ).Join(
+               _db.ShippingMethods,
+               ordersOrStatus => ordersOrStatus.orders.shippingMethod_id,
+               shippingMethod => shippingMethod.Id,
+               (ordersOrStatus, shippingMethod) => new { orders = ordersOrStatus.orders, status = ordersOrStatus.orderStatuses, shipping = shippingMethod }
+               ).Join(
+               _db.PaymentMethods,
+               ordersOrStatusPay => ordersOrStatusPay.orders.paymentMethod_id,
+               paymentMethod => paymentMethod.Id,
+               (ordersOrStatusPay, paymentMethod) => new { orders = ordersOrStatusPay.orders, status = ordersOrStatusPay.status, payment = paymentMethod, shipping = ordersOrStatusPay.shipping }
+               ).Join(
+               _db.Customers,
+               ordercustomer => ordercustomer.orders.customer_id,
+               customer => customer.Id,
+               (ordercustomer, customer) => new { orders = ordercustomer.orders, status = ordercustomer.status, payment = ordercustomer.payment, customer = customer, shipping = ordercustomer.shipping }
+               ).Join(
+               _db.customerAddresses,
+               orderaddress => orderaddress.orders.customerAddress_id,
+               address => address.Id,
+               (orderaddress, address) => new { orders = orderaddress.orders, status = orderaddress.status, payment = orderaddress.payment, customer = orderaddress.customer, address = address, shipping = orderaddress.shipping }
+            )
+               .Where(x => x.orders.Id == id).FirstOrDefault();
+
+            ViewBag.order = result;
+
+            ViewBag.cart = _db.OrderDetails.Where(x => x.order_id == id).
+                Join(
+                _db.Books,
+                cart => cart.book_id,
+                book => book.Id,
+                (cart, book) => new { cart = cart, book = book }
+                )
+                .
+                ToList();
+
+
+
+            return View("orderdetail","customer");
+        }
+
+
+        [Route("review")]
+        public IActionResult review([FromForm] int bookid, [FromForm] int customerid, [FromForm] int ratingValue , [FromForm] string description)
+        {
+
+
+           
+
+            var review = new ReviewModel()
+            {
+                book_id = bookid,
+                comment = description,
+                customer_id = customerid,
+                ranking = ratingValue,
+            };
+
+            _db.Reviews.Add(review);
+            _db.SaveChanges();
+
+            _toastNotification.AddSuccessToastMessage("bạn đã đánh giá thành công");
+            
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+
     }
 }
 

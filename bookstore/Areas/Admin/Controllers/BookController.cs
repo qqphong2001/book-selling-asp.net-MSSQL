@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using System.Collections;
+using System.Security.Policy;
 
 namespace bookstore.Areas.Admin.Controllers
 {
@@ -51,7 +52,7 @@ namespace bookstore.Areas.Admin.Controllers
 
 
 
-        public async Task<IActionResult> create(BookModel obj,IFormFile? imageFile,BookImagesModel imagebook ,IFormFile[]? FileUploads)
+        public async Task<IActionResult> create(BookModel obj,IFormFile? imageFile,BookImagesModel imagebook ,IFormFile[]? FileUploadss)
         {
             string wwwRootPath = _webHostEnvironment.WebRootPath;     
 
@@ -82,10 +83,10 @@ namespace bookstore.Areas.Admin.Controllers
 
             await _db.SaveChangesAsync();
 
-            if (FileUploads != null)
+            if (FileUploadss != null)
             {
               
-                foreach (var FileUpload in FileUploads)
+                foreach (var FileUpload in FileUploadss)
                 {
                     string fileName = Guid.NewGuid().ToString();
                     string uploads = Path.Combine(wwwRootPath, @"images\products\thumbnail");
@@ -168,9 +169,25 @@ namespace bookstore.Areas.Admin.Controllers
             }
 
             IEnumerable<BookImagesModel> obj = _db.BookImages.Where(i => i.book_id == id).ToList();
-       
+            IEnumerable<AuthorModel> authors = _db.Authors.ToList();
+            IEnumerable<PublisherModel> publishers = _db.Publisher.ToList();
+            IEnumerable<GenreModel> genres = _db.Genres.ToList();
+
+            ViewBag.authors = authors;
+            ViewBag.publisher = publishers;
+            ViewBag.genres = genres;
             ViewBag.BookImages = obj;
 
+            ViewBag.bookadd = new
+            {
+                publisher = _db.Books.Join(_db.Publisher,book => book.publisher_id , publisher => publisher.Id , (book, publisher) => new { book = book  , publisher= publisher.Name }).Where( x => x.book.Id == id).FirstOrDefault(),
+                author = _db.Books.Join(_db.Authors, book => book.author_id, author => author.Id, (book, author) => new { book = book, author = author.Name }).Where(x => x.book.Id == id).FirstOrDefault(),
+                genre = _db.Books.Join(_db.Genres, book => book.genre_id, genre => genre.Id, (book, genre) => new { book = book, genre = genre.Name }).Where(x => x.book.Id == id).FirstOrDefault(),
+
+
+            };
+
+         
 
             return View(book);
 

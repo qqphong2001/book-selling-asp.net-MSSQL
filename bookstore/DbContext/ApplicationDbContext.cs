@@ -57,4 +57,6 @@ public class ApplicationDbContext : IdentityDbContext<UserModel>
 
     public DbSet<ShippingMethodModel> ShippingMethods { get; set; }
 
+    public DbSet<ReviewModel> Reviews { get; set; }
+
 }

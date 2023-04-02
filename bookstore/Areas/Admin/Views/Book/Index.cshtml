@@ -43,12 +43,18 @@
                                 <tr>
                                     <td class="font-weight-bold">@obj.Id</td>
                                     <td class="font-weight-bold">@obj.isbn</td>
-                                    <td class="font-weight-bold">@obj.title</td>
+                                    <td class="font-weight-bold" style="overflow-x: hidden;width:50px;overflow:hidden">
+                                        <span style=" overflow-x: hidden;width:100px;display:block">
+                                            @obj.title
+
+                                       </span>
+
+                                    </td>
                                     <td>
                                     <img src="@obj.cover" style="border-radius: 0px; height: 80px; width: 60px;" />
 
                                     </td>
-                                    <td class="font-weight-bold">@obj.unitPrice</td>
+                                    <td class="font-weight-bold">@obj.unitPrice.ToString("#,##0 đ")</td>
                                     <td class="font-weight-bold">@(obj.unitStock < 1 ? "Hết hàng" : "Còn hàng")</td>
                                     <td>
                                         <button onclick="location.href='@Url.Action("detail","Book",new{id = obj.Id})'" class="btn btn-info">Xem chi tiết</button>
@@ -142,7 +148,7 @@
 
                             <div class="form-group">
                                 <label>Ảnh miêu tả sách</label>
-                                <input type="file" name="FileUploads[]" multiple id="photoInputBooks" onchange="preview_imageBooks()" class="file-upload-default">
+                                <input type="file" name="FileUploadss" id="photoInputBooks" onchange="preview_imageBooks()" class="file-upload-default" multiple>
                                 <div class="input-group col-xs-12">
                                     <span class="">
                                         <button class="file-upload-browse btn btn-primary" type="button">Tải ảnh</button>
