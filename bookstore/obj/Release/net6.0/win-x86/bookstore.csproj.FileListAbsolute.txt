@@ -1815,9 +1815,7 @@ C:\Dotnet\nghi\fahaha-ui\bookstore\obj\Release\net6.0\win-x86\staticwebassets\ms
 C:\Dotnet\nghi\fahaha-ui\bookstore\obj\Release\net6.0\win-x86\staticwebassets.pack.json
 C:\Dotnet\nghi\fahaha-ui\bookstore\obj\Release\net6.0\win-x86\staticwebassets.build.json
 C:\Dotnet\nghi\fahaha-ui\bookstore\obj\Release\net6.0\win-x86\staticwebassets.development.json
-C:\Dotnet\nghi\fahaha-ui\bookstore\obj\Release\net6.0\win-x86\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Dotnet\nghi\fahaha-ui\bookstore\obj\Release\net6.0\win-x86\scopedcss\bundle\bookstore.styles.css
-C:\Dotnet\nghi\fahaha-ui\bookstore\obj\Release\net6.0\win-x86\scopedcss\projectbundle\bookstore.bundle.scp.css
 C:\Dotnet\nghi\fahaha-ui\bookstore\obj\Release\net6.0\win-x86\bookstore.csproj.CopyComplete
 C:\Dotnet\nghi\fahaha-ui\bookstore\obj\Release\net6.0\win-x86\bookstore.dll
 C:\Dotnet\nghi\fahaha-ui\bookstore\obj\Release\net6.0\win-x86\refint\bookstore.dll

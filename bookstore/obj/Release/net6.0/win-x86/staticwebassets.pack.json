@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\obj\\Release\\net6.0\\win-x86\\scopedcss\\projectbundle\\bookstore.bundle.scp.css",
-      "PackagePath": "staticwebassets\\bookstore.bundle.scp.css"
-    },
-    {
       "Id": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\404.html",
       "PackagePath": "staticwebassets\\404.html"
     },

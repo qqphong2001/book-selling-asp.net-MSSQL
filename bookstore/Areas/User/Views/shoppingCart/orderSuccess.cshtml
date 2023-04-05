@@ -1,1 +1,34 @@
-﻿
+﻿@{
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+
+}
+
+<section class="section">
+    <div class="container">
+        <div class="paymentSuccess-box">
+            <h2>Đặt hàng thành công</h2>
+            <p>Trong cuộc sống có quá nhiều sự lựa chọn cám ơn <b>@ViewBag.ordersuccess.customer.firstName @ViewBag.ordersuccess.customer.lastName</b> đã chọn <b>Fahaha</b>.</p>
+            <p><b>Fahaha</b> rất vui thông báo đơn hàng <b>@ViewBag.ordersuccess.order.orderNumber</b> của bạn đã được tiếp nhận và đang trong quá trình xử lý.</p>
+
+            <hr>
+
+            <div class="paymentSuccess-orderInfo">
+                <h5>THÔNG TIN ĐƠN HÀNG <b>@ViewBag.ordersuccess.order.orderNumber</b></h5>
+                <ul>
+                    <li>Tên khách hàng: @ViewBag.ordersuccess.customer.firstName @ViewBag.ordersuccess.customer.lastName</li>
+                    <li>Email: @ViewBag.ordersuccess.user.Email</li>
+                    <li>Số điện thoại: @ViewBag.ordersuccess.customer.phoneNumber</li>
+                    <li>Địa chỉ giao hàng: @ViewBag.ordersuccess.address.address</li>
+                    <li>Phương thức thanh toán: @ViewBag.ordersuccess.payment.Name</li>
+                </ul>
+            </div>
+
+            <hr>
+            <p>Bạn có thể nhấn vào đường link dưới đây để xem chi tiết thông tin đơn hàng của mình.</p>
+            <a href="~/" class="order-link">tiếp tục mua hàng</a>
+
+            <a href="/" class="order-link">@ViewBag.ordersuccess.order.orderNumber</a>
+
+        </div>
+    </div>
+</section>

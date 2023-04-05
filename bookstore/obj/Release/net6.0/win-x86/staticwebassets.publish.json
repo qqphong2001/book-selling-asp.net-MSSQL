@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zCKu6pE8c56xchDcKpgCUVkZpjXW8IrlM0zHk2thUNg=",
+  "Hash": "361e2aVB20WWqpChKe2qJWToRMshMJQYwy8bVr+8Yvg=",
   "Source": "bookstore",
   "BasePath": "_content/bookstore",
   "Mode": "Default",
@@ -16,40 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\obj\\Release\\net6.0\\win-x86\\scopedcss\\bundle\\bookstore.styles.css",
-      "SourceId": "bookstore",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\obj\\Release\\net6.0\\win-x86\\scopedcss\\bundle\\",
-      "BasePath": "_content/bookstore",
-      "RelativePath": "bookstore.styles.css",
-      "AssetKind": "All",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ApplicationBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\obj\\Release\\net6.0\\win-x86\\scopedcss\\bundle\\bookstore.styles.css"
-    },
-    {
-      "Identity": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\obj\\Release\\net6.0\\win-x86\\scopedcss\\projectbundle\\bookstore.bundle.scp.css",
-      "SourceId": "bookstore",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\obj\\Release\\net6.0\\win-x86\\scopedcss\\projectbundle\\",
-      "BasePath": "_content/bookstore",
-      "RelativePath": "bookstore.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\obj\\Release\\net6.0\\win-x86\\scopedcss\\projectbundle\\bookstore.bundle.scp.css"
-    },
     {
       "Identity": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\wwwroot\\404.html",
       "SourceId": "bookstore",

@@ -208,9 +208,9 @@ namespace bookstore.Areas.User.Controllers
             }
 
 
-            if (Request.Form["payment"] == "6")
+            if (Request.Form["payment"] == "3")
             {
-                var domain = "https://localhost:44355/";
+                var domain = "https://nhom1huflit.azurewebsites.net/";
                 var options = new SessionCreateOptions
                 {
                     PaymentMethodTypes = new List<string>
@@ -257,7 +257,7 @@ namespace bookstore.Areas.User.Controllers
             }
             _cartSevice.ClearCart();
 
-            return Redirect("/");
+            return Redirect($"/orderSuccess/{order_id.Entity.Id}");
 
         }
 
@@ -290,7 +290,7 @@ namespace bookstore.Areas.User.Controllers
 
 
 
-            var ordersuccess = _db.Orders.Join(
+            var ordersuccesss = _db.Orders.Join(
                 _db.ShippingMethods,
                 order => order.shippingMethod_id,
                 shipping => shipping.Id,
@@ -319,12 +319,52 @@ namespace bookstore.Areas.User.Controllers
                 .Where( x => x.order.Id == id ).FirstOrDefault();
 
 
-            ViewBag.ordersuccess = ordersuccess;
+            ViewBag.ordersuccess = ordersuccesss;
 
 
             return View();
         }
 
+        [Route("orderSuccess/{id}")]
+        public IActionResult orderSuccess(int? id)
+        {
+
+
+            var ordersuccess = _db.Orders.Join(
+               _db.ShippingMethods,
+               order => order.shippingMethod_id,
+               shipping => shipping.Id,
+               (order, shipping) => new { order = order, shipping = shipping })
+               .Join(
+               _db.PaymentMethods,
+               orderpayment => orderpayment.order.paymentMethod_id,
+               payment => payment.Id,
+               (orderpayment, payment) => new { order = orderpayment.order, shipping = orderpayment.shipping, payment = payment }).
+               Join(
+               _db.Customers,
+               ordercustomer => ordercustomer.order.customer_id,
+               customer => customer.Id,
+               (ordercustomer, customer) => new { order = ordercustomer.order, shipping = ordercustomer.shipping, payment = ordercustomer.payment, customer = customer }
+               ).
+               Join(
+               _UserManager.Users,
+               orderuser => orderuser.customer.account_id,
+               user => user.Id,
+               (orderuser, user) => new { order = orderuser.order, shipping = orderuser.shipping, payment = orderuser.payment, customer = orderuser.customer, user = user })
+               .Join(
+               _db.customerAddresses,
+               orderaddress => orderaddress.order.customerAddress_id,
+               address => address.Id,
+               (orderaddress, address) => new { order = orderaddress.order, shipping = orderaddress.shipping, payment = orderaddress.payment, customer = orderaddress.customer, user = orderaddress.user, address = address })
+               .Where(x => x.order.Id == id).FirstOrDefault();
+
+
+            ViewBag.ordersuccess = ordersuccess;
+
+
+
+            return View();
+        }
 
 
 
