@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2LF8XmxLTHlJnr34a/fnLZ/DujXUQSdRsct7yHJTLGcX1R7a+IEBvnuNafL7CBbFxUHVUtmQ62vNS7c72fmU0Q==",
+  "dgSpecHash": "gGmVh1VUCsgmd12wFJTlNZwajnSbo2k0xEU/SSXn88xOuN78fSgOnGhjkVv4tnVX/WpfasH1NARlO2t/tNotqQ==",
   "success": true,
-  "projectFilePath": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\bookstore.csproj",
+  "projectFilePath": "C:\\Users\\ADMIN\\source\\repos\\book-selling-asp.net-MSSQL\\bookstore\\bookstore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\mailkit\\3.6.0\\mailkit.3.6.0.nupkg.sha512",

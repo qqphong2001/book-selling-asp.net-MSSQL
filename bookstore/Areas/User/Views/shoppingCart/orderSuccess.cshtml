@@ -1,15 +1,28 @@
 ﻿@{
     Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+    @using Microsoft.AspNetCore.Identity
+    @inject SignInManager<bookstore.Areas.Admin.Models.UserModel> SignInManager
 
+    @inject UserManager<bookstore.Areas.Admin.Models.UserModel> UserManager
 }
 
 <section class="section">
     <div class="container">
         <div class="paymentSuccess-box">
             <h2>Đặt hàng thành công</h2>
-            <p>Trong cuộc sống có quá nhiều sự lựa chọn cám ơn <b>@ViewBag.ordersuccess.customer.firstName @ViewBag.ordersuccess.customer.lastName</b> đã chọn <b>Fahaha</b>.</p>
-            <p><b>Fahaha</b> rất vui thông báo đơn hàng <b>@ViewBag.ordersuccess.order.orderNumber</b> của bạn đã được tiếp nhận và đang trong quá trình xử lý.</p>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <p>Trong cuộc sống có quá nhiều sự lựa chọn cám ơn <b>@ViewBag.ordersuccess.customer.firstName @ViewBag.ordersuccess.customer.lastName</b> đã chọn <b>Fahaha</b>.</p>
+                <p><b>Fahaha</b> rất vui thông báo đơn hàng <b>@ViewBag.ordersuccess.order.orderNumber</b> của bạn đã được tiếp nhận và đang trong quá trình xử lý.</p>
 
+            }
+            else
+            {
+                <p>Trong cuộc sống có quá nhiều sự lựa chọn cám ơn <b>@ViewBag.ordersuccess.customer.lastName</b> đã chọn <b>Fahaha</b>.</p>
+                <p><b>Fahaha</b> rất vui thông báo đơn hàng <b>@ViewBag.ordersuccess.order.orderNumber</b> của bạn đã được tiếp nhận và đang trong quá trình xử lý.</p>
+
+            }
+          
             <hr>
 
             <div class="paymentSuccess-orderInfo">
@@ -18,7 +31,16 @@
                     <li>Tên khách hàng: @ViewBag.ordersuccess.customer.firstName @ViewBag.ordersuccess.customer.lastName</li>
                     <li>Email: @ViewBag.ordersuccess.user.Email</li>
                     <li>Số điện thoại: @ViewBag.ordersuccess.customer.phoneNumber</li>
-                    <li>Địa chỉ giao hàng: @ViewBag.ordersuccess.address.address</li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li>Địa chỉ giao hàng: @ViewBag.ordersuccess.address.address</li>
+
+                    }
+                    else
+                    {
+                        <li>Địa chỉ giao hàng: @ViewBag.ordersuccess.order.customerAddress</li>
+
+                    }
                     <li>Phương thức thanh toán: @ViewBag.ordersuccess.payment.Name</li>
                 </ul>
             </div>

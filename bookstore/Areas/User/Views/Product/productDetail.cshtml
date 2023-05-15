@@ -158,7 +158,19 @@
 								<span class="qty-down">-</span>
 							</div>
 						</div>
-						<button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
+							@if (ViewBag.book.Book.unitStock > 0)
+							{
+								<button  type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
+
+
+							}
+							else
+							{
+								<button disabled type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
+								<span class="product-available">Hết hàng</span>
+
+
+							}
 					</div>
 					</form>
 

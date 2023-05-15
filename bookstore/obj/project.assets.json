@@ -12247,11 +12247,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\bookstore.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\book-selling-asp.net-MSSQL\\bookstore\\bookstore.csproj",
       "projectName": "bookstore",
-      "projectPath": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\bookstore.csproj",
+      "projectPath": "C:\\Users\\ADMIN\\source\\repos\\book-selling-asp.net-MSSQL\\bookstore\\bookstore.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "C:\\Dotnet\\nghi\\fahaha-ui\\bookstore\\obj\\",
+      "outputPath": "C:\\Users\\ADMIN\\source\\repos\\book-selling-asp.net-MSSQL\\bookstore\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",

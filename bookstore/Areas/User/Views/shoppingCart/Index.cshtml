@@ -56,26 +56,34 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="">Địa chỉ</label>
-                                <select class="form-control" name="address">
-                                            @if(ViewBag.address != null)
-                                            {
-                                                <option selected>Chọn</option>
-                                                @foreach (var item in ViewBag.address)
+
+                                        @if (SignInManager.IsSignedIn(User))
+                                        {
+                                            <select class="form-control" name="address">
+                                                @if (ViewBag.address != null)
                                                 {
-                                                    <option value="@item.address.Id">@item.address.address</option>
+                                                    <option selected>Chọn</option>
+                                                    @foreach (var item in ViewBag.address)
+                                                    {
+                                                        <option value="@item.address.Id">@item.address.address</option>
+
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <option selected>Chọn</option>
+                                                    <span class="text-danger">Bạn chưa thêm địa chỉ vui lòng vào <a asp-action="Index" asp-controller="Customer" asp-route-customer_id="@UserManager.GetUserId(User)">thông tin cá nhân để cập nhật địa chỉ</a>  </span>
 
                                                 }
-                                            }
-                                            else
-                                            {
-                                                <option selected>Chọn</option>
-                                                <span class="text-danger">Bạn chưa thêm địa chỉ vui lòng vào <a asp-action="Index" asp-controller="Customer" asp-route-customer_id="@UserManager.GetUserId(User)">thông tin cá nhân để cập nhật địa chỉ</a>  </span>
+                                            </select>
+                                            
+                                        }
+                                        else
+                                        {
+                                            <input class="form-control font-weight-bold" type="text" name="address_string">
 
-                                            }
-
-                                         
-                                 
-                                </select>
+                                        }
+                             
                             </div>
                         </div>
 
@@ -185,7 +193,7 @@
                     <div class="order-col">
                         <div><strong>Phương thức thanh toán</strong></div>
                         <div><strong></strong></div>
-                    </div>
+                    </div> 
 
                             @foreach (var item in ViewBag.paymentMethod)
                             {

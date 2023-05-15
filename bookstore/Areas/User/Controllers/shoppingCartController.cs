@@ -175,24 +175,97 @@ namespace bookstore.Areas.User.Controllers
 
             }
 
-
-
-            var order = new OrderModel
+            var order_id = 0;
+            if (_SignInManager.IsSignedIn(User))
             {
-                orderNumber = $"#{randomNumber}",
-                orderDate = DateTime.Now,
-                total = totalMax,
-                description = Request.Form["description"],
-                customer_id = int.Parse(Request.Form["customer_id"]),
-                customerAddress_id = int.Parse(Request.Form["address"]),
-                status = 2,
-                paymentMethod_id = int.Parse(Request.Form["payment"]),
-                shippingMethod_id = int.Parse(Request.Form["shipping"])
+
+			  var	 order = new OrderModel
+				{
+					orderNumber = $"#{randomNumber}",
+					orderDate = DateTime.Now,
+					total = totalMax,
+					description = Request.Form["description"],
+					customer_id = int.Parse(Request.Form["customer_id"]),
+					customerAddress_id = int.Parse(Request.Form["address"]),
+					status = 2,
+					paymentMethod_id = int.Parse(Request.Form["payment"]),
+					shippingMethod_id = int.Parse(Request.Form["shipping"])
 
 
-            };
-            var order_id = await _db.Orders.AddAsync(order);
-            await _db.SaveChangesAsync();
+				};
+                var order_ids = await _db.Orders.AddAsync(order);
+                await _db.SaveChangesAsync();
+                order_id = order_ids.Entity.Id;
+
+            }
+            else
+            {
+
+
+                var userGuest = new UserModel()
+                {
+                    UserName = (string)Request.Form["email"],
+
+                    Email = Request.Form["email"],
+                    EmailConfirmed = true,
+
+                };
+
+                var result = await _UserManager.CreateAsync(userGuest, "asdjasdhad123213");
+
+                if (result.Succeeded)
+                {
+                    var user = await _UserManager.FindByNameAsync(userGuest.UserName);
+                    await _UserManager.AddToRoleAsync(user, Role.Role_Guest);
+                    var userId = user.Id;
+
+                    var customer = new CustomerModel()
+                    {
+                        dob = DateTime.Now,
+                        firstName = Request.Form["fullName"],
+                        lastName = Request.Form["fullName"],
+                        gender = 0,
+                        createdAt = DateTime.Now,
+                        avatar = @"images/logo/logo.png",
+                        phoneNumber = Request.Form["phone"],
+                        account_id = userId
+                    };
+
+                    var customer_id = _db.Customers.Add(customer);
+
+
+
+                    await _db.SaveChangesAsync();
+
+
+                    var order = new OrderModel
+                    {
+                        orderNumber = $"#{randomNumber}",
+                        orderDate = DateTime.Now,
+                        total = totalMax,
+                        description = Request.Form["description"],
+                        customer_id = customer_id.Entity.Id,
+                        customerAddress_id = 0,
+                        customerAddress = Request.Form["address_string"],
+                        status = 2,
+                        paymentMethod_id = int.Parse(Request.Form["payment"]),
+                        shippingMethod_id = int.Parse(Request.Form["shipping"])
+                    };
+                    var order_ids = await _db.Orders.AddAsync(order);
+                    await _db.SaveChangesAsync();
+                    order_id = order_ids.Entity.Id;
+
+                    // ... rest of the code
+                }
+
+
+
+            
+
+            }
+
+
+           
 
             foreach (var item in cart)
             {
@@ -200,11 +273,16 @@ namespace bookstore.Areas.User.Controllers
                 {
                     book_id = item.product.Id,
                     quantity = item.quantity,
-                    order_id = order_id.Entity.Id,
+                    order_id = order_id,
                 };
                 await _db.OrderDetails.AddAsync(orderdetail);
                 await _db.SaveChangesAsync();
 
+                var product = _db.Books.Find(item.product.Id);
+                product.unitStock = product.unitStock - item.quantity;
+
+                _db.Books.Update(product);
+                _db.SaveChanges();
             }
 
 
@@ -220,7 +298,7 @@ namespace bookstore.Areas.User.Controllers
                     LineItems = new List<SessionLineItemOptions>()
                   ,
                     Mode = "payment",
-                    SuccessUrl = domain + $"successCart/{order_id.Entity.Id}",
+                    SuccessUrl = domain + $"successCart/{order_id}",
                     CancelUrl = domain,
                 };
                 long StripeTotalMax = 0;
@@ -256,8 +334,8 @@ namespace bookstore.Areas.User.Controllers
                 return new StatusCodeResult(303);
             }
             _cartSevice.ClearCart();
-
-            return Redirect($"/orderSuccess/{order_id.Entity.Id}");
+          
+            return Redirect($"/orderSuccess/{order_id}");
 
         }
 
@@ -289,37 +367,72 @@ namespace bookstore.Areas.User.Controllers
             _db.SaveChanges();
 
 
+            if (_SignInManager.IsSignedIn(User))
+            {
+                var ordersuccesss = _db.Orders.Join(
+              _db.ShippingMethods,
+              order => order.shippingMethod_id,
+              shipping => shipping.Id,
+              (order, shipping) => new { order = order, shipping = shipping })
+              .Join(
+              _db.PaymentMethods,
+              orderpayment => orderpayment.order.paymentMethod_id,
+              payment => payment.Id,
+              (orderpayment, payment) => new { order = orderpayment.order, shipping = orderpayment.shipping, payment = payment }).
+              Join(
+              _db.Customers,
+              ordercustomer => ordercustomer.order.customer_id,
+              customer => customer.Id,
+              (ordercustomer, customer) => new { order = ordercustomer.order, shipping = ordercustomer.shipping, payment = ordercustomer.payment, customer = customer }
+              ).
+              Join(
+              _UserManager.Users,
+              orderuser => orderuser.customer.account_id,
+              user => user.Id,
+              (orderuser, user) => new { order = orderuser.order, shipping = orderuser.shipping, payment = orderuser.payment, customer = orderuser.customer, user = user })
+              .Join(
+              _db.customerAddresses,
+              orderaddress => orderaddress.order.customerAddress_id,
+              address => address.Id,
+              (orderaddress, address) => new { order = orderaddress.order, shipping = orderaddress.shipping, payment = orderaddress.payment, customer = orderaddress.customer, user = orderaddress.user, address = address })
+              .Where(x => x.order.Id == id).FirstOrDefault();
 
-            var ordersuccesss = _db.Orders.Join(
-                _db.ShippingMethods,
-                order => order.shippingMethod_id,
-                shipping => shipping.Id,
-                (order , shipping) => new { order = order, shipping = shipping })
-                .Join(
-                _db.PaymentMethods,
-                orderpayment => orderpayment.order.paymentMethod_id,
-                payment => payment.Id,
-                (orderpayment , payment) => new { order = orderpayment.order , shipping = orderpayment.shipping , payment = payment }).
-                Join(
-                _db.Customers,
-                ordercustomer => ordercustomer.order.customer_id,
-                customer => customer.Id,
-                (ordercustomer, customer) => new {order = ordercustomer.order, shipping = ordercustomer.shipping , payment = ordercustomer.payment, customer = customer }
-                ).
-                Join(
-                _UserManager.Users,
-                orderuser => orderuser.customer.account_id,
-                user => user.Id,
-                (orderuser , user )=> new { order = orderuser.order, shipping = orderuser.shipping, payment = orderuser.payment, customer = orderuser.customer , user = user })
-                .Join(
-                _db.customerAddresses,
-                orderaddress => orderaddress.order.customerAddress_id,
-                address => address.Id,
-                (orderaddress, address) => new { order = orderaddress.order, shipping = orderaddress.shipping, payment = orderaddress.payment, customer = orderaddress.customer, user = orderaddress.user , address =address })
-                .Where( x => x.order.Id == id ).FirstOrDefault();
+                ViewBag.ordersuccess = ordersuccesss;
+
+            }
+            else
+            {
+                var ordersuccesss = _db.Orders.Join(
+                          _db.ShippingMethods,
+                          order => order.shippingMethod_id,
+                          shipping => shipping.Id,
+                          (order, shipping) => new { order = order, shipping = shipping })
+                          .Join(
+                          _db.PaymentMethods,
+                          orderpayment => orderpayment.order.paymentMethod_id,
+                          payment => payment.Id,
+                          (orderpayment, payment) => new { order = orderpayment.order, shipping = orderpayment.shipping, payment = payment }).
+                          Join(
+                          _db.Customers,
+                          ordercustomer => ordercustomer.order.customer_id,
+                          customer => customer.Id,
+                          (ordercustomer, customer) => new { order = ordercustomer.order, shipping = ordercustomer.shipping, payment = ordercustomer.payment, customer = customer }
+                          ).
+                          Join(
+                          _UserManager.Users,
+                          orderuser => orderuser.customer.account_id,
+                          user => user.Id,
+                          (orderuser, user) => new { order = orderuser.order, shipping = orderuser.shipping, payment = orderuser.payment, customer = orderuser.customer, user = user })
+                          .Where(x => x.order.Id == id).FirstOrDefault();
+                ViewBag.ordersuccess = ordersuccesss;
+
+            }
 
 
-            ViewBag.ordersuccess = ordersuccesss;
+
+
+
+
 
 
             return View();
@@ -330,36 +443,66 @@ namespace bookstore.Areas.User.Controllers
         {
 
 
-            var ordersuccess = _db.Orders.Join(
-               _db.ShippingMethods,
-               order => order.shippingMethod_id,
-               shipping => shipping.Id,
-               (order, shipping) => new { order = order, shipping = shipping })
-               .Join(
-               _db.PaymentMethods,
-               orderpayment => orderpayment.order.paymentMethod_id,
-               payment => payment.Id,
-               (orderpayment, payment) => new { order = orderpayment.order, shipping = orderpayment.shipping, payment = payment }).
-               Join(
-               _db.Customers,
-               ordercustomer => ordercustomer.order.customer_id,
-               customer => customer.Id,
-               (ordercustomer, customer) => new { order = ordercustomer.order, shipping = ordercustomer.shipping, payment = ordercustomer.payment, customer = customer }
-               ).
-               Join(
-               _UserManager.Users,
-               orderuser => orderuser.customer.account_id,
-               user => user.Id,
-               (orderuser, user) => new { order = orderuser.order, shipping = orderuser.shipping, payment = orderuser.payment, customer = orderuser.customer, user = user })
-               .Join(
-               _db.customerAddresses,
-               orderaddress => orderaddress.order.customerAddress_id,
-               address => address.Id,
-               (orderaddress, address) => new { order = orderaddress.order, shipping = orderaddress.shipping, payment = orderaddress.payment, customer = orderaddress.customer, user = orderaddress.user, address = address })
-               .Where(x => x.order.Id == id).FirstOrDefault();
+            if (_SignInManager.IsSignedIn(User))
+            {
+                var ordersuccesss = _db.Orders.Join(
+              _db.ShippingMethods,
+              order => order.shippingMethod_id,
+              shipping => shipping.Id,
+              (order, shipping) => new { order = order, shipping = shipping })
+              .Join(
+              _db.PaymentMethods,
+              orderpayment => orderpayment.order.paymentMethod_id,
+              payment => payment.Id,
+              (orderpayment, payment) => new { order = orderpayment.order, shipping = orderpayment.shipping, payment = payment }).
+              Join(
+              _db.Customers,
+              ordercustomer => ordercustomer.order.customer_id,
+              customer => customer.Id,
+              (ordercustomer, customer) => new { order = ordercustomer.order, shipping = ordercustomer.shipping, payment = ordercustomer.payment, customer = customer }
+              ).
+              Join(
+              _UserManager.Users,
+              orderuser => orderuser.customer.account_id,
+              user => user.Id,
+              (orderuser, user) => new { order = orderuser.order, shipping = orderuser.shipping, payment = orderuser.payment, customer = orderuser.customer, user = user })
+              .Join(
+              _db.customerAddresses,
+              orderaddress => orderaddress.order.customerAddress_id,
+              address => address.Id,
+              (orderaddress, address) => new { order = orderaddress.order, shipping = orderaddress.shipping, payment = orderaddress.payment, customer = orderaddress.customer, user = orderaddress.user, address = address })
+              .Where(x => x.order.Id == id).FirstOrDefault();
 
+                ViewBag.ordersuccess = ordersuccesss;
 
-            ViewBag.ordersuccess = ordersuccess;
+            }
+            else
+            {
+                var ordersuccesss = _db.Orders.Join(
+                          _db.ShippingMethods,
+                          order => order.shippingMethod_id,
+                          shipping => shipping.Id,
+                          (order, shipping) => new { order = order, shipping = shipping })
+                          .Join(
+                          _db.PaymentMethods,
+                          orderpayment => orderpayment.order.paymentMethod_id,
+                          payment => payment.Id,
+                          (orderpayment, payment) => new { order = orderpayment.order, shipping = orderpayment.shipping, payment = payment }).
+                          Join(
+                          _db.Customers,
+                          ordercustomer => ordercustomer.order.customer_id,
+                          customer => customer.Id,
+                          (ordercustomer, customer) => new { order = ordercustomer.order, shipping = ordercustomer.shipping, payment = ordercustomer.payment, customer = customer }
+                          ).
+                          Join(
+                          _UserManager.Users,
+                          orderuser => orderuser.customer.account_id,
+                          user => user.Id,
+                          (orderuser, user) => new { order = orderuser.order, shipping = orderuser.shipping, payment = orderuser.payment, customer = orderuser.customer, user = user })
+                          .Where(x => x.order.Id == id).FirstOrDefault();
+                ViewBag.ordersuccess = ordersuccesss;
+
+            }
 
 
 

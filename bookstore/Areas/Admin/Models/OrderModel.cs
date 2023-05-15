@@ -17,6 +17,7 @@ namespace bookstore.Areas.Admin.Models
         public int paymentMethod_id { get; set; }
         public int customer_id { get; set; }
         public int customerAddress_id { get; set; }
+        public string customerAddress { get; set; }
         public int promotion_id { get; set; }
         public int emloyee_id { get; set; }
 
